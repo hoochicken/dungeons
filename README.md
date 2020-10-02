@@ -83,10 +83,20 @@ php bin/console doctrine:migrations:migrate
 
 ## Trouble shooting
 
-* npm rebuild node-sass
+(1) npm rebuild node-sass
+
+(2) Error: 1812 Tablespace is missing for table `dungeondb`.`doctrine_migration_versions`.
+
+~~~sql
+ALTER TABLE `dungeondb`.`doctrine_migration_versions` DISCARD TABLESPACE;
+ALTER TABLE `dungeondb`.`doctrine_migration_versions` IMPORT TABLESPACE;
+~~~
+
 
 ## based on
 
 * <https://gist.github.com/jcavat/2ed51c6371b9b488d6a940ba1049189b>
 * <https://developer.okta.com/blog/2018/06/14/php-crud-app-symfony-vue>
 * <https://symfony.com/doc/current/doctrine/reverse_engineering.html>
+
+
