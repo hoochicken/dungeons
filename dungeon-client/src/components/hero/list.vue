@@ -31,8 +31,8 @@
                 </template>
             </tbody>
         </md-table>
-        <pagination :totalPage="listState.totalPage" @btnClick="changePage"></pagination>
-        <button class="btn btn-success " @click="$router.push('/hero/create')">Create New Hero</button>
+        <pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
+        <md-button class="md-primary" @click="$router.push('/hero/create')">Create New Hero</md-button>
     </div>
 </template>
 
