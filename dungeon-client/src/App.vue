@@ -16,26 +16,27 @@
         <span class="md-title">Navigation</span>
       </md-toolbar>
 
-      <md-list>
+      <md-list class="navigation">
         <md-list-item>
           <md-icon>move_to_inbox</md-icon>
-          <span class="md-list-item-text">Inbox</span>
+          <span class="md-list-item-text" @click="$router.push('/hero/list')">Heros</span>
         </md-list-item>
 
         <md-list-item>
           <md-icon>send</md-icon>
-          <span class="md-list-item-text">Sent Mail</span>
-        </md-list-item>
-
-        <md-list-item>
-          <md-icon>delete</md-icon>
-          <span class="md-list-item-text">Trash</span>
+          <span class="md-list-item-text" @click="$router.push('/place/list')">Places</span>
         </md-list-item>
 
         <md-list-item>
           <md-icon>error</md-icon>
-          <span class="md-list-item-text">Spam</span>
+          <span class="md-list-item-text" @click="$router.push('/hero/list')">Routes</span>
         </md-list-item>
+
+        <md-list-item>
+          <md-icon>delete</md-icon>
+          <span class="md-list-item-text" @click="$router.push('/item/list')">Items</span>
+        </md-list-item>
+
       </md-list>
     </md-drawer>
 
@@ -104,4 +105,9 @@
   .md-content {
     padding: 16px;
   }
+
+  .md-list-item {
+    cursor: pointer;
+  }
+
 </style>
