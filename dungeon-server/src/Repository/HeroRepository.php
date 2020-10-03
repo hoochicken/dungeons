@@ -33,7 +33,7 @@ class HeroRepository extends ServiceEntityRepository
         $firstResult = $maxResults * $currentPage;
         $qb = $this->createQueryBuilder('h');
 
-        if (false && !empty($value)) {
+        if (!empty($value)) {
             $qb->andWhere('h.name LIKE :val')
                 ->setParameter('val', '%' . $value . '%');
         }
