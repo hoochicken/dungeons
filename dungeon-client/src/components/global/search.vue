@@ -1,27 +1,25 @@
 <template>
-    <div class="input-group">
-        <input class="form-control" v-model="searchterm" v-on:keyup.enter="search" />
-        <div class="input-group-append">
-            <button class="input-group-text" @click="search">Search</button>
-            <button class="input-group-text" @click="resetSearch">Reset</button>
-        </div>
-    </div>
+    <md-field>
+        <md-input class="form-control" v-model="searchterm" v-on:keyup.enter="search"/>
+        <md-button class="md-primary" @click="search">Search</md-button>
+        <md-button class="md-accent" @click="resetSearch">Reset</md-button>
+    </md-field>
 </template>
 
 <script>
     export default {
         name: "search",
         props: [],
-        data () {
+        data() {
             return {
                 searchterm: ''
             }
         },
         methods: {
-            search () {
+            search() {
                 this.$emit('search', this.searchterm);
             },
-            resetSearch () {
+            resetSearch() {
                 this.searchterm = '';
                 this.$emit('resetSearch');
             }
@@ -40,11 +38,12 @@
 
     ```jsx
     <template>
-        <search @resetSearch="resetSearch" @search="search" />
+        <search @resetSearch="resetSearch" @search="search"/>
     </template>
 
     <script>
         import Search from "./search";
+
         export default {
             data() {
                 return {
