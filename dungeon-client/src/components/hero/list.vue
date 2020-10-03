@@ -29,10 +29,26 @@
                         </md-table-cell>
                     </md-table-row>
                 </template>
+                <md-table-row>
+                    <md-table-cell></md-table-cell>
+                    <md-table-cell></md-table-cell>
+                    <md-table-cell></md-table-cell>
+                    <md-table-cell></md-table-cell>
+                    <md-table-cell>
+                        <!--md-button disabled class="md-raised md-primary update" @click="updateHero(item.id)">Update
+                        </md-button-->
+                        <md-button class="md-raised md-primary" @click="$router.push('/hero/create')">Create</md-button>
+                    </md-table-cell>
+                    <md-table-cell>
+                        <md-button disabled class="md-raised md-accent delete" @click="deleteHero(item.id)">Delete</md-button>
+                    </md-table-cell>
+                </md-table-row>
             </tbody>
         </md-table>
         <pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
-        <md-button class="md-primary" @click="$router.push('/hero/create')">Create New Hero</md-button>
+        <div class="container">
+            <md-button style="float:right" class="md-primary" @click="$router.push('/hero/create')">Create New Hero</md-button>
+        </div>
     </div>
 </template>
 
