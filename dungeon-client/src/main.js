@@ -9,6 +9,15 @@ import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 
 import Demonic from './components/demo/Demonic';
+
+import HeroList from './components/hero/list.vue'
+import HeroCreate from './components/hero/create.vue'
+import HeroUpdate from './components/hero/update.vue'
+
+import PlaceList from './components/place/list.vue'
+import PlaceCreate from './components/place/create.vue'
+import PlaceUpdate from './components/place/update.vue'
+
 Vue.config.productionTip = false;
 Vue.use(VueRouter, axios);
 Vue.use(VueMaterial);
@@ -19,6 +28,12 @@ Vue.axios.defaults.baseURL = `http://${process.env.VUE_APP_ENV_HOST}:${process.e
 const routes = [
   { path: '/demo', component: Demonic },
   { path: '/app', component: App },
+  { path: '/hero/list', component: HeroList },
+  { path: '/hero/create', component: HeroCreate },
+  { path: '/hero/update/:id', component: HeroUpdate },
+  { path: '/place/list', component: PlaceList },
+  { path: '/place/create', component: PlaceCreate },
+  { path: '/place/update/:id', component: PlaceUpdate },
   { path: '/', component: App },
 ];
 

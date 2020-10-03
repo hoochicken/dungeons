@@ -2,33 +2,43 @@
 
 namespace App\Entity;
 
-use App\Repository\DemoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=DemoRepository::class)
+ * Demo
+ *
+ * @ORM\Table(name="demo")
+ * @ORM\Entity
  */
 class Demo
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @var int|null
+     *
+     * @ORM\Column(name="state", type="smallint", nullable=true)
      */
     private $state;
 
@@ -72,4 +82,6 @@ class Demo
 
         return $this;
     }
+
+
 }
