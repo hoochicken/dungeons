@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import axios from './plugins/axios'
 import Pagination from 'vue-paginate-al'
 
+import 'material-icons/iconfont/material-icons.scss';
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
