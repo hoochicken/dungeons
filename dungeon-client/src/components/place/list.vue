@@ -2,35 +2,35 @@
     <div class="container">
         <h1>Places</h1>
         <search @resetSearch="resetSearch" @search="search" />
-        <table class="table table-striped table-hover">
+        <md-table>
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th></th>
-            </tr>
+            <md-table-row>
+                <md-table-head>ID</md-table-head>
+                <md-table-head>Name</md-table-head>
+                <md-table-head>Description</md-table-head>
+                <md-table-head></md-table-head>
+            </md-table-row>
             </thead>
             <tbody>
             <template v-for="item in places">
-                <tr v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
-                    <td><button class="btn btn-success text-white update" @click="updatePlace(item.id)">Update</button><button class="btn btn-danger delete" @click="deletePlace(item.id)">Delete</button></td>
-                </tr>
+                <md-table-row v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
+                    <md-table-cell>{{ item.id }}</md-table-cell>
+                    <md-table-cell>{{ item.name }}</md-table-cell>
+                    <md-table-cell>{{ item.description }}</md-table-cell>
+                    <md-table-cell><button class="btn btn-success text-white update" @click="updatePlace(item.id)">Update</button><button class="btn btn-danger delete" @click="deletePlace(item.id)">Delete</button></md-table-cell>
+                </md-table-row>
             </template>
             </tbody>
-        </table>
+        </md-table>
         <pagination :totalPage="listState.totalPage" @btnClick="changePage"></pagination>
-        <button class="btn btn-success " @click="$router.push('/place/create')">Create New Place</button>
+        <md-button @click="$router.push('/place/create')">Create New Place</md-button>
 
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <md-alert class="success" role="alert">
             With Bootstrap!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <md-button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            </md-button>
+        </md-alert>
     </div>
 </template>
 
