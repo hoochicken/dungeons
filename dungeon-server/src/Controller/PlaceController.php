@@ -25,14 +25,14 @@ class PlaceController extends ApiController
         $searchterm = trim($request->request->get('searchterm'));
         $listState = json_decode($request->request->get('listState'));
         $currentPage = $listState->currentPage ?? 0;
-        $maxResult = $listState->maxResults ?? 0;
+        $maxResult = $listState->maxResults ?? 2;
 
         // get items and pagination info
         $result = $placeRepository->findByName($searchterm, $currentPage, $maxResult);
         $items = $placeRepository->transformAll($result['items']);
 
         // build return array
-        return $this->respond(['items' => $items, 'listState' => $result['listState']]);
+        return $this->respond(['items' => $items, 'info' => $result['info'], 'listState' => $result['listState']]);
     }
 
     /**

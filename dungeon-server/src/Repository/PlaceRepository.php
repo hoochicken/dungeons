@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Place|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,93 @@ class PlaceRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Place::class);
+    }
+
+    /**
+     * @param $value
+     * @param int $currentPage
+     * @param int $maxResults
+     * @return Hero[] Returns an array of Place objects
+     */
+    public function findByName($value, int $currentPage = 0, int $maxResults = 0)
+    {
+
+        $firstResult = $maxResults * $currentPage;
+        $qb = $this->createQueryBuilder('h');
+
+        if (!empty($value)) {
+            $qb->andWhere('h.name LIKE :val')
+                ->setParameter('val', '%' . $value . '%');
+        }
+
+        $qb->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->orderBy('h.id', 'ASC');
+
+        $query = $qb->getQuery();
+        $items = $query->getResult();
+        return ['info' => $maxResults, 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+    }
+
+    /**
+     * @param $query
+     * @param $maxResults
+     * @param $firstResult
+     * @param $currentPage
+     * @return array
+     */
+    public function getListState($query, $maxResults, $firstResult, $currentPage)
+    {
+        // load doctrine Paginator
+        $paginator = new Paginator($query);
+
+        // you can get total items
+        $totalItems = count($paginator);
+
+        // get total pages
+        $totalPage = $maxResults > 0 ? ceil($totalItems / $maxResults) : $totalItems;
+
+        // now get one page's items:
+        $paginator
+            ->getQuery()
+            ->setFirstResult($firstResult) // set the offset
+            ->setMaxResults($maxResults);
+
+        $listState = [
+            'currentPage' => $currentPage,
+            'maxResults' => $maxResults,
+            'totalPage' => $totalPage,
+            'firstResult' => $firstResult,
+            'totalItems' => $totalItems,
+        ];
+        return $listState;
+    }
+
+    /**
+     * @param array $items
+     * @return array
+     */
+    public function transformAll(array $items)
+    {
+        $return = [];
+        foreach($items as $item) {
+            $return[] = $this->transform($item);
+        }
+        return $return;
+    }
+
+    /**
+     * @param Place $place
+     * @return array
+     */
+    public function transform(Place $place)
+    {
+        $return = [];
+        $return['id'] = $place->getId();
+        $return['name'] = $place->getName();
+        $return['description'] = $place->getDescription();
+        $return['state'] = $place->getState();
+        return $return;
     }
 
     // /**
