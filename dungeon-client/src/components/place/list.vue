@@ -17,9 +17,26 @@
                     <md-table-cell>{{ item.id }}</md-table-cell>
                     <md-table-cell>{{ item.name }}</md-table-cell>
                     <md-table-cell>{{ item.description }}</md-table-cell>
-                    <md-table-cell><button class="btn btn-success text-white update" @click="updatePlace(item.id)">Update</button><button class="btn btn-danger delete" @click="deletePlace(item.id)">Delete</button></md-table-cell>
+                    <md-table-cell>
+                        <md-button class="md-raised md-primary update" @click="updatePlace(item.id)">Update
+                        </md-button>
+                    </md-table-cell>
+                    <md-table-cell>
+                        <md-button class="md-raised md-accent delete" @click="deletePlace(item.id)">Delete</md-button>
+                    </md-table-cell>
                 </md-table-row>
             </template>
+            <md-table-row>
+                <md-table-cell></md-table-cell>
+                <md-table-cell></md-table-cell>
+                <md-table-cell></md-table-cell>
+                <md-table-cell>
+                    <md-button class="md-raised md-primary" @click="$router.push('/place/create')">Create</md-button>
+                </md-table-cell>
+                <md-table-cell>
+                    <md-button disabled class="md-raised md-accent delete">Delete</md-button>
+                </md-table-cell>
+            </md-table-row>
             </tbody>
         </md-table>
         <pagination :totalPage="listState.totalPage" @btnClick="changePage"></pagination>
