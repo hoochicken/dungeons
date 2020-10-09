@@ -40,8 +40,6 @@
             </tbody>
         </md-table>
         <pagination :totalPage="listState.totalPage" @btnClick="changePage"></pagination>
-        <md-button @click="$router.push('/place/create')">Create New Place</md-button>
-
         <md-alert class="success" role="alert">
             With Bootstrap!
             <md-button type="button" class="close" data-dismiss="alert" aria-label="Close">
