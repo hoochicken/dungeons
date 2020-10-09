@@ -8,6 +8,8 @@
                 <md-table-head>ID</md-table-head>
                 <md-table-head>Name</md-table-head>
                 <md-table-head>Description</md-table-head>
+                <md-table-head>Connections</md-table-head>
+                <md-table-head></md-table-head>
                 <md-table-head></md-table-head>
             </md-table-row>
             </thead>
@@ -17,6 +19,7 @@
                     <md-table-cell>{{ item.id }}</md-table-cell>
                     <md-table-cell>{{ item.name }}</md-table-cell>
                     <md-table-cell>{{ item.description }}</md-table-cell>
+                    <md-table-cell>Place A, place B, place C</md-table-cell>
                     <md-table-cell>
                         <md-button class="md-raised md-primary update" @click="updatePlace(item.id)">Update
                         </md-button>
@@ -28,6 +31,7 @@
             </template>
             <md-table-row>
                 <md-table-cell></md-table-cell>
+                <md-table-cell><i>New place</i></md-table-cell>
                 <md-table-cell></md-table-cell>
                 <md-table-cell></md-table-cell>
                 <md-table-cell>
@@ -39,7 +43,7 @@
             </md-table-row>
             </tbody>
         </md-table>
-        <pagination :totalPage="listState.totalPage" @btnClick="changePage"></pagination>
+        <pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
     </div>
 </template>
 
