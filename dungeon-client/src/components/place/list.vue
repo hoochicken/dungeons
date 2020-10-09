@@ -40,12 +40,6 @@
             </tbody>
         </md-table>
         <pagination :totalPage="listState.totalPage" @btnClick="changePage"></pagination>
-        <md-alert class="success" role="alert">
-            With Bootstrap!
-            <md-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </md-button>
-        </md-alert>
     </div>
 </template>
 
