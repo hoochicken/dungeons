@@ -1,6 +1,6 @@
 <template>
     <md-field>
-        <md-input class="form-control" v-model="searchterm" v-on:keyup.enter="search"/>
+        <md-input v-model="searchterm" v-on:keyup.enter="search"/>
         <md-button class="md-primary" @click="search">Search</md-button>
         <md-button class="md-accent" @click="resetSearch">Reset</md-button>
     </md-field>
