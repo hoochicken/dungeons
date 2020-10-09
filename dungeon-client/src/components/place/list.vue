@@ -34,7 +34,7 @@
                     <md-button class="md-raised md-primary" @click="$router.push('/place/create')">Create</md-button>
                 </md-table-cell>
                 <md-table-cell>
-                    <md-button disabled class="md-raised md-accent delete">Delete</md-button>
+                    <md-button disabled class="md-raised md-accent">Delete</md-button>
                 </md-table-cell>
             </md-table-row>
             </tbody>
