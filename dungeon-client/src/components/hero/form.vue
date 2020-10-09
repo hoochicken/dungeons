@@ -1,84 +1,107 @@
 <template>
     <div>
         <form>
-            <div v-if="item.id > 0" class="form-group row form-horizontal">
-                <label for="id" class="col-sm-2 col-form-label">ID</label><input id="id" class="form-control col-sm-10" v-model="item.id"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="name" class="col-sm-2 col-form-label">name</label><input id="name" class="form-control col-sm-10" v-model="item.name"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="class" class="col-sm-2 col-form-label">class</label><!--input id="class" class="form-control col-sm-10" v-model="item.class"/-->
-                 <select id="class" class="form-control col-sm-10" required v-model="item.class">
-                     <option value="0"> - please choose - </option>
-                     <option v-for="hcls in heroclass" :key="hcls.id" :selected="hcls.id === item.class" :value="hcls.id">{{ hcls.label }} ({{ hcls.id }})</option>
-                 </select>
-            </div>
-            <div class="form-group row form-horizontal">
-                 <label for="description" class="col-sm-2 col-form-label">description</label><textarea id="description" class="form-control col-sm-10" v-model="item.description"></textarea>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="pic" class="col-sm-2 col-form-label">pic</label><input id="pic" class="form-control col-sm-10" v-model="item.pic"/>
-            </div>
-            <div v-if="item.id > 0" class="form-group row form-horizontal">
-                <label for="le" class="col-sm-2 col-form-label">le</label><input id="le" type="number" class="form-control col-sm-5" v-model.number="item.le"/><input id="le_current" type="number" class="form-control col-sm-5" v-model.number="item.le_current"/>
-            </div>
-            <div v-else class="form-group row form-horizontal">
-                <label for="le" class="col-sm-2 col-form-label">le</label><input id="le" type="number" class="form-control col-sm-10" v-model.number="item.le"/>
-            </div>
-            <div v-if="item.id > 0" class="form-group row form-horizontal">
-                <label for="ae" class="col-sm-2 col-form-label">ae</label><input id="ae" type="number" class="form-control col-sm-5" v-model.number="item.ae"/><input id="ae_current" type="number" class="form-control col-sm-5" v-model.number="item.ae_current"/>
-            </div>
-            <div v-else class="form-group row form-horizontal">
-                <label for="ae" class="col-sm-2 col-form-label">ae</label><input id="ae" type="number" class="form-control col-sm-10" v-model.number="item.ae"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="inventory" class="col-sm-2 col-form-label">inventory</label><input id="inventory" class="form-control col-sm-10" v-model="item.inventory"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="weapon" class="col-sm-2 col-form-label">weapon</label><input id="weapon" class="form-control col-sm-10" v-model="item.weapon"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="at" class="col-sm-2 col-form-label">at</label><input id="at" type="number" class="form-control col-sm-10" v-model.number="item.at"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="pa" class="col-sm-2 col-form-label">pa</label><input id="pa" type="number" class="form-control col-sm-10" v-model.number="item.pa"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                 <label for="attributes" class="col-sm-2 col-form-label">attributes</label><textarea id="attributes" class="form-control col-sm-10" v-model="item.attributes"></textarea>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="state" class="col-sm-2 col-form-label">state</label><input id="state" type="number" class="form-control col-sm-10" v-model.number="item.state"/>
-            </div>
-            <div v-if="0 < errors.length" class="alert alert-danger">
+            <md-field v-if="item.id > 0">
+                <label for="id">ID</label>
+                <md-input id="id" v-model="item.id"/>
+            </md-field>
+            <md-field>
+                <label for="name">name</label>
+                <md-input id="name" v-model="item.name"/>
+            </md-field>
+            <md-field>
+                <label for="class">class</label>
+                <!--md-input id="class" v-model="item.class"/-->
+                <md-select id="class" required v-model="item.class">
+                    <option value="0"> - please choose -</option>
+                    <option v-for="hcls in heroclass" :key="hcls.id" :selected="hcls.id === item.class"
+                            :value="hcls.id">{{ hcls.label }} ({{ hcls.id }})
+                    </option>
+                </md-select>
+            </md-field>
+            <md-field>
+                <label for="description">description</label>
+                <md-textarea id="description"
+                             v-model="item.description"></md-textarea>
+            </md-field>
+            <md-field>
+                <label for="pic">pic</label>
+                <md-input id="pic" v-model="item.pic"/>
+            </md-field>
+            <md-field v-if="item.id > 0">
+                <label for="le">le</label>
+                <md-input id="le" type="number" v-model.number="item.le"/>
+                <md-input id="le_current" type="number" v-model.number="item.le_current"/>
+            </md-field>
+            <md-field v-else>
+                <label for="le">le</label>
+                <md-input id="le" type="number" v-model.number="item.le"/>
+            </md-field>
+            <md-field v-if="item.id > 0">
+                <label for="ae">ae</label>
+                <md-input id="ae" type="number" v-model.number="item.ae"/>
+                <md-input id="ae_current" type="number" v-model.number="item.ae_current"/>
+            </md-field>
+            <md-field v-else>
+                <label for="ae">ae</label>
+                <md-input id="ae" type="number" v-model.number="item.ae"/>
+            </md-field>
+            <md-field>
+                <label for="inventory">inventory</label>
+                <md-input id="inventory" v-model="item.inventory"/>
+            </md-field>
+            <md-field>
+                <label for="weapon">weapon</label>
+                <md-input id="weapon" v-model="item.weapon"/>
+            </md-field>
+            <md-field>
+                <label for="at">at</label>
+                <md-input id="at" type="number" v-model.number="item.at"/>
+            </md-field>
+            <md-field>
+                <label for="pa">pa</label>
+                <md-input id="pa" type="number" v-model.number="item.pa"/>
+            </md-field>
+            <md-field>
+                <label for="attributes">attributes</label>
+                <md-textarea id="attributes"
+                             v-model="item.attributes"></md-textarea>
+            </md-field>
+            <md-field>
+                <label for="state">state</label>
+                <md-input id="state" type="number" v-model.number="item.state"/>
+            </md-field>
+            <md-field v-if="0 < errors.length" class="alert alert-danger">
                 <p>Folgende Fehler sind aufgefallen:</p>
                 <ul>
                     <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
                 </ul>
-            </div>
-            <button-line :itemId="item.id" @create="saveItem" @update="saveItem" @delete="$emit('delete')" @cancel="$emit('cancel')"></button-line>
+            </md-field>
+            <button-line :itemId="item.id" @create="saveItem" @update="saveItem" @delete="$emit('delete')"
+                         @cancel="$emit('cancel')"></button-line>
         </form>
     </div>
 </template>
 
 <script>
     import ButtonLine from "../global/button-line";
+
     export default {
         name: "hero-form",
         components: {ButtonLine},
         props: {item: {}},
-        data () {
+        data() {
             return {
                 heroclass: {},
                 errors: []
             }
         },
-        async mounted () {
+        async mounted() {
             let classResponse = await this.axios.post('/hero/getClass', {});
             this.heroclass = classResponse.data;
         },
         methods: {
-            saveItem: function() {
+            saveItem: function () {
                 if (!this.checkForm()) {
                     return false;
                 }
@@ -101,6 +124,11 @@
 </script>
 
 <style scoped>
-    label::first-letter { text-transform: uppercase; }
-    .alert {text-align:left;}
+    label::first-letter {
+        text-transform: uppercase;
+    }
+
+    .alert {
+        text-align: left;
+    }
 </style>

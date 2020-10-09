@@ -1,21 +1,27 @@
 <template>
     <div>
-        <form>
-            <div v-if="item.id > 0" class="form-group row form-horizontal">
-                <label for="id" class="col-sm-2 col-form-label">ID</label><input id="id" readonly class="form-control col-sm-10" v-model="item.id"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                <label for="name" class="col-sm-2 col-form-label">name</label><input id="name" class="form-control col-sm-10" v-model="item.name"/>
-            </div>
-            <div class="form-group row form-horizontal">
-                 <label for="description" class="col-sm-2 col-form-label">description</label><textarea id="description" class="form-control col-sm-10" v-model="item.description"></textarea>
-            </div>
-            <div v-if="0 < errors.length" class="alert alert-danger">
+        <form class="md-layout md-gutter">
+            <md-field v-if="item.id > 0">
+                <label for="id">Id</label>
+                <md-input id="id" name="id" disabled v-model="item.id" />
+            </md-field>
+
+            <md-field>
+                <label for="name">Name</label>
+                <md-input id="name" name="name" v-model="item.name" />
+            </md-field>
+
+            <md-field>
+                <label for="description">Description</label>
+                <md-textarea id="description" name="name" v-model="item.description" />
+            </md-field>
+
+            <md-alert v-if="0 < errors.length" class="primary">
                 <p>Folgende Fehler sind aufgefallen:</p>
                 <ul>
                     <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
                 </ul>
-            </div>
+            </md-alert>
             <button-line :itemId="item.id" @create="saveItem" @cancel="$emit('cancel')" @update="saveItem" @delete="$emit('delete')"></button-line>
         </form>
     </div>
