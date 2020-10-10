@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{ item }}
         <h1>Update</h1>
         <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')" @delete="deletePlace"></place-form>
         <message-box>{{ error }}</message-box>
@@ -19,6 +20,8 @@
                     name: '',
                     class: 0,
                     description: '',
+                    misc: '',
+                    pic: '',
                     state: 1
                 },
                 response: {},

@@ -1,6 +1,7 @@
 <template>
     <div>
         <form class="md-layout md-gutter">
+            {{ item }}
             <md-field v-if="item.id > 0">
                 <label for="id">Id</label>
                 <md-input id="id" name="id" disabled v-model="item.id" />
@@ -13,7 +14,12 @@
 
             <md-field>
                 <label for="description">Description</label>
-                <md-textarea id="description" name="name" v-model="item.description" />
+                <md-textarea id="description" name="description" v-model="item.description" />
+            </md-field>
+
+            <md-field>
+                <label for="misc">Misc</label>
+                <md-input id="misc" name="misc" v-model="item.misc" />
             </md-field>
 
             <md-alert v-if="0 < errors.length" class="primary">

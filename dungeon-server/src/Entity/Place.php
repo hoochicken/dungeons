@@ -43,6 +43,13 @@ class Place
     private $pic;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="misc", type="string", length=500, nullable=false)
+     */
+    private $misc;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(name="type", type="integer", nullable=true)
@@ -142,6 +149,18 @@ class Place
     public function setPic(string $pic): self
     {
         $this->pic = $pic;
+
+        return $this;
+    }
+
+    public function getMisc(): ?string
+    {
+        return $this->misc;
+    }
+
+    public function setMisc(string $misc): self
+    {
+        $this->misc = $misc;
 
         return $this;
     }

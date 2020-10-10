@@ -18,6 +18,8 @@
                     id: 0,
                     name: '',
                     description: '',
+                    pic: '',
+                    misc: '',
                     state: 1
                 },
                 response: {},
