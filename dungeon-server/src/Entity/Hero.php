@@ -52,7 +52,7 @@ class Hero
     /**
      * @var string
      *
-     * @ORM\Column(name="pic", type="string", length=255, nullable=false)
+     * @ORM\Column(name="pic", type="string", length=2000, nullable=false)
      */
     private $pic;
 

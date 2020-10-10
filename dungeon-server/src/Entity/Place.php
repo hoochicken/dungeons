@@ -36,6 +36,13 @@ class Place
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="pic", type="string", length=2000, nullable=false)
+     */
+    private $pic;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(name="type", type="integer", nullable=true)
@@ -123,6 +130,18 @@ class Place
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPic(): ?string
+    {
+        return $this->pic;
+    }
+
+    public function setPic(string $pic): self
+    {
+        $this->pic = $pic;
 
         return $this;
     }
