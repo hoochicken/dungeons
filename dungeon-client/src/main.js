@@ -19,6 +19,7 @@ import HeroUpdate from './components/hero/update.vue'
 import PlaceList from './components/place/list.vue'
 import PlaceCreate from './components/place/create.vue'
 import PlaceUpdate from './components/place/update.vue'
+import PlaceDisplay from './components/place/display.vue'
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter, axios);
@@ -36,6 +37,7 @@ const routes = [
   { path: '/place/list', component: PlaceList },
   { path: '/place/create', component: PlaceCreate },
   { path: '/place/update/:id', component: PlaceUpdate },
+  { path: '/place/display/:id', component: PlaceDisplay },
   { path: '/', component: App },
 ];
 
