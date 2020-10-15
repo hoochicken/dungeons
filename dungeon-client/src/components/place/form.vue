@@ -12,6 +12,10 @@
             </md-field>
 
             <md-field>
+                <md-input id="pic" name="pic" type="file" v-model="item.pic" />
+            </md-field>
+
+            <md-field>
                 <label for="description">Description</label>
                 <md-textarea id="description" name="description" v-model="item.description" />
             </md-field>

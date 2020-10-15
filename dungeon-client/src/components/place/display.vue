@@ -2,7 +2,7 @@
     <div>
         <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
         <h1>{{ item.name }} ({{ item.id }})</h1>
-        <pre>{{ item.pic }}</pre>
+        <div>{{ item.pic }}</div>
         <div>{{ item.description }}</div>
 
         <youtube-audio :video-id="item.misc"></youtube-audio>
