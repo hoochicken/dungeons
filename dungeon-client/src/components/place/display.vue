@@ -1,18 +1,22 @@
 <template>
     <div>
+        <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
         <h1>{{ item.name }} ({{ item.id }})</h1>
+        <pre>{{ item.pic }}</pre>
         <div>{{ item.description }}</div>
 
         <youtube-audio :video-id="item.misc"></youtube-audio>
+
         <message-box>{{ message }}</message-box>
     </div>
 </template>
 <script>
     import MessageBox from "../global/message-box";
     import YoutubeAudio from "../global/youtube-audio";
+    import ButtonEdit from "../global/button-edit";
     export default {
         name: "place-display",
-        components: {YoutubeAudio, MessageBox},
+        components: {ButtonEdit, YoutubeAudio, MessageBox},
         data () {
             return {
                 item: {

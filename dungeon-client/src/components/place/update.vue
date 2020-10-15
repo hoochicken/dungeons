@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ item }}
+        <button-display :clickRoute="'/place/display/' + item.id"></button-display>
         <h1>Update</h1>
         <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')" @delete="deletePlace"></place-form>
         <message-box>{{ error }}</message-box>
@@ -10,9 +10,10 @@
 <script>
     import PlaceForm from "./form";
     import MessageBox from "../global/message-box";
+    import ButtonDisplay from "../global/button-display";
     export default {
         name: "place-update",
-        components: {MessageBox, PlaceForm},
+        components: {ButtonDisplay, MessageBox, PlaceForm},
         data () {
             return {
                 item: {
