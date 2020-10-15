@@ -1,10 +1,10 @@
 <template>
     <div>
-        <iframe :src="this.urlStreamingService + '/' + this.videoId + '?autoplay=' + autoplayString"></iframe>
-        <md-button @click="asd();" class="md-raised primary">asd</md-button>
+        <iframe :src="this.urlStreamingService + '/' + this.videoId + '?autoplay=' + autoplayString" allow="autoplay;"></iframe>
         <message-box>{{ error }}</message-box>
     </div>
 </template>
+
 
 <script>
     import MessageBox from "./message-box";
@@ -28,25 +28,10 @@
             return {
                 response: {},
                 error: {},
-                urlCors: 'https://cors-anywhere.herokuapp.com',
                 urlStreamingService: 'https://www.youtube.com/embed',
-                urlStreamingParam: 'video_id',
                 autoplayString: this.autoPlay ? '1' : '0'
             }
         },
-        mounted() {
-            console.log(this.videoId);
-
-        },
-        methods: {
-            async getAudio() {
-                console.log(this.videoId);
-            },
-            asd: function () {
-                this.getAudio();
-            }
-
-        }
     }
 </script>
 
