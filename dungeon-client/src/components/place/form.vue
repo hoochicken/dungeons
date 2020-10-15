@@ -1,7 +1,6 @@
 <template>
     <div>
-        <form class="md-layout md-gutter">
-            {{ item }}
+        <form>
             <md-field v-if="item.id > 0">
                 <label for="id">Id</label>
                 <md-input id="id" name="id" disabled v-model="item.id" />
