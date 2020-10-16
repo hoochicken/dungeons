@@ -4,6 +4,7 @@
         <message-box v-if="displayError">{{ error.data.errors }}</message-box>
         <h1>Update</h1>
         <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')" @delete="deletePlace"></place-form>
+        <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
 
@@ -11,9 +12,10 @@
     import PlaceForm from "./form";
     import MessageBox from "../global/message-box";
     import ButtonDisplay from "../global/button-display";
+    import VueLoading from "vue-loading-overlay/src/js/Component";
     export default {
         name: "place-update",
-        components: {ButtonDisplay, MessageBox, PlaceForm},
+        components: {VueLoading, ButtonDisplay, MessageBox, PlaceForm},
         data () {
             return {
                 item: {
@@ -28,6 +30,7 @@
                 response: {},
                 error: {data: {errors: {}}},
                 msgtype: 'info',
+                loading: false,
                 displayError: false
             }
         },
@@ -38,22 +41,28 @@
         methods: {
             async getPlace(id) {
                 try {
+                    this.loading = true;
                     this.response = await this.axios.get('/place/get/' + id);
                     this.item = this.response.data;
                     this.displayError = false;
+                    this.loading = false;
                 } catch (error) {
                     this.error = error.response;
                     this.displayError = true;
+                    this.loading = true;
                 }
             },
             async updatePlace(item) {
                 try {
+                    this.loading = true;
                     let params = JSON.stringify(item);
                     this.response = await this.axios.post('/place/update/' + item.id, params);
                     this.displayError = false;
+                    this.loading = false;
                 } catch (error) {
                     this.error = error.response;
                     this.displayError = true;
+                    this.loading = true;
                 }
             },
             async deletePlace() {
@@ -61,11 +70,14 @@
                     return;
                 }
                 try {
+                    this.loading = true;
                     await this.axios.post('/place/delete/' + this.item.id);
                     this.displayError = false;
+                    this.loading = false;
                 } catch (error) {
                     this.error = error.response;
                     this.displayError = true;
+                    this.loading = true;
                 }
             }
         }

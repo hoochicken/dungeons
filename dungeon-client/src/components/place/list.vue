@@ -44,20 +44,23 @@
             </tbody>
         </md-table>
         <pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
+        <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
 
 <script>
   import Search from "../global/search";
+  import VueLoading from "vue-loading-overlay/src/js/Component";
   export default {
     name: 'place-list',
-      components: {Search},
+      components: {VueLoading, Search},
       data() {
         return {
             places: [],
             currentId: 0,
             response: {},
             searchterm: '',
+            loading: false,
             listState: {
                 maxResults: 3,
                 currentPage:0,
@@ -77,12 +80,19 @@
     },
     methods: {
       async list() {
-          let params = new URLSearchParams();
-          params.append('searchterm', this.searchterm);
-          params.append('listState', JSON.stringify(this.listState));
-          const response = await this.axios.post('/place/list', params);
-          this.places = response.data.items;
-          this.listState = response.data.listState;
+          try {
+              this.loading = true;
+              let params = new URLSearchParams();
+              params.append('searchterm', this.searchterm);
+              params.append('listState', JSON.stringify(this.listState));
+              const response = await this.axios.post('/place/list', params);
+              this.places = response.data.items;
+              this.listState = response.data.listState;
+              this.loading = false;
+          } catch(error) {
+              this.loading = false;
+          }
+
       },
       async deletePlace(id) {
           if (!confirm('Really delete this place???')) {
