@@ -3,12 +3,13 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import axios from './plugins/axios'
 import Pagination from 'vue-paginate-al'
-
+import Loading from 'vue-loading-overlay';
 
 import 'material-icons/iconfont/material-icons.scss';
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 import Demonic from './components/demo/Demonic';
 
@@ -20,9 +21,14 @@ import PlaceList from './components/place/list.vue'
 import PlaceCreate from './components/place/create.vue'
 import PlaceUpdate from './components/place/update.vue'
 import PlaceDisplay from './components/place/display.vue'
+// Import stylesheet
 
 Vue.config.productionTip = false;
-Vue.use(VueRouter, axios);
+
+// Init plugin
+Vue.use(VueRouter);
+Vue.use(axios);
+Vue.use(Loading);
 Vue.use(VueMaterial);
 Vue.component('pagination', Pagination);
 
