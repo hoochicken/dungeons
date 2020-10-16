@@ -1,5 +1,9 @@
 <template>
-    <div><div v-if="hasSlotData" :class="'d-flex alert alert-' + msgtype">{{ $slots.default }}<slot></slot></div></div>
+    <div :class="'box d-flex md-card' + msgtype">
+        <slot></slot>
+        <br/>
+        {{ $slots.default }}
+    </div>
 </template>
 
 <script>
@@ -8,17 +12,16 @@
         props: {
             msgtype: {
                 type: String,
-                default: 'info',
+                default: 'warning',
             },
-        },
-        computed: {
-            hasSlotData() {
-                return this.$slots.default.text && this.$slots.default.text !== '{}';
-            }
         }
     }
 </script>
 
 <style scoped>
-
+    .box {
+        background: #ffeeee;
+        padding: 1rem;
+        border-left: 3px solid #ffaaaa;
+    }
 </style>
