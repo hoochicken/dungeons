@@ -1,45 +1,29 @@
 <template>
     <div>
-        <div class="md-layout-item md-layout md-gutter">
-            <div class="btn btn1 md-layout-item md-size-10">asd</div>
-            <div class="btn btn2 md-layout-item">asd</div>
-            <div class="btn btn3 md-layout-item md-size-10">asd</div>
-        </div>
-        <div class="md-layout-item md-layout md-gutter">
-            <div class="btn btn4 md-layout-item md-size-10">asd</div>
-            <div class="content md-layout-item">
-                <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
-                <h1>{{ item.name }} ({{ item.id }})</h1>
-                <div class="pic">{{ item.pic }}</div>
-                <div>{{ item.description }}</div>
+        <place-frame>
+            <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
+            <h1>{{ item.name }} ({{ item.id }})</h1>
+            <div class="pic">{{ item.pic }}</div>
+            <div>{{ item.description }}</div>
 
-                <vue-loading :active="loading"></vue-loading>
+            <vue-loading :active="loading"></vue-loading>
 
-                <youtube-audio :video-id="item.misc"></youtube-audio>
+            <youtube-audio :video-id="item.misc"></youtube-audio>
 
-            </div>
-            <div class="btn btn5 md-layout-item md-size-10">asd</div>
-        </div>
-
-        <div class="md-layout-item md-layout md-gutter">
-            <div class="btn btn6 md-layout-item md-size-10">asd</div>
-            <div class="btn btn7 md-layout-item">asd</div>
-            <div class="btn btn8 md-layout-item md-size-10">asd</div>
-        </div>
-
-        <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
-        <md-progress-spinner v-if="loading" :md-diameter="30" :md-stroke="3" md-mode="indeterminate"></md-progress-spinner>
+            <md-progress-spinner v-if="loading" :md-diameter="30" :md-stroke="3" md-mode="indeterminate"></md-progress-spinner>
+            <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
+        </place-frame>
     </div>
 </template>
 <script>
-    import MessageBox from "../global/message-box";
     import YoutubeAudio from "../global/youtube-audio";
     import ButtonEdit from "../global/button-edit";
     import VueLoading from "vue-loading-overlay/src/js/Component";
+    import PlaceFrame from "./frame";
 
     export default {
         name: "place-display",
-        components: {VueLoading, ButtonEdit, YoutubeAudio, MessageBox},
+        components: {PlaceFrame, VueLoading, ButtonEdit, YoutubeAudio},
         data() {
             return {
                 item: {
@@ -67,7 +51,7 @@
                     this.response = await this.axios.get('/place/get/' + id);
                     this.item = this.response.data;
                     this.displayError = false;
-                    this.loading =  false;
+                    this.loading = false;
                 } catch (error) {
                     this.error = error;
                     this.displayError = true;
@@ -90,13 +74,46 @@
         background: url('../../../../assets/img/place/default.jpg') no-repeat;
         background-size: cover;
     }
-    .btn {}
-    .btn1 {text-align:left;}
-    .btn2 {text-align:center;}
-    .btn3 {text-align:right;}
-    .btn4 {text-align:left;}
-    .btn5 {text-align:right;}
-    .btn6 {text-align:left;}
-    .btn7 {text-align:center;}
-    .btn8 {text-align:right;}
+
+    .btn {
+        cursor: pointer;
+    }
+
+    .btn1 {
+        text-align: left;
+        transform: rotate(-45deg);
+    }
+
+    .btn2 {
+        text-align: center;
+    }
+
+    .btn3 {
+        text-align: right;
+        transform: rotate(45deg);
+    }
+
+    .btn4 {
+        text-align: left;
+        margin-top: 20%;
+    }
+
+    .btn5 {
+        text-align: right;
+        margin-top: 20%;
+    }
+
+    .btn6 {
+        text-align: left;
+        transform: rotate(45deg);
+    }
+
+    .btn7 {
+        text-align: center;
+    }
+
+    .btn8 {
+        text-align: right;
+        transform: rotate(-45deg);
+    }
 </style>
