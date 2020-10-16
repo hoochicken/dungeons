@@ -1,16 +1,13 @@
 <template>
     <div>
         <iframe :src="this.urlStreamingService + '/' + this.videoId + '?autoplay=' + autoplayString" allow="autoplay;"></iframe>
-        <message-box>{{ error }}</message-box>
     </div>
 </template>
 
 
 <script>
-    import MessageBox from "./message-box";
     export default {
         name: "youtube-audio",
-        components: {MessageBox},
         props: {
             videoId: {
                 type: String
@@ -27,7 +24,6 @@
         data: function () {
             return {
                 response: {},
-                error: {},
                 urlStreamingService: 'https://www.youtube.com/embed',
                 autoplayString: this.autoPlay ? '1' : '0'
             }
