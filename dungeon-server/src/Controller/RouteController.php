@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Route;
 use App\Modules\Dater;
 use App\Repository\RouteRepository;
 use mysql_xdevapi\Exception;
@@ -22,14 +23,8 @@ class RouteController extends ApiController
      */
     public function place(Request $request, RouteRepository $routeRepository): JsonResponse
     {
-        // retrieve data from request query
-        $searchterm = trim($request->request->get('searchterm'));
-        $listState = json_decode($request->request->get('listState'));
-        $currentPage = $listState->currentPage ?? 0;
-        $maxResult = $listState->maxResults ?? 2;
-
         // get items and pagination info
-        $result = $routeRepository->findByName($searchterm, $currentPage, $maxResult);
+        $result = $routeRepository->findByPlace($request->request->get('place'));
         $items = $routeRepository->transformAll($result['items']);
 
         // build return array
@@ -47,23 +42,21 @@ class RouteController extends ApiController
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
 
-        // validate the title
-        if (! $request->get('name')) {
-            return $this->respondValidationError('Please provide a name!');
-        }
+        $out = $request->request->get('out');
+        $in = $request->request->get('in');
+        $direction = $request->request->get('direction');
 
-        // persist the new place
-        $place = new Place;
-        $place->setName($request->get('name'));
-        $place->setDescription($request->get('description'));
-        $place->setPic($request->get('pic'));
-        $place->setMisc($request->get('misc'));
-        $place->setState($request->get('state'));
-        $place->setCreated(Dater::get());
+        $route = new Route();
+        $route->setOut($out);
+        $route->setIn($in);
+        $route->setOutDirection($direction);
 
-        $em->persist($place);
+        $route->setCreated(Dater::get());
+        $route->setCreatedUser('ADM');
+
+        $em->persist($route);
         $em->flush();
-        $arr = $routeRepository->transform($place);
+        $arr = $routeRepository->transform($route);
         return $this->respondCreated($arr);
     }
 

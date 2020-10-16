@@ -1,6 +1,6 @@
 <template>
     <div>
-        <place-frame>
+        <place-frame @placeId="item.id">
             <button-display :clickRoute="'/place/display/' + item.id"></button-display>
             <message-box v-if="displayError">{{ error.data.errors }}</message-box>
             <h1>Update</h1>

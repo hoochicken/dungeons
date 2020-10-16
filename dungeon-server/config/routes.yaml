@@ -62,8 +62,8 @@ placeDelete:
   path: /place/delete/{id}
   controller: App\Controller\PlaceController::delete
 
-routeList:
-  path: /route/place/{id}
+routePlace:
+  path: /route/place/{place}
   controller: App\Controller\RouteController::place
 
 routeCreate:
