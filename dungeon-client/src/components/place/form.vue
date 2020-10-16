@@ -12,7 +12,7 @@
             </md-field>
 
             <md-field>
-                <md-input id="pic" name="pic" type="file" v-model="item.pic" />
+                <md-input id="pic" name="pic" v-model="item.pic" />
             </md-field>
 
             <md-field>
