@@ -61,3 +61,11 @@ placeUpdate:
 placeDelete:
   path: /place/delete/{id}
   controller: App\Controller\PlaceController::delete
+
+routeList:
+  path: /route/place/{id}
+  controller: App\Controller\RouteController::place
+
+routeCreate:
+  path: /route/create
+  controller: App\Controller\RouteController::create

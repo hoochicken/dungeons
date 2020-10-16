@@ -70,50 +70,8 @@
 
 <style scoped>
     .pic {
-        min-height: 600px;
+        min-height: 350px;
         background: url('../../../../assets/img/place/default.jpg') no-repeat;
         background-size: cover;
-    }
-
-    .btn {
-        cursor: pointer;
-    }
-
-    .btn1 {
-        text-align: left;
-        transform: rotate(-45deg);
-    }
-
-    .btn2 {
-        text-align: center;
-    }
-
-    .btn3 {
-        text-align: right;
-        transform: rotate(45deg);
-    }
-
-    .btn4 {
-        text-align: left;
-        margin-top: 20%;
-    }
-
-    .btn5 {
-        text-align: right;
-        margin-top: 20%;
-    }
-
-    .btn6 {
-        text-align: left;
-        transform: rotate(45deg);
-    }
-
-    .btn7 {
-        text-align: center;
-    }
-
-    .btn8 {
-        text-align: right;
-        transform: rotate(-45deg);
     }
 </style>
