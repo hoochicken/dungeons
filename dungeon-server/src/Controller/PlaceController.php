@@ -74,8 +74,15 @@ class PlaceController extends ApiController
      */
     public function get(int $id, PlaceRepository $placeRepository, EntityManagerInterface $em): JsonResponse
     {
-        $place = $placeRepository->find($id);
-        return $this->respond($placeRepository->transform($place));
+        try {
+            $place = $placeRepository->find($id);
+            if (!is_object($place)) {
+                throw new \ErrorException(sprintf('The place width the id \'%s\' could not be found.', $id));
+            }
+            return $this->respond($placeRepository->transform($place));
+        } catch (\Exception $e) {
+            return $this->respondNotFound($e->getMessage());
+        }
     }
 
     /**

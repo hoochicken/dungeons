@@ -1,6 +1,7 @@
 <template>
     <div>
         <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
+        {{ message }}
         <h1>{{ item.name }} ({{ item.id }})</h1>
         <div>{{ item.pic }}</div>
         <div>{{ item.description }}</div>
@@ -33,12 +34,16 @@
             }
         },
         async mounted () {
-            await this.getPlace(this.$route.params.id)
+            await this.getPlace(this.$route.params.id);
         },
         methods: {
             async getPlace(id) {
-                this.response = await this.axios.get('/place/get/' + id);
-                this.item = this.response.data;
+                try {
+                    this.response = await this.axios.get('/place/get/' + id);
+                    this.item = this.response.data;
+                } catch(error) {
+                    this.message = error;
+                }
             }
         }
     }
