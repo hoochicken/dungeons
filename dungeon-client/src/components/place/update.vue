@@ -1,10 +1,13 @@
 <template>
     <div>
-        <button-display :clickRoute="'/place/display/' + item.id"></button-display>
-        <message-box v-if="displayError">{{ error.data.errors }}</message-box>
-        <h1>Update</h1>
-        <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')" @delete="deletePlace"></place-form>
-        <vue-loading :active="loading"></vue-loading>
+        <place-frame>
+            <button-display :clickRoute="'/place/display/' + item.id"></button-display>
+            <message-box v-if="displayError">{{ error.data.errors }}</message-box>
+            <h1>Update</h1>
+            <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')"
+                        @delete="deletePlace"></place-form>
+            <vue-loading :active="loading"></vue-loading>
+        </place-frame>
     </div>
 </template>
 
@@ -13,10 +16,12 @@
     import MessageBox from "../global/message-box";
     import ButtonDisplay from "../global/button-display";
     import VueLoading from "vue-loading-overlay/src/js/Component";
+    import PlaceFrame from "./frame";
+
     export default {
         name: "place-update",
-        components: {VueLoading, ButtonDisplay, MessageBox, PlaceForm},
-        data () {
+        components: {PlaceFrame, VueLoading, ButtonDisplay, MessageBox, PlaceForm},
+        data() {
             return {
                 item: {
                     id: 0,
@@ -34,7 +39,7 @@
                 displayError: false
             }
         },
-        async mounted () {
+        async mounted() {
             this.displayError = false;
             await this.getPlace(this.$route.params.id)
         },
