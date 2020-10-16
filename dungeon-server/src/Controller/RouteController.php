@@ -74,7 +74,7 @@ class RouteController extends ApiController
             return $this->respond('Place with id ' . $id . ' was not found. (Already removed?)');
         }
         $place->setDeleted(Dater::get());
-        $place->setState(false);
+        $place->setState(0);
 
         // $em->remove($place);
         $em->flush();

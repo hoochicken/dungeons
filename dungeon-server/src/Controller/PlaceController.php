@@ -55,9 +55,9 @@ class PlaceController extends ApiController
         $place = new Place;
         $place->setName($request->get('name'));
         $place->setDescription($request->get('description'));
-        $place->setPic($request->get('pic'));
-        $place->setMisc($request->get('misc'));
-        $place->setState($request->get('state'));
+        $place->setPic($request->get('pic', ''));
+        $place->setMisc($request->get('misc', ''));
+        $place->setState($request->get('state', false));
         $place->setCreated(Dater::get());
 
         $em->persist($place);
@@ -107,7 +107,7 @@ class PlaceController extends ApiController
         $place = $placeRepository->find($id);
         $place->setName($request->get('name'));
         $place->setDescription($request->get('description'));
-        $place->setPic($request->get('pic'));
+        $place->setPic($request->get('pic', ''));
         $place->setMisc($request->get('misc'));
         $place->setState($request->get('state'));
         $place->setUpdated(Dater::get());

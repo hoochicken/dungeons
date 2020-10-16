@@ -21,19 +21,27 @@
             <div @click="createNewRoute(8)" class="btn btn8 md-layout-item md-size-10"><md-icon class="fa fa-arrow-down"></md-icon></div>
         </div>
         <div class="btn btn5 md-layout-item md-size-10"><md-icon class="fa fa-arrow-right"></md-icon></div>
-
+{{error}}
     </div>
 </template>
 <script>
     export default {
         name: "place-frame",
         props: ['placeId'],
+        data() {
+            return {
+                error: {}
+            }
+        },
         methods: {
             async createNewRoute(direction) {
                 try {
                     this.error = {};
+
                     // create place
                     let newPlaceId = this.initiatePlace();
+                    let asd = false;
+                    if (asd) {
 
                     // create route
                     this.createRoute(this.placeId, newPlaceId, direction);
@@ -42,17 +50,18 @@
                     this.$route.push('/place/display/' + newPlaceId);
 
                     return this.response.data.id;
+                    }
                 } catch (error) {
                     this.error = error.response;
                 }
-
-
-
             },
             async initiatePlace() {
                 try {
                     this.error = {};
-                    this.response = await this.axios.post('/place/create', {});
+                    let params = {
+                        name: 'New Place'
+                    };
+                    this.response = await this.axios.post('/place/create', params);
                     return this.response.data.id;
                 } catch (error) {
                     this.error = error.response;
@@ -67,7 +76,7 @@
                         in: roomIn,
                         direction: direction
                     };
-                    this.response = await this.axios.post('/place/create', params);
+                    this.response = await this.axios.post('/route/create', params);
                 } catch (error) {
                     this.error = error.response;
                 }
