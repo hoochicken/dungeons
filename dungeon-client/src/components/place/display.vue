@@ -65,7 +65,7 @@
                 this.error = error;
             },
             async moveTo(newPlaceId) {
-                this.getPlace(newPlaceId);
+                this.$router.push('/place/display/' + newPlaceId);
             },
             async setLoading(loading) {
                 this.loading = loading;

@@ -50,14 +50,17 @@
         },
         methods: {
             async useRoute(placeId, routeId, outDirection) {
+
                 if (this.edit) {
                     this.outDirection = outDirection;
                     this.routeId = routeId;
                     this.showRouteDrawer = true;
                     return;
                 }
-
-                this.$router.push('/place/display/' + this.placeId);
+                console.log(placeId);
+                // this.$emit('moveTo', this.placeId);
+                // this.$emit('moveTo', )
+                this.$router.push('/place/display/' + placeId);
                 location.reload();
             },
             async initiatePlace() {

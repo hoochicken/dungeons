@@ -4,7 +4,7 @@
             <span class="md-title">Route</span>
             <div class="content">
                 <md-button v-if="0 === routeId" class="md-raised md-primary" @click="createRoute">Create</md-button>
-                <md-button v-else class="md-raised md-primary" @click="updateRoute">Update</md-button>
+                <md-button v-else class="md-raised md-primary" @click="updateRoute(routeId)">Update</md-button>
                 <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
                 <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
             {{ placeId }}
@@ -46,16 +46,15 @@
                     await this.createRoute(this.placeId, newPlaceId, out_direction);
 
                     // move to new place
-                    this.$router.push('/place/update/' + newPlaceId);
-                    location.reload();
+                    this.updateRoute(newPlaceId);
                 } catch (error) {
                     this.error = error.response;
                     this.$emit('sendError', this.error);
                 }
             },
-            updateRoute()
+            updateRoute(routeId)
             {
-                this.$router.push('/place/update/' + this.placeId);
+                this.$router.push('/place/update/' + routeId);
                 location.reload();
             },
             async deleteRoute()
