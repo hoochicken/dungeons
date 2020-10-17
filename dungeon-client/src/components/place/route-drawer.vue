@@ -4,7 +4,7 @@
             <span class="md-title">Route</span>
             <div class="content">
                 <md-button v-if="0 === routeId" class="md-raised md-primary" @click="createRoute">Create</md-button>
-                <md-button v-else class="md-raised md-primary" @click="updateRoute(placeIn)">Update ({{ placeIn }})</md-button>
+                <md-button v-else class="md-raised md-primary" @click="updateRoute(placeIn)">Walk To ({{ placeIn }})</md-button>
                 <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
                 <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
 
