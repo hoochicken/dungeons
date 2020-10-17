@@ -27,7 +27,8 @@
         props: ['placeId'],
         data() {
             return {
-                error: {}
+                error: {},
+                response: {}
             }
         },
         methods: {
