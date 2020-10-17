@@ -5,7 +5,7 @@
                 <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
                 <h1>{{ item.name }} ({{ item.id }})</h1>
                 <div>{{ item.description }}</div>
-                <route-console :edit="true" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+                <route-console :edit="false" :place-id="placeId" :key="placeId" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <div class="pic">{{ item.pic }}</div>
@@ -38,6 +38,7 @@
                 },
                 response: {},
                 error: {},
+                placeId: 0,
                 displayError: false,
                 loading: false
             }
@@ -49,6 +50,7 @@
             async getPlace(id) {
                 try {
                     this.loading = true;
+                    this.placeId = parseInt(id);
                     this.response = await this.axios.get('/place/get/' + id);
                     this.item = this.response.data;
                     this.displayError = false;
@@ -70,11 +72,6 @@
             }
         }
     }
-    /**
-     * videoId: '',
-     controls: true,
-     autoPlay: true
-     */
 </script>
 
 
@@ -91,8 +88,7 @@
 
     .route-console {
         width: 100px;
-        height: 100px;
-        overflow: hidden;
+        height: 130px;
         position: absolute;
         left: 20px;
         bottom: 70px;

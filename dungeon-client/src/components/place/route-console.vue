@@ -4,7 +4,6 @@
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
             <route-drawer :place-id="placeId" :out-direction="outDirection"></route-drawer>
         </md-drawer>
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
             <div v-for="item in routes" @click="useRoute(item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
@@ -50,9 +49,16 @@
         },
         methods: {
             async useRoute(placeId, outDirection) {
-                this.placeId = placeId;
-                this.outDirection = outDirection;
-                this.showRouteDrawer = true;
+                this.placeId = parseInt(placeId);
+
+                if (this.edit) {
+                    this.outDirection = outDirection;
+                    this.showRouteDrawer = true;
+                    return;
+                }
+
+                this.$router.push('/place/display/' + this.placeId);
+                location.reload();
             },
             async createNewRoute(out_direction) {
                 try {

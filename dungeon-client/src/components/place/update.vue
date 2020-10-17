@@ -55,7 +55,7 @@
                     this.loading = true;
                     this.response = await this.axios.get('/place/get/' + id);
                     this.item = this.response.data;
-                    this.placeId = this.item.id;
+                    this.placeId = parseInt(this.item.id);
                     this.displayError = false;
                     this.loading = false;
                 } catch (error) {
@@ -106,12 +106,5 @@
 </script>
 
 <style scoped>
-    .btn.btn19.route-console {
-        width: 100px;
-        height: 100px;
-        overflow: hidden;
-        position: absolute;
-        left: 20px;
-        bottom: 70px;
-    }
+
 </style>
