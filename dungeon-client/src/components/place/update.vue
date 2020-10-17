@@ -4,7 +4,7 @@
             <div class="description-console md-layout-item md-size-50">
                 <button-display :clickRoute="'/place/display/' + item.id"></button-display>
                 <vue-loading :active="loading"></vue-loading>
-                <route-console :edit="true" :place-id="item.id" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+                <route-console :edit="true" :place-id="placeId" :key="placeId" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')"
@@ -38,6 +38,7 @@
                     state: 1
                 },
                 response: {},
+                placeId: 0,
                 error: {data: {errors: {}}},
                 msgtype: 'info',
                 loading: false,
@@ -54,6 +55,7 @@
                     this.loading = true;
                     this.response = await this.axios.get('/place/get/' + id);
                     this.item = this.response.data;
+                    this.placeId = this.item.id;
                     this.displayError = false;
                     this.loading = false;
                 } catch (error) {
@@ -104,7 +106,7 @@
 </script>
 
 <style scoped>
-    .route-console {
+    .btn.btn19.route-console {
         width: 100px;
         height: 100px;
         overflow: hidden;

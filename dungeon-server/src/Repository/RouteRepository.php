@@ -61,6 +61,7 @@ class RouteRepository extends ServiceEntityRepository
         $routes = [];
         foreach (range(1,9) as $direction) {
             $routes[$direction] = $default;
+            $routes[$direction]['out_direction'] = $direction;
             if (!isset($unifiedAll[$direction])) continue;
             $routes[$direction] = $unifiedAll[$direction];
         }
@@ -86,7 +87,7 @@ class RouteRepository extends ServiceEntityRepository
         // swap in and out places
         $return['place_out'] = $item['place_in'];
         $return['place_in'] = $item['place_out'];
-        $return['out_direction'] = 9 - (int) $item['out_direction'];
+        $return['out_direction'] = 10 - (int) $item['out_direction'];
         return $return;
     }
 

@@ -1,7 +1,13 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <div class="md-layout-item md-layout md-gutter">
+        <div class="console">
+            <div v-for="item in routes" :key="item.out_direction" @click="useRoute(item.out_direction)" :class="'btn btn' + item.out_direction + ' ' + item.class">
+                <md-icon class="fa fa-arrow-up"></md-icon>
+            </div>
+        </div>
+
+        <!--div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
             <div @click="useRoute(2)" class="btn btn2 md-layout-item"><md-icon class="fa fa-arrow-up"></md-icon></div>
             <div @click="useRoute(3)" class="btn btn3 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
@@ -15,7 +21,7 @@
             <div @click="useRoute(6)" class="btn btn6 md-layout-item md-size-10"><md-icon class="fa fa-arrow-down"></md-icon></div>
             <div @click="useRoute(7)" class="btn btn7 md-layout-item"><md-icon class="fa fa-arrow-down"></md-icon></div>
             <div @click="useRoute(8)" class="btn btn8 md-layout-item md-size-10"><md-icon class="fa fa-arrow-down"></md-icon></div>
-        </div>
+        </div-->
     </div>
 </template>
 <script>
@@ -38,7 +44,7 @@
             }
         },
         async mounted() {
-            this.routes = await this.getRoutesByPlace(this.placeId);
+            this.response = await this.getRoutesByPlace(this.placeId);
         },
         watch: {
             placeId: function(value) {
@@ -46,15 +52,18 @@
             }
         },
         methods: {
-            async useRoute(direction) {
+            async useRoute(out_direction) {
                 if (this.edit) {
-                    this.createNewRoute(direction);
+                    this.createNewRoute(out_direction);
                 }
-                this.createNewRoute(direction);
+                // this.createNewRoute(direction);
                 // this.$route(direction);
             },
-            async createNewRoute(direction) {
+            async createNewRoute(out_direction) {
                 try {
+                    if (5 === out_direction) {
+                        return;
+                    }
                     this.$emit('setLoading', true);
                     this.error = {};
 
@@ -62,11 +71,11 @@
                     let newPlaceId = await this.initiatePlace();
 
                     // create route
-                    await this.createRoute(this.placeId, newPlaceId, direction);
+                    await this.createRoute(this.placeId, newPlaceId, out_direction);
 
                     // move to new place
                     this.$router.push('/place/update/' + newPlaceId);
-                    this.$emit('setLoading', false);
+                    location.reload();
                 } catch (error) {
                     this.error = error.response;
                     this.$emit('sendError', this.error);
@@ -90,7 +99,7 @@
                     let params = {
                         place_out: placeOut,
                         place_in: placeIn,
-                        direction: direction
+                        out_direction: direction
                     };
                     this.response = await this.axios.post('/route/create', params);
                     return this.response;
@@ -101,7 +110,8 @@
             async getRoutesByPlace(placeId) {
                 try {
                     if (placeId <= 0) return;
-                    this.routes = await this.axios.post('/route/place/' + placeId);
+                    this.response = await this.axios.post('/route/place/' + placeId);
+                    this.routes = this.response.data.items;
                     return this.routes;
                 } catch (error) {
                     this.error = error.response;
@@ -110,20 +120,17 @@
         }
     }
 </script>
-
-
-
 <style scoped>
-    .content {}
-    .md-layout-item.md-layout.md-gutter {}
-    .md-layout-item.md-layout.md-gutter > div {padding:0;width: 33px;height: 33px;text-align: center;}
+    .console {width:99px;}
+    .console > div {width:33%;float:left;}
     .btn {font-size:20px;cursor:pointer;display:block; padding:0;text-align: center;}
     .btn1 {transform: rotate(-45deg);}
     .btn2 {}
     .btn3 {transform: rotate(45deg);}
-    .btn4 {}
-    .btn5 {}
-    .btn6 {transform: rotate(45deg);}
-    .btn7 {text-align: center;}
-    .btn8 {transform: rotate(-45deg);}
+    .btn4 {transform: rotate(-90deg);}
+    .btn5 {opacity: 0;}
+    .btn6 {transform: rotate(90deg);}
+    .btn7 {transform: rotate(-135deg);}
+    .btn8 {transform: rotate(180deg);}
+    .btn9 {transform: rotate(135deg);}
 </style>
