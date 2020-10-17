@@ -46,7 +46,7 @@
                     await this.createRoute(this.placeId, newPlaceId, direction);
 
                     // move to new place
-                    this.$emit('moveTo', newPlaceId);
+                    this.$emit('moveToCreate', newPlaceId);
 
                 } catch (error) {
                     this.error = error.response;
