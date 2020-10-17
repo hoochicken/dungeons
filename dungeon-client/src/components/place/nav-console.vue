@@ -1,5 +1,5 @@
 <template>
-    <div class="console">
+    <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
@@ -41,7 +41,6 @@
             <div></div>
             <div @click="useRoute(8)" class="btn btn8 md-layout-item md-size-10"><md-icon class="fa fa-arrow-down"></md-icon></div>
         </div>
-{{error}}
     </div>
 </template>
 <script>
@@ -132,9 +131,8 @@
     .content {}
     .md-layout-item.md-layout.md-gutter {}
     .md-layout-item.md-layout.md-gutter > div {padding:0;width: 20%;height: 20px;text-align: center;}
-    .console {width:100px;height:100px;overflow:hidden;}
     .btn {font-size:20px;cursor:pointer;display:block; padding:0;text-align: center;}
-    .btn1 {transform: rotate(-45deg);background:red;}
+    .btn1 {transform: rotate(-45deg);}
     .btn2 {}
     .btn3 {transform: rotate(45deg);}
     .btn4 {}

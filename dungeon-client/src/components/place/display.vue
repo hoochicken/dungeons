@@ -1,20 +1,20 @@
 <template>
     <div>
-
-
-
-        <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
-        <h1>{{ item.name }} ({{ item.id }})</h1>
-        <div>{{ item.description }}</div>
-
-        <vue-loading :active="loading"></vue-loading>
-
-        <youtube-audio :video-id="item.misc"></youtube-audio>
-
-        <nav-console></nav-console>
-
+        <div class="md-layout-item md-layout md-gutter">
+            <div class="description-console md-layout-item md-size-50">
+                <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
+                <h1>{{ item.name }} ({{ item.id }})</h1>
+                <div>{{ item.description }}</div>
+                <nav-console class="nav-console"></nav-console>
+            </div>
+            <div class="ambient-console md-layout-item md-size-50">
+                <div class="pic">{{ item.pic }}</div>
+                <youtube-audio :video-id="item.misc"></youtube-audio>
+            </div>
+        </div>
         <md-progress-spinner v-if="loading" :md-diameter="30" :md-stroke="3"
                              md-mode="indeterminate"></md-progress-spinner>
+        <vue-loading :active="loading"></vue-loading>
         <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
 
     </div>
@@ -77,5 +77,19 @@
         min-height: 350px;
         background: url('../../../../assets/img/place/default.jpg') no-repeat;
         background-size: cover;
+    }
+
+    .description-console {
+        position: relative;
+    }
+
+    .nav-console {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        position: absolute;
+        left: 20px;
+        bottom: 70px;
+        width: 100px;
     }
 </style>
