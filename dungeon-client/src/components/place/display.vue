@@ -5,18 +5,15 @@
                 <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
                 <h1>{{ item.name }} ({{ item.id }})</h1>
                 <div>{{ item.description }}</div>
-                <route-console @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+                <route-console @moveToCreate="moveToCreate" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <div class="pic">{{ item.pic }}</div>
                 <youtube-audio :video-id="item.misc"></youtube-audio>
             </div>
         </div>
-        <!--md-progress-spinner v-if="loading" :md-diameter="30" :md-stroke="3"
-                             md-mode="indeterminate"></md-progress-spinner-->
         <vue-loading :active="loading"></vue-loading>
         <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
-
     </div>
 </template>
 <script>
@@ -67,6 +64,9 @@
             },
             async moveTo(newPlaceId) {
                 this.getPlace(newPlaceId);
+            },
+            async moveToCreate(newPlaceId) {
+                this.$router.push('/place/update/' + newPlaceId);
             },
             async setLoading(loading) {
                 this.loading = loading;
