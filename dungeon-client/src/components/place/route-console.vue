@@ -2,8 +2,10 @@
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
-            <div v-for="item in routes" :key="item.out_direction" @click="useRoute(item.out_direction)" :class="'btn btn' + item.out_direction + ' ' + item.class">
-                <md-icon class="fa fa-arrow-up"></md-icon>
+            <div v-for="item in routes" @click="useRoute(item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
+                {{ item.place_in }}
+                <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
+                <md-icon v-else class="fa fa-arrow-up"></md-icon>
             </div>
         </div>
     </div>
@@ -36,12 +38,20 @@
             }
         },
         methods: {
-            async useRoute(out_direction) {
+            async useRoute(placeId, out_direction) {
                 if (this.edit) {
-                    this.createNewRoute(out_direction);
+
+                    if (placeId === 0) {
+                        this.createNewRoute(out_direction);
+                        return;
+                    }
+                    else {
+                        this.$router.push('/place/update/' + placeId);
+                        location.reload();
+                    }
+
                 }
-                // this.createNewRoute(direction);
-                // this.$route(direction);
+                this.$router.push('place/display/' + placeId);
             },
             async createNewRoute(out_direction) {
                 try {
@@ -107,6 +117,7 @@
 <style scoped>
     .console {width:99px;}
     .console > div {width:33%;float:left;}
+    .inner {height:100%;width:100%;}
     .btn {font-size:20px;cursor:pointer;display:block; padding:0;text-align: center;}
     .btn1 {transform: rotate(-45deg);}
     .btn2 {}
