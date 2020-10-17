@@ -52,6 +52,7 @@ class RouteRepository extends ServiceEntityRepository
         }
 
         $default = [
+            'id' => 0 ,
             'place_out' => 0 ,
             'place_in' => 0 ,
             'out_direction' => 0 ,
@@ -111,6 +112,7 @@ class RouteRepository extends ServiceEntityRepository
     public function transform(Route $route)
     {
         $return = [];
+        $return['id'] = $route->getId();
         $return['place_out'] = $route->getPlaceOut();
         $return['place_in'] = $route->getPlaceIn();
         $return['out_direction'] = $route->getOutDirection();

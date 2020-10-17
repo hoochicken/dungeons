@@ -2,11 +2,12 @@
     <div>
 
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
-            <route-drawer :place-id="placeId" :out-direction="outDirection"></route-drawer>
+            <route-drawer :place-id="placeId" :route-id="routeId" @closeDrawer="showRouteDrawer = false" :out-direction="outDirection"></route-drawer>
         </md-drawer>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {{ edit }}
         <div class="console">
-            <div v-for="item in routes" @click="useRoute(item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
+            <div v-for="item in routes" @click="useRoute(item.place_in, item.id, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
                 {{ item.place_in }}
                 <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
                 <md-icon v-else class="fa fa-arrow-up"></md-icon>
@@ -48,11 +49,10 @@
             }
         },
         methods: {
-            async useRoute(placeId, outDirection) {
-                this.placeId = parseInt(placeId);
-
+            async useRoute(placeId, routeId, outDirection) {
                 if (this.edit) {
                     this.outDirection = outDirection;
+                    this.routeId = routeId;
                     this.showRouteDrawer = true;
                     return;
                 }
