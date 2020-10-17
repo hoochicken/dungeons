@@ -1,5 +1,10 @@
 <template>
     <div>
+
+        <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
+            <route-drawer :place-id="placeId" :out-direction="outDirection"></route-drawer>
+        </md-drawer>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
             <div v-for="item in routes" @click="useRoute(item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
@@ -11,10 +16,15 @@
     </div>
 </template>
 <script>
+    import RouteDrawer from "./route-drawer";
     export default {
         name: "route-console",
+        components: {RouteDrawer},
         props: {
             placeId: {
+                type: Number
+            },
+            OutDirection: {
                 type: Number
             },
             edit: {
@@ -26,7 +36,8 @@
             return {
                 error: {},
                 response: {},
-                routes: {}
+                routes: {},
+                showRouteDrawer: false
             }
         },
         async mounted() {
@@ -38,20 +49,10 @@
             }
         },
         methods: {
-            async useRoute(placeId, out_direction) {
-                if (this.edit) {
-
-                    if (placeId === 0) {
-                        this.createNewRoute(out_direction);
-                        return;
-                    }
-                    else {
-                        this.$router.push('/place/update/' + placeId);
-                        location.reload();
-                    }
-
-                }
-                this.$router.push('place/display/' + placeId);
+            async useRoute(placeId, outDirection) {
+                this.placeId = placeId;
+                this.outDirection = outDirection;
+                this.showRouteDrawer = true;
             },
             async createNewRoute(out_direction) {
                 try {
