@@ -1,13 +1,18 @@
 <template>
     <div>
-        <place-frame @placeId="item.id">
-            <button-display :clickRoute="'/place/display/' + item.id"></button-display>
-            <message-box v-if="displayError">{{ error.data.errors }}</message-box>
-            <h1>Update</h1>
-            <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')"
-                        @delete="deletePlace"></place-form>
-            <vue-loading :active="loading"></vue-loading>
-        </place-frame>
+        <div class="md-layout-item md-layout md-gutter">
+            <div class="description-console md-layout-item md-size-50">
+                <button-display :clickRoute="'/place/display/' + item.id"></button-display>
+                <vue-loading :active="loading"></vue-loading>
+                <route-console :edit="true" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+            </div>
+            <div class="ambient-console md-layout-item md-size-50">
+                <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')"
+                            @delete="deletePlace"></place-form>
+            </div>
+        </div>
+        <vue-loading :active="loading"></vue-loading>
+        <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
     </div>
 </template>
 
@@ -16,11 +21,11 @@
     import MessageBox from "../global/message-box";
     import ButtonDisplay from "../global/button-display";
     import VueLoading from "vue-loading-overlay/src/js/Component";
-    import PlaceFrame from "./frame";
+    import RouteConsole from "./route-console";
 
     export default {
         name: "place-update",
-        components: {PlaceFrame, VueLoading, ButtonDisplay, MessageBox, PlaceForm},
+        components: {RouteConsole, VueLoading, ButtonDisplay, MessageBox, PlaceForm},
         data() {
             return {
                 item: {
@@ -84,11 +89,27 @@
                     this.displayError = true;
                     this.loading = true;
                 }
+            },
+            async methDisplayError(error) {
+                this.error = error;
+            },
+            async moveTo(newPlaceId) {
+                this.getPlace(newPlaceId);
+            },
+            async setLoading(loading) {
+                this.loading = loading;
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .route-console {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        position: absolute;
+        left: 20px;
+        bottom: 70px;
+    }
 </style>

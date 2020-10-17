@@ -1,6 +1,7 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {{ edit }}
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
             <div @click="useRoute(2)" class="btn btn2 md-layout-item"><md-icon class="fa fa-arrow-up"></md-icon></div>
@@ -23,7 +24,15 @@
 <script>
     export default {
         name: "route-console",
-        props: ['placeId'],
+        props: {
+            placeId: {
+                type: String
+            },
+            edit: {
+                type:Boolean,
+                default: false
+            }
+            },
         data() {
             return {
                 error: {},
@@ -32,7 +41,11 @@
         },
         methods: {
             async useRoute(direction) {
+                if (this.edit) {
+                    this.createNewRoute(direction);
+                }
                 this.createNewRoute(direction);
+                // this.$route(direction);
             },
             async createNewRoute(direction) {
                 try {
@@ -46,8 +59,8 @@
                     await this.createRoute(this.placeId, newPlaceId, direction);
 
                     // move to new place
-                    this.$emit('moveToCreate', newPlaceId);
-
+                    this.$router.push('/place/update/' + newPlaceId);
+                    this.$emit('setLoading', false);
                 } catch (error) {
                     this.error = error.response;
                     this.$emit('sendError', this.error);

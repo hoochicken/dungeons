@@ -5,7 +5,7 @@
                 <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
                 <h1>{{ item.name }} ({{ item.id }})</h1>
                 <div>{{ item.description }}</div>
-                <route-console @moveToCreate="moveToCreate" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+                <route-console :edit="true" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <div class="pic">{{ item.pic }}</div>
@@ -64,9 +64,6 @@
             },
             async moveTo(newPlaceId) {
                 this.getPlace(newPlaceId);
-            },
-            async moveToCreate(newPlaceId) {
-                this.$router.push('/place/update/' + newPlaceId);
             },
             async setLoading(loading) {
                 this.loading = loading;
