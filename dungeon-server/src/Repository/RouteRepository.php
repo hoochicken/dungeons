@@ -27,13 +27,15 @@ class RouteRepository extends ServiceEntityRepository
     //  */
     public function findByPlace($value)
     {
-        return $this->createQueryBuilder('r')
-            ->where('r.place_out = :val')
-            ->orWhere('r.place_in = :val')
+        $query = $this->createQueryBuilder('r')
+            ->where('r.placeOut = :val')
+            ->orWhere('r.placeIn = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;
+        // $query = $query->getSQL();
+        return $query;
     }
 
     /**
