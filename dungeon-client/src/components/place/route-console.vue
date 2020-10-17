@@ -62,13 +62,13 @@
                 }
             },
 
-            async createRoute(roomOut, roomIn, direction) {
+            async createRoute(placeOut, placeIn, direction) {
                 console.log('createRoute');
                 try {
                     // create route
                     let params = {
-                        place_out: roomOut,
-                        place_in: roomIn,
+                        place_out: placeOut,
+                        place_in: placeIn,
                         direction: direction
                     };
                     return await this.axios.post('/route/create', params);

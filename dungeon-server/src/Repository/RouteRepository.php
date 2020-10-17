@@ -56,7 +56,6 @@ class RouteRepository extends ServiceEntityRepository
     public function transform(Route $route)
     {
         $return = [];
-        $return['place_id'] = $route->getId();
         $return['place_out'] = $route->getPlaceOut();
         $return['place_in'] = $route->getPlaceIn();
         $return['out_direction'] = $route->getOutDirection();
