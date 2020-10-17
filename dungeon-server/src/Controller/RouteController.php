@@ -42,21 +42,24 @@ class RouteController extends ApiController
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
 
-        $out = $request->request->get('out');
-        $in = $request->request->get('in');
-        $direction = $request->request->get('direction');
+        $placeOut = $request->request->get('place_out', 0);
+        $placeIn = $request->request->get('place_in', 0);
+        $direction = $request->request->get('direction', 0);
 
         $route = new Route();
-        $route->setOut($out);
-        $route->setIn($in);
+
+        $route->setPlaceOut($placeOut);
+        $route->setPlaceIn($placeIn);
         $route->setOutDirection($direction);
 
         $route->setCreated(Dater::get());
-        $route->setCreatedUser('ADM');
-
+        $route->setCreatedUser(0);
+        return $this->respondCreated(['route' => $data]);
+        return $this->respondCreated(['route' => $routeRepository->transform($route)]);
         $em->persist($route);
         $em->flush();
         $arr = $routeRepository->transform($route);
+        return $this->respondCreated(['route' => $routeRepository->transform($route)]);
         return $this->respondCreated($arr);
     }
 

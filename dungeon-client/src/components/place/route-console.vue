@@ -40,8 +40,10 @@
 
                     // create place
                     let newPlaceId = this.initiatePlace();
-                    console.log(direction);
-                    console.log(newPlaceId);
+
+                    // create route
+                    let newRoute = this.createRoute(this.placeId, newPlaceId, direction);
+                    console.log(newRoute);
                 } catch (error) {
                     this.error = error.response;
                     this.$emit('sendError', this.error);
@@ -54,23 +56,22 @@
                         name: 'New Place'
                     };
                     this.response = await this.axios.post('/place/create', params);
-                    console.log(this.response);
                     return this.response.data.id;
                 } catch (error) {
-                    console.log(error);
                     this.error = error.response;
                 }
             },
 
             async createRoute(roomOut, roomIn, direction) {
+                console.log('createRoute');
                 try {
                     // create route
                     let params = {
-                        out: roomOut,
-                        in: roomIn,
+                        place_out: roomOut,
+                        place_in: roomIn,
                         direction: direction
                     };
-                    this.response = await this.axios.post('/route/create', params);
+                    return await this.axios.post('/route/create', params);
                 } catch (error) {
                     this.error = error.response;
                 }

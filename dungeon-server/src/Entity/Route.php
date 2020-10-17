@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Route
  *
- * @ORM\Table(name="route", uniqueConstraints={@ORM\UniqueConstraint(name="in", columns={"in", "out_direction"})})
+ * @ORM\Table(name="route", uniqueConstraints={@ORM\UniqueConstraint(name="in", columns={"place_in", "out_direction"})})
  * @ORM\Entity
  */
 class Route
@@ -24,16 +24,16 @@ class Route
     /**
      * @var int
      *
-     * @ORM\Column(name="out", type="integer", nullable=false)
+     * @ORM\Column(name="place_out", type="integer", nullable=false)
      */
-    private $out;
+    private $placeOut;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="in", type="integer", nullable=false)
+     * @ORM\Column(name="place_in", type="integer", nullable=false)
      */
-    private $in;
+    private $placeIn;
 
     /**
      * @var int
@@ -103,26 +103,26 @@ class Route
         return $this->id;
     }
 
-    public function getOut(): ?int
+    public function getPlaceOut(): ?int
     {
-        return $this->out;
+        return $this->placeOut;
     }
 
-    public function setOut(int $out): self
+    public function setPlaceOut(int $placeOut): self
     {
-        $this->out = $out;
+        $this->placeOut = $placeOut;
 
         return $this;
     }
 
-    public function getIn(): ?int
+    public function getPlaceIn(): ?int
     {
-        return $this->in;
+        return $this->placeIn;
     }
 
-    public function setIn(int $in): self
+    public function setPlaceIn(int $placeIn): self
     {
-        $this->in = $in;
+        $this->placeIn = $placeIn;
 
         return $this;
     }

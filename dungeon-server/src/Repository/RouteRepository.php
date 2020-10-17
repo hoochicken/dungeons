@@ -28,8 +28,8 @@ class RouteRepository extends ServiceEntityRepository
     public function findByPlace($value)
     {
         return $this->createQueryBuilder('r')
-            ->where('r.out = :val')
-            ->orWhere('r.in = :val')
+            ->where('r.place_out = :val')
+            ->orWhere('r.place_in = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
@@ -56,9 +56,9 @@ class RouteRepository extends ServiceEntityRepository
     public function transform(Route $route)
     {
         $return = [];
-        $return['id'] = $route->getId();
-        $return['out'] = $route->getOut();
-        $return['in'] = $route->getIn();
+        $return['place_id'] = $route->getId();
+        $return['place_out'] = $route->getPlaceOut();
+        $return['place_in'] = $route->getPlaceIn();
         $return['out_direction'] = $route->getOutDirection();
         $return['attributes'] = $route->getAttributes();
         $return['state'] = $route->getState();
