@@ -44,11 +44,28 @@ class RouteRepository extends ServiceEntityRepository
      */
     public function unifyRoutesAll(int $placeId, array $items)
     {
-        $return = [];
+        $unifiedAll = [];
         foreach($items as $item) {
-            $return[] = $this->unifyRoute($placeId, $item);
+            $unified = $this->unifyRoute($placeId, $item);
+            $tmpDirection = $unified['out_direction'];
+            $unifiedAll[$tmpDirection] = $unified;
         }
-        return $return;
+
+        $default = [
+            'place_out' => 0 ,
+            'place_in' => 0 ,
+            'out_direction' => 0 ,
+            'type' => 'btn',
+        ];
+
+        $routes = [];
+        foreach (range(1,9) as $direction) {
+            $routes[$direction] = $default;
+            if (!isset($unifiedAll[$direction])) continue;
+            $routes[$direction] = $unifiedAll[$direction];
+        }
+        $routes[4]['type'] = 'center';
+        return $routes;
     }
 
     /**
@@ -69,7 +86,7 @@ class RouteRepository extends ServiceEntityRepository
         // swap in and out places
         $return['place_out'] = $item['place_in'];
         $return['place_in'] = $item['place_out'];
-        $return['direction_out'] = 9 - (int) $item['out_direction'];
+        $return['out_direction'] = 9 - (int) $item['out_direction'];
         return $return;
     }
 

@@ -48,7 +48,7 @@ class RouteController extends ApiController
 
         $placeOut = $request->request->get('place_out', 0);
         $placeIn = $request->request->get('place_in', 0);
-        $direction = $request->request->get('direction', 0);
+        $direction = $request->request->get('out_direction', 0);
 
         $route = new Route();
 
