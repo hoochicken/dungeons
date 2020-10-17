@@ -53,10 +53,10 @@ class RouteRepository extends ServiceEntityRepository
         }
 
         $default = [
-            'id' => 0 ,
-            'place_out' => 0 ,
-            'place_in' => 0 ,
-            'out_direction' => 0 ,
+            'id' => 0,
+            'place_out' => $placeId,
+            'place_in' => 0,
+            'out_direction' => 0,
             'type' => 'btn',
         ];
 
@@ -67,6 +67,7 @@ class RouteRepository extends ServiceEntityRepository
             if (!isset($unifiedAll[$direction])) continue;
             $routes[$direction] = $unifiedAll[$direction];
         }
+        // middle button is center
         $routes[4]['type'] = 'center';
         return $routes;
     }
@@ -81,7 +82,6 @@ class RouteRepository extends ServiceEntityRepository
         // if place out correct => return original array
         if ($placeId == $item['place_out']) {
             return $item;
-
         }
         // if now, reverse routing
         $return = $item;
