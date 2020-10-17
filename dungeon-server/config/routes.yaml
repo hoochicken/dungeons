@@ -69,3 +69,7 @@ routePlace:
 routeCreate:
   path: /route/create
   controller: App\Controller\RouteController::create
+
+routeDelete:
+  path: /route/delete/{id}
+  controller: App\Controller\RouteController::delete

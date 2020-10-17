@@ -60,28 +60,6 @@
                 this.$router.push('/place/display/' + this.placeId);
                 location.reload();
             },
-            async createNewRoute(out_direction) {
-                try {
-                    if (5 === out_direction) {
-                        return;
-                    }
-                    this.$emit('setLoading', true);
-                    this.error = {};
-
-                    // create place
-                    let newPlaceId = await this.initiatePlace();
-
-                    // create route
-                    await this.createRoute(this.placeId, newPlaceId, out_direction);
-
-                    // move to new place
-                    this.$router.push('/place/update/' + newPlaceId);
-                    location.reload();
-                } catch (error) {
-                    this.error = error.response;
-                    this.$emit('sendError', this.error);
-                }
-            },
             async initiatePlace() {
                 try {
                     this.error = {};

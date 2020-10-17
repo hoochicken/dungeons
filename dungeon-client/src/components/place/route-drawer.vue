@@ -31,32 +31,40 @@
             }
         },
         methods: {
-            editRoute() {
-                if (this.edit) {
-
-                    if (this.placeId === 0) {
-                        this.createNewRoute(this.outDirection);
+            async createRoute(out_direction) {
+                try {
+                    if (5 === out_direction) {
                         return;
                     }
-                    else {
-                        this.$router.push('/place/update/' + this.placeId);
-                        location.reload();
-                    }
-                    return;
-                }
-                this.$router.push('place/display/' + this.placeId);
-            },
-            createRoute()
-            {
+                    this.$emit('setLoading', true);
+                    this.error = {};
 
+                    // create place
+                    let newPlaceId = await this.initiatePlace();
+
+                    // create route
+                    await this.createRoute(this.placeId, newPlaceId, out_direction);
+
+                    // move to new place
+                    this.$router.push('/place/update/' + newPlaceId);
+                    location.reload();
+                } catch (error) {
+                    this.error = error.response;
+                    this.$emit('sendError', this.error);
+                }
             },
             updateRoute()
             {
-
+                this.$router.push('/place/update/' + this.placeId);
+                location.reload();
             },
-            deleteRoute()
+            async deleteRoute()
             {
-                this.axios('/route/delete/' + this.routeId)
+                console.log(this.routeId);
+                this.$emit('setLoading', true);
+                await this.axios.post('/route/delete/' + this.routeId);
+                this.$emit('closeDrawer');
+                location.reload();
             }
         }
     }

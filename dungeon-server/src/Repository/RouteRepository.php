@@ -30,6 +30,7 @@ class RouteRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('r')
             ->where('r.placeOut = :place')
             ->orWhere('r.placeIn = :place')
+            ->andWhere('r.state = 1')
             ->setParameter('place', $place)
             ->getQuery()
         ;
