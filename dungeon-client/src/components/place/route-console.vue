@@ -39,6 +39,10 @@
                 response: {}
             }
         },
+        async mounted() {
+          let routes = await this.findRoutesByPlace(this.placeId);
+          console.log(routes);
+        },
         methods: {
             async useRoute(direction) {
                 if (this.edit) {
@@ -78,7 +82,6 @@
                     this.error = error.response;
                 }
             },
-
             async createRoute(placeOut, placeIn, direction) {
                 try {
                     // create route
@@ -88,6 +91,14 @@
                         direction: direction
                     };
                     this.response = await this.axios.post('/route/create', params);
+                    return this.response;
+                } catch (error) {
+                    this.error = error.response;
+                }
+            },
+            async findRoutesByPlace(placeId) {
+                try {
+                    this.response = await this.axios.post('/route/place/' + placeId);
                     return this.response;
                 } catch (error) {
                     this.error = error.response;

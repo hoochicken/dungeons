@@ -25,17 +25,16 @@ class RouteRepository extends ServiceEntityRepository
     // /**
     //  * @return Route[] Returns an array of Route objects
     //  */
-    public function findByPlace($value)
+    public function findByPlace($place, $debug = false)
     {
         $query = $this->createQueryBuilder('r')
-            ->where('r.placeOut = :val')
-            ->orWhere('r.placeIn = :val')
-            ->setParameter('val', $value)
+            ->where('r.placeOut = :place')
+            ->orWhere('r.placeIn = :place')
+            ->setParameter('place', $place)
             ->getQuery()
-            ->getResult()
         ;
-        // $query = $query->getSQL();
-        return $query;
+        if ($debug) return $query = $query->getSQL();
+        return $query->getResult();
     }
 
     /**

@@ -17,18 +17,21 @@ class RouteController extends ApiController
 {
 
     /**
-     * @param Request $request
+     * @param int $place
      * @param RouteRepository $routeRepository
      * @return JsonResponse
      */
-    public function place(Request $request, RouteRepository $routeRepository): JsonResponse
+    public function place(int $place, RouteRepository $routeRepository): JsonResponse
     {
+        $debug = false;
+
         // get items and pagination info
-        $result = $routeRepository->findByPlace($request->request->get('place'));
-        $items = $routeRepository->transformAll($result['items']);
+        $result = $routeRepository->findByPlace($place, $debug);
+        if ($debug) return $this->respond(['items' => $result]);
+        $items = $routeRepository->transformAll($result);
 
         // build return array
-        return $this->respond(['items' => $items, 'info' => $result['info'], 'listState' => $result['listState']]);
+        return $this->respond(['items' => $items]);
     }
 
     /**
