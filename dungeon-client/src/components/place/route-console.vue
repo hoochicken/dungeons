@@ -6,22 +6,6 @@
                 <md-icon class="fa fa-arrow-up"></md-icon>
             </div>
         </div>
-
-        <!--div class="md-layout-item md-layout md-gutter">
-            <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
-            <div @click="useRoute(2)" class="btn btn2 md-layout-item"><md-icon class="fa fa-arrow-up"></md-icon></div>
-            <div @click="useRoute(3)" class="btn btn3 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
-        </div>
-        <div class="md-layout-item md-layout md-gutter">
-            <div @click="useRoute(4)" class="btn btn4 md-layout-item md-size-10"><md-icon class="fa fa-arrow-left"></md-icon></div>
-            <div class="btn content md-layout-item"></div>
-            <div @click="useRoute(5)" class="btn btn5 md-layout-item md-size-10"><md-icon class="fa fa-arrow-right"></md-icon></div>
-        </div>
-        <div class="md-layout-item md-layout md-gutter">
-            <div @click="useRoute(6)" class="btn btn6 md-layout-item md-size-10"><md-icon class="fa fa-arrow-down"></md-icon></div>
-            <div @click="useRoute(7)" class="btn btn7 md-layout-item"><md-icon class="fa fa-arrow-down"></md-icon></div>
-            <div @click="useRoute(8)" class="btn btn8 md-layout-item md-size-10"><md-icon class="fa fa-arrow-down"></md-icon></div>
-        </div-->
     </div>
 </template>
 <script>
