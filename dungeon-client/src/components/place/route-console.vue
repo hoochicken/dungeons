@@ -9,7 +9,7 @@
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(4)" class="btn btn4 md-layout-item md-size-10"><md-icon class="fa fa-arrow-left"></md-icon></div>
             <div class="btn content md-layout-item">
-                CENTRE
+                &nbsp;
             </div>
             <div @click="useRoute(5)" class="btn btn5 md-layout-item md-size-10"><md-icon class="fa fa-arrow-right"></md-icon></div>
         </div>
@@ -23,7 +23,7 @@
 </template>
 <script>
     export default {
-        name: "nav-console",
+        name: "route-console",
         props: ['placeId'],
         data() {
             return {

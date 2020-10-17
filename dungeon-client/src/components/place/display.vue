@@ -5,7 +5,7 @@
                 <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
                 <h1>{{ item.name }} ({{ item.id }})</h1>
                 <div>{{ item.description }}</div>
-                <nav-console class="nav-console"></nav-console>
+                <route-console class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <div class="pic">{{ item.pic }}</div>
@@ -23,11 +23,11 @@
     import YoutubeAudio from "../global/youtube-audio";
     import ButtonEdit from "../global/button-edit";
     import VueLoading from "vue-loading-overlay/src/js/Component";
-    import NavConsole from "./nav-console";
+    import RouteConsole from "./route-console";
 
     export default {
         name: "place-display",
-        components: {NavConsole, VueLoading, ButtonEdit, YoutubeAudio},
+        components: {RouteConsole, VueLoading, ButtonEdit, YoutubeAudio},
         data() {
             return {
                 item: {
@@ -83,7 +83,7 @@
         position: relative;
     }
 
-    .nav-console {
+    .route-console {
         width: 100px;
         height: 100px;
         overflow: hidden;
