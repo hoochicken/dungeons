@@ -49,7 +49,6 @@
         },
         methods: {
             async useRoute(placeId, placeIn, routeId, outDirection) {
-                console.log(placeId);
                 if (this.edit && routeId > 0) {
                     this.outDirection = outDirection;
                     this.routeId = routeId;
@@ -62,8 +61,8 @@
                 }
                 // this.$emit('moveTo', this.placeId);
                 // this.$emit('moveTo', )
-                if (0 >=  placeId) return;
-                this.$router.push('/place/display/' + placeId);
+                if (0 >=  placeIn) return;
+                this.$router.push('/place/display/' + placeIn);
                 location.reload();
             },
             async buildRoute(placeId, out_direction) {

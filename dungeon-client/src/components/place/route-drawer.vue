@@ -12,7 +12,7 @@
                 <div v-if="0 < routeId">
                     {{ places }}
                     <md-select v-model="placeIn">
-                        <md-option v-for="item in places" v-bind:value="item.id" :key="item.id">{{ item.name }}</md-option>
+                        <md-option v-for="item in places" :value="item.id" :key="item.id">{{ item.name }}</md-option>
                     </md-select>
                 </div>
             {{ placeId }}
