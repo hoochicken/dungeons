@@ -42,8 +42,6 @@ class RouteController extends ApiController
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
 
-        return $this->respondCreated(['request' => $data]);
-
         $placeOut = $request->request->get('place_out', 0);
         $placeIn = $request->request->get('place_in', 0);
         $direction = $request->request->get('direction', 0);

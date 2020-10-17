@@ -1,7 +1,6 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        {{ response }}
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
             <div @click="useRoute(2)" class="btn btn2 md-layout-item"><md-icon class="fa fa-arrow-up"></md-icon></div>
@@ -37,14 +36,18 @@
             },
             async createNewRoute(direction) {
                 try {
+                    this.$emit('setLoading', true);
                     this.error = {};
 
                     // create place
-                    let newPlaceId = this.initiatePlace();
+                    let newPlaceId = await this.initiatePlace();
 
                     // create route
-                    let newRoute = this.createRoute(this.placeId, newPlaceId, direction);
-                    console.log(newRoute);
+                    await this.createRoute(this.placeId, newPlaceId, direction);
+
+                    // move to new place
+                    this.$emit('moveTo', newPlaceId);
+
                 } catch (error) {
                     this.error = error.response;
                     this.$emit('sendError', this.error);
@@ -64,7 +67,6 @@
             },
 
             async createRoute(placeOut, placeIn, direction) {
-                console.log('createRoute');
                 try {
                     // create route
                     let params = {
@@ -72,7 +74,8 @@
                         place_in: placeIn,
                         direction: direction
                     };
-                    return await this.axios.post('/route/create', params);
+                    this.response = await this.axios.post('/route/create', params);
+                    return this.response;
                 } catch (error) {
                     this.error = error.response;
                 }
