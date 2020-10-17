@@ -1,29 +1,33 @@
 <template>
     <div>
-        <place-frame>
-            <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
-            <h1>{{ item.name }} ({{ item.id }})</h1>
-            <div class="pic">{{ item.pic }}</div>
-            <div>{{ item.description }}</div>
 
-            <vue-loading :active="loading"></vue-loading>
 
-            <youtube-audio :video-id="item.misc"></youtube-audio>
 
-            <md-progress-spinner v-if="loading" :md-diameter="30" :md-stroke="3" md-mode="indeterminate"></md-progress-spinner>
-            <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
-        </place-frame>
+        <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
+        <h1>{{ item.name }} ({{ item.id }})</h1>
+        <div>{{ item.description }}</div>
+
+        <vue-loading :active="loading"></vue-loading>
+
+        <youtube-audio :video-id="item.misc"></youtube-audio>
+
+        <nav-console></nav-console>
+
+        <md-progress-spinner v-if="loading" :md-diameter="30" :md-stroke="3"
+                             md-mode="indeterminate"></md-progress-spinner>
+        <message-box v-if="error.data && error.data.length > 0">{{ error }}</message-box>
+
     </div>
 </template>
 <script>
     import YoutubeAudio from "../global/youtube-audio";
     import ButtonEdit from "../global/button-edit";
     import VueLoading from "vue-loading-overlay/src/js/Component";
-    import PlaceFrame from "./frame";
+    import NavConsole from "./nav-console";
 
     export default {
         name: "place-display",
-        components: {PlaceFrame, VueLoading, ButtonEdit, YoutubeAudio},
+        components: {NavConsole, VueLoading, ButtonEdit, YoutubeAudio},
         data() {
             return {
                 item: {
