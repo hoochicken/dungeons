@@ -7,6 +7,14 @@
                 <md-button v-else class="md-raised md-primary" @click="updateRoute(placeIn)">Update ({{ placeIn }})</md-button>
                 <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
                 <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
+
+
+                <div v-if="0 < routeId">
+                    {{ places }}
+                    <md-select v-model="placeIn">
+                        <md-option v-for="item in places" v-bind:value="item.id" :key="item.id">{{ item.name }}</md-option>
+                    </md-select>
+                </div>
             {{ placeId }}
             {{ outDirection }}
             {{ routeId }}
@@ -33,6 +41,21 @@
                 type: Number
             }
         },
+        data() {
+            return {
+                places: [],
+                listStateDefault: {
+                    maxResults: 30,
+                    currentPage: 0,
+                    totalPage: 0,
+                    totalItems: 0
+                },
+                placeUpdated: this.placeIn
+            }
+        },
+        async mounted() {
+            this.getPlaces();
+        },
         methods: {
             updateRoute(placeId)
             {
@@ -41,11 +64,17 @@
             },
             async deleteRoute()
             {
-                console.log(this.routeId);
                 this.$emit('setLoading', true);
                 await this.axios.post('/route/delete/' + this.routeId);
                 this.$emit('closeDrawer');
                 location.reload();
+            },
+            async getPlaces()
+            {
+                let params = new URLSearchParams();
+                params.append('listState', JSON.stringify(this.listState));
+                let response = await this.axios.post('/place/list', params);
+                this.places = response.data.items;
             }
         }
     }
