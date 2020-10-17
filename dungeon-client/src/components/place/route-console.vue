@@ -1,7 +1,6 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        {{ edit }}
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
             <div @click="useRoute(2)" class="btn btn2 md-layout-item"><md-icon class="fa fa-arrow-up"></md-icon></div>
@@ -9,9 +8,7 @@
         </div>
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(4)" class="btn btn4 md-layout-item md-size-10"><md-icon class="fa fa-arrow-left"></md-icon></div>
-            <div class="btn content md-layout-item">
-                &nbsp;
-            </div>
+            <div class="btn content md-layout-item"></div>
             <div @click="useRoute(5)" class="btn btn5 md-layout-item md-size-10"><md-icon class="fa fa-arrow-right"></md-icon></div>
         </div>
         <div class="md-layout-item md-layout md-gutter">
@@ -26,22 +23,27 @@
         name: "route-console",
         props: {
             placeId: {
-                type: String
+                type: Number
             },
             edit: {
-                type:Boolean,
+                type: Boolean,
                 default: false
             }
-            },
+        },
         data() {
             return {
                 error: {},
-                response: {}
+                response: {},
+                routes: {}
             }
         },
         async mounted() {
-          let routes = await this.findRoutesByPlace(this.placeId);
-          console.log(routes);
+            this.routes = await this.getRoutesByPlace(this.placeId);
+        },
+        watch: {
+            placeId: function(value) {
+                if (0 < value) this.getRoutesByPlace(value)
+            }
         },
         methods: {
             async useRoute(direction) {
@@ -96,10 +98,11 @@
                     this.error = error.response;
                 }
             },
-            async findRoutesByPlace(placeId) {
+            async getRoutesByPlace(placeId) {
                 try {
-                    this.response = await this.axios.post('/route/place/' + placeId);
-                    return this.response;
+                    if (placeId <= 0) return;
+                    this.routes = await this.axios.post('/route/place/' + placeId);
+                    return this.routes;
                 } catch (error) {
                     this.error = error.response;
                 }

@@ -28,10 +28,11 @@ class RouteController extends ApiController
         // get items and pagination info
         $result = $routeRepository->findByPlace($place, $debug);
         if ($debug) return $this->respond(['items' => $result]);
-        $items = $routeRepository->transformAll($result);
+        $routesRaw = $routeRepository->transformAll($result);
+        $routes = $routeRepository->unifyRoutesAll($place, $routesRaw);
 
         // build return array
-        return $this->respond(['items' => $items]);
+        return $this->respond(['items' => $routes]);
     }
 
     /**

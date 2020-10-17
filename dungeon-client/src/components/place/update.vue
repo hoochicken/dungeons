@@ -4,7 +4,7 @@
             <div class="description-console md-layout-item md-size-50">
                 <button-display :clickRoute="'/place/display/' + item.id"></button-display>
                 <vue-loading :active="loading"></vue-loading>
-                <route-console :edit="true" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+                <route-console :edit="true" :place-id="item.id" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')"
