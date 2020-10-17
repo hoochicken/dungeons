@@ -44,7 +44,7 @@ class PlaceController extends ApiController
     public function create(Request $request, PlaceRepository $placeRepository, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $request->request->replace(is_array($data) ? $data : array());
+        $request->request->replace(is_array($data) ? $data : []);
 
         // validate the title
         if (! $request->get('name')) {
@@ -54,11 +54,13 @@ class PlaceController extends ApiController
         // persist the new place
         $place = new Place;
         $place->setName($request->get('name'));
-        $place->setDescription($request->get('description'));
+        $place->setDescription($request->get('description',''));
         $place->setPic($request->get('pic', ''));
         $place->setMisc($request->get('misc', ''));
-        $place->setState($request->get('state', false));
+        $place->setState($request->get('state', true));
         $place->setCreated(Dater::get());
+
+        // return $this->respondCreated(['place' => $placeRepository->transform($place)]);
 
         $em->persist($place);
         $em->flush();

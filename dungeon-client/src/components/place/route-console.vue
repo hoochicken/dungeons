@@ -1,6 +1,7 @@
 <template>
     <div>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {{ response }}
         <div class="md-layout-item md-layout md-gutter">
             <div @click="useRoute(1)" class="btn btn1 md-layout-item md-size-10"><md-icon class="fa fa-arrow-up"></md-icon></div>
             <div @click="useRoute(2)" class="btn btn2 md-layout-item"><md-icon class="fa fa-arrow-up"></md-icon></div>
@@ -39,19 +40,11 @@
 
                     // create place
                     let newPlaceId = this.initiatePlace();
-                    let asd = false;
-                    if (asd) {
-
-                    // create route
-                    this.createRoute(this.placeId, newPlaceId, direction);
-
-                    // move to place
-                    this.$route.push('/place/display/' + newPlaceId);
-
-                    return this.response.data.id;
-                    }
+                    console.log(direction);
+                    console.log(newPlaceId);
                 } catch (error) {
                     this.error = error.response;
+                    this.$emit('sendError', this.error);
                 }
             },
             async initiatePlace() {
@@ -61,8 +54,10 @@
                         name: 'New Place'
                     };
                     this.response = await this.axios.post('/place/create', params);
+                    console.log(this.response);
                     return this.response.data.id;
                 } catch (error) {
+                    console.log(error);
                     this.error = error.response;
                 }
             },

@@ -5,7 +5,7 @@
                 <button-edit :clickRoute="'/place/update/' + item.id"></button-edit>
                 <h1>{{ item.name }} ({{ item.id }})</h1>
                 <div>{{ item.description }}</div>
-                <route-console class="route-console"></route-console>
+                <route-console @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <div class="pic">{{ item.pic }}</div>
@@ -61,6 +61,9 @@
                     this.displayError = true;
                     this.loading = true;
                 }
+            },
+            async methDisplayError(error) {
+                this.error = error;
             }
         }
     }
