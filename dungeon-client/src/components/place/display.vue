@@ -99,6 +99,5 @@
         position: absolute;
         left: 20px;
         bottom: 70px;
-        width: 100px;
     }
 </style>
