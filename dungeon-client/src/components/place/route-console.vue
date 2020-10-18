@@ -1,8 +1,7 @@
 <template>
     <div>
-
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
-            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="showRouteDrawer = false" :out-direction="outDirection"></route-drawer>
+            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="closeDrawer()" :out-direction="outDirection"></route-drawer>
         </md-drawer>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
@@ -40,7 +39,7 @@
             }
         },
         async mounted() {
-            this.response = await this.getRoutesByPlace(this.placeId);
+            this.init();
         },
         watch: {
             placeId: function(value) {
@@ -48,6 +47,9 @@
             }
         },
         methods: {
+            async init() {
+                this.response = await this.getRoutesByPlace(this.placeId);
+            },
             async useRoute(placeId, placeIn, routeId, outDirection) {
                 if (this.edit && routeId > 0) {
                     this.outDirection = outDirection;
@@ -122,6 +124,10 @@
                 } catch (error) {
                     this.error = error.response;
                 }
+            },
+            async closeDrawer() {
+                this.showRouteDrawer = false;
+                this.init();
             }
         }
     }

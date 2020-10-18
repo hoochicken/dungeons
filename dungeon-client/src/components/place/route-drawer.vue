@@ -11,9 +11,9 @@
 
                 <div v-if="0 < routeId">
                     {{ places }}
-                    <md-select v-model="placeIn">
+                    <!--md-select v-model="placeIn">
                         <md-option v-for="item in places" :value="item.id" :key="item.id">{{ item.name }}</md-option>
-                    </md-select>
+                    </md-select-->
                 </div>
             {{ placeId }}
             {{ outDirection }}
@@ -61,13 +61,20 @@
             {
                 this.$router.push('/place/update/' + placeId);
                 location.reload();
+                /*
+                this.$router.push({
+                    name: 'placeUpdate',
+                    // path: '/place/update/',
+                    id: placeId
+                });
+                */
+
             },
             async deleteRoute()
             {
                 this.$emit('setLoading', true);
                 await this.axios.post('/route/delete/' + this.routeId);
                 this.$emit('closeDrawer');
-                location.reload();
             },
             async getPlaces()
             {
