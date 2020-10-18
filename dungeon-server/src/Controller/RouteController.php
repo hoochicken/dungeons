@@ -85,6 +85,35 @@ class RouteController extends ApiController
         return $this->respond(['delete' => true]);
     }
 
+
+    /**
+     * @param int $id
+     * @param Request $request
+     * @param RouteRepository $routeRepository
+     * @param EntityManagerInterface $em
+     * @return JsonResponse
+     */
+    public function update($id, Request $request, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
+    {
+        $route = $routeRepository->find($id);
+        if (null === $route) {
+            return $this->respond('Route with id ' . $id . ' was not found. (Already removed?)');
+        }
+        $placeOut = $request->get('place_out', 0);
+        $placeIn = $request->get('place_in', 0);
+
+        $route = $routeRepository->find($id);
+        $route->setPlaceOut($placeOut);
+        $route->setPlaceIn($placeIn);
+
+        $em->persist($route);
+        $em->flush();
+        $arr = $routeRepository->transform($route);
+
+        // return $this->respondCreated(['route' => $routeRepository->transform($route)]);
+        return $this->respondCreated($arr);
+    }
+
     /**
      * @param int $id
      * @param Request $request

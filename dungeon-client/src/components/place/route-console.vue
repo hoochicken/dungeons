@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
             <div v-for="item in routes" @click="useRoute(placeId, item.place_in, item.id, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
-                {{ item.place_in }}
+                <span v-if="edit">{{ item.place_in }}</span>
                 <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
                 <md-icon v-else class="fa fa-arrow-up"></md-icon>
             </div>
