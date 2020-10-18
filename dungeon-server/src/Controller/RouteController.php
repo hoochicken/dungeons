@@ -99,8 +99,11 @@ class RouteController extends ApiController
         if (null === $route) {
             return $this->respond('Route with id ' . $id . ' was not found. (Already removed?)');
         }
-        $placeOut = $request->get('place_out', 0);
-        $placeIn = $request->get('place_in', 0);
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+
+        $placeOut = $request->request->get('place_out', 0);
+        $placeIn = $request->request->get('place_in', 0);
 
         $route = $routeRepository->find($id);
         $route->setPlaceOut($placeOut);

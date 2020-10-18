@@ -1,7 +1,7 @@
 <template>
     <div>
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
-            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="closeDrawer()"></route-drawer>
+            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="closeDrawer()" @reloadConsole="reload()"></route-drawer>
         </md-drawer>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
@@ -130,6 +130,9 @@
             },
             async closeDrawer() {
                 this.showRouteDrawer = false;
+                this.init();
+            },
+            async reload() {
                 this.init();
             }
         }

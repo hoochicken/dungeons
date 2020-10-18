@@ -5,7 +5,7 @@
         </md-toolbar>
         <div class="md-content md-layout-default">
             <md-button v-if="0 === routeId" class="md-raised md-primary" @click="createRoute">Create</md-button>
-            <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="moveTo(placeIn)">Walk To ({{ placeIn }})
+            <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="moveTo(newPlace)">Walk To ({{ newPlace }})
             </md-button>
             <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
         </div>
@@ -33,12 +33,16 @@
         <div class="md-content md-layout-default">
             <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
         </div>
+
+        <vue-loading v-if="loading"></vue-loading>
     </div>
 </template>
 
 <script>
+    import VueLoading from "vue-loading-overlay/src/js/Component";
     export default {
         name: "route-drawer",
+        components: {VueLoading},
         props: {
             placeId: {
                 type: Number
@@ -59,7 +63,8 @@
                     totalPage: 0,
                     totalItems: 0
                 },
-                newPlace: 0
+                newPlace: 0,
+                loading: false
             }
         },
         async mounted() {
@@ -70,13 +75,14 @@
             async updateRoute()
             {
                 try {
-                    this.$emit('setLoading', true);
+                    this.loading = true;
                     let params = {
                         place_out: this.placeId,
                         place_in: this.newPlace
                     };
                     await this.axios.post('/route/update/' + this.routeId, params);
-                    this.$emit('setLoading', false);
+                    this.$emit('reloadConsole');
+                    this.loading = false;
                 } catch (error) {
                     this.error = error.response;
                 }
@@ -96,16 +102,19 @@
             },
             async deleteRoute()
             {
-                this.$emit('setLoading', true);
+                this.loading = true;
                 await this.axios.post('/route/delete/' + this.routeId);
                 this.$emit('closeDrawer');
+                this.loading = false;
             },
             async getPlaces()
             {
+                this.loading = true;
                 let params = new URLSearchParams();
                 params.append('listState', JSON.stringify(this.listState));
                 let response = await this.axios.get('/place/list', params);
                 this.places = response.data.items;
+                this.loading = false;
             }
         }
     }
