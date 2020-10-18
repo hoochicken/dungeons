@@ -86,8 +86,7 @@
                     await this.createRoute(placeId, newPlaceId, out_direction);
 
                     // move to new place
-                    this.$router.push('/place/update/' + newPlaceId);
-                    location.reload();
+                    this.$emit('moveTo', newPlaceId);
                 } catch (error) {
                     this.error = error.response;
                     this.$emit('sendError', this.error);
