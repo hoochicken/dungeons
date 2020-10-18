@@ -3,28 +3,41 @@
         <md-toolbar class="md-transparent" md-elevation="0">
             <span class="md-title">Route</span>
         </md-toolbar>
-        <div class="content">
+        <div class="md-content md-layout-default">
             <md-button v-if="0 === routeId" class="md-raised md-primary" @click="createRoute">Create</md-button>
-            <md-button v-else class="md-raised md-primary" @click="updateRoute(placeIn)">Walk To ({{ placeIn }})</md-button>
-            <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
+            <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="moveTo(placeIn)">Walk To ({{ placeIn }})
+            </md-button>
             <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
+        </div>
 
-
+        <div class="md-content md-layout-default">
             <div v-if="0 < routeId">
                 {{ newPlace }}
                 <md-field>
                     <label for="newPlace">Place</label>
                     <md-select v-model="newPlace" name="newPlace" id="newPlace">
-                        <md-option v-for="item in places" :value="item.id" :key="item.id">{{ item.name }} ({{ item.id }})</md-option>
+                        <md-option v-for="item in places" :value="item.id" :key="item.id">{{ item.name }} ({{ item.id
+                            }})
+                        </md-option>
                     </md-select>
                 </md-field>
 
                 {{ places }}
             </div>
-            {{ placeId }}
-            {{ outDirection }}
-            {{ routeId }}
         </div>
+
+        <div class="md-content md-layout-default">
+            <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="updateRoute(placeid)">Update({{ placeId }})
+            </md-button>
+        </div>
+
+        <div class="md-content md-layout-default">
+            <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
+        </div>
+        {{ placeId }}
+        {{ outDirection }}
+        {{ routeId }}
+
     </div>
 </template>
 
@@ -74,6 +87,19 @@
                 */
 
             },
+            moveTo(placeId)
+            {
+                this.$router.push('/place/update/' + placeId);
+                location.reload();
+                /*
+                this.$router.push({
+                    name: 'placeUpdate',
+                    // path: '/place/update/',
+                    id: placeId
+                });
+                */
+
+            },
             async deleteRoute()
             {
                 this.$emit('setLoading', true);
@@ -92,5 +118,5 @@
 </script>
 
 <style scoped>
-
+.md-content {padding:0 20px;}
 </style>
