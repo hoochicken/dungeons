@@ -1,11 +1,11 @@
 <template>
     <div>
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
-            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="closeDrawer()" :out-direction="outDirection"></route-drawer>
+            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="closeDrawer()"></route-drawer>
         </md-drawer>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
-            <div v-for="item in routes" @click="useRoute(placeId, item.place_in, item.id, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
+            <div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
                 <span v-if="edit">{{ item.place_in }}</span>
                 <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
                 <md-icon v-else class="fa fa-arrow-up"></md-icon>
@@ -50,7 +50,7 @@
             async init() {
                 this.response = await this.getRoutesByPlace(this.placeId);
             },
-            async useRoute(placeId, placeIn, routeId, outDirection) {
+            async useRoute(routeId, placeId, placeIn, outDirection) {
                 // being in edit mode, opening drawer console to update route
                 if (this.edit && routeId > 0) {
                     this.outDirection = outDirection;

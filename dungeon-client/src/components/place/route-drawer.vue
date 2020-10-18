@@ -43,9 +43,6 @@
             placeId: {
                 type: Number
             },
-            outDirection: {
-                type: Number
-            },
             routeId: {
                 type: Number
             },
@@ -78,10 +75,7 @@
                         place_out: this.placeId,
                         place_in: this.newPlace
                     };
-                    console.log(this.routeId);
-                    console.log(params);
-                    let response = await this.axios.post('/route/update/' + this.routeId, params);
-                    console.log(response);
+                    await this.axios.post('/route/update/' + this.routeId, params);
                     this.$emit('setLoading', false);
                 } catch (error) {
                     this.error = error.response;

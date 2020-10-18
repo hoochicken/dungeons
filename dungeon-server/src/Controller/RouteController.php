@@ -110,8 +110,7 @@ class RouteController extends ApiController
         $em->flush();
         $arr = $routeRepository->transform($route);
 
-        // return $this->respondCreated(['route' => $routeRepository->transform($route)]);
-        return $this->respondCreated($arr);
+        return $this->respond($arr);
     }
 
     /**
