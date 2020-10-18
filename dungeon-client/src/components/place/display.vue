@@ -65,7 +65,9 @@
                 this.error = error;
             },
             async moveTo(newPlaceId) {
+                // this line should rerender, but doesn't, hmmm ...
                 this.$router.push('/place/display/' + newPlaceId);
+                this.getPlace(newPlaceId);
             },
             async setLoading(loading) {
                 this.loading = loading;

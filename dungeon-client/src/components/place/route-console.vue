@@ -51,21 +51,25 @@
                 this.response = await this.getRoutesByPlace(this.placeId);
             },
             async useRoute(placeId, placeIn, routeId, outDirection) {
+                // being in edit mode, opening drawer console to update route
                 if (this.edit && routeId > 0) {
                     this.outDirection = outDirection;
                     this.routeId = routeId;
                     this.placeIn = placeIn;
                     this.showRouteDrawer = true;
                     return;
-                } else if(this.edit) {
+                }
+                // being in edit mode, creating new rout and moving there
+                else if (this.edit) {
                     this.buildRoute(placeId, outDirection);
                     return;
                 }
-                // this.$emit('moveTo', this.placeId);
-                // this.$emit('moveTo', )
+                // being in display mode
+                // 0 = no route, we don't do nothing
                 if (0 >=  placeIn) return;
-                this.$router.push('/place/display/' + placeIn);
-                location.reload();
+
+                // being in display mode, moving to next place
+                this.$emit('moveTo', placeIn);
             },
             async buildRoute(placeId, out_direction) {
                 try {
