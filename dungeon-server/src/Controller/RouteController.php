@@ -82,7 +82,7 @@ class RouteController extends ApiController
         $route->setState(0);
         $em->remove($route);
         $em->flush();
-        return $this->respond();
+        return $this->respond(['delete' => true]);
     }
 
     /**
@@ -103,6 +103,6 @@ class RouteController extends ApiController
 
         // $em->remove($place);
         $em->flush();
-        return $this->respond();
+        return $this->respond(['delete' => true]);
     }
 }
