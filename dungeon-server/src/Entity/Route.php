@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Route
  *
- * @ORM\Table(name="route", uniqueConstraints={@ORM\UniqueConstraint(name="in", columns={"place_in", "out_direction"})})
+ * @ORM\Table(name="route")
  * @ORM\Entity
  */
 class Route
