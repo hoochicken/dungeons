@@ -25,6 +25,21 @@ class RouteRepository extends ServiceEntityRepository
     // /**
     //  * @return Route[] Returns an array of Route objects
     //  */
+    public function findById($id, $debug = false)
+    {
+        $query = $this->createQueryBuilder('r')
+            ->where('r.id = :id')
+            ->andWhere('r.state = 1')
+            ->setParameter('id', $id)
+            ->getQuery()
+        ;
+        if ($debug) return $query = $query->getSQL();
+        return $query->getResult();
+    }
+
+    // /**
+    //  * @return Route[] Returns an array of Route objects
+    //  */
     public function findByPlace($place, $debug = false)
     {
         $query = $this->createQueryBuilder('r')
