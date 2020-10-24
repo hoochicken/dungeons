@@ -3,6 +3,8 @@
         <div class="md-layout-item md-layout md-gutter">
             <div class="description-console md-layout-item md-size-50">
                 <button-display :clickRoute="'/place/display/' + item.id"></button-display>
+                <md-switch v-model="walkFast" class="md-primary">Walk fast</md-switch>
+                <md-switch v-model="createFast" class="md-primary">Create fast</md-switch>
                 <vue-loading :active="loading"></vue-loading>
                 <route-console :edit="true" :place-id="placeId" :key="placeId" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
@@ -42,6 +44,8 @@
                 error: {data: {errors: {}}},
                 msgtype: 'info',
                 loading: false,
+                walkFast: false,
+                createFast: false,
                 displayError: false
             }
         },
