@@ -96,6 +96,7 @@
                 this.error = error;
             },
             async moveTo(newPlaceId) {
+                this.$router.push('/place/update/' + newPlaceId);
                 this.getPlace(newPlaceId);
             },
             async setLoading(loading) {
