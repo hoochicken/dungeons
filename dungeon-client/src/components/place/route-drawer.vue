@@ -72,6 +72,25 @@
             this.newPlace = this.placeIn;
         },
         methods: {
+
+            async createRoute(placeId, out_direction) {
+                try {
+                    // this.$emit('setLoading', true);
+                    this.error = {};
+
+                    // create place
+                    let newPlaceId = await this.initiatePlace();
+
+                    // create route
+                    await this.createRoute(placeId, newPlaceId, out_direction);
+
+                    // move to new place
+                    // this.moveTo(newPlaceId);
+                } catch (error) {
+                    this.error = error.response;
+                    this.$emit('sendError', this.error);
+                }
+            },
             async updateRoute()
             {
                 try {
