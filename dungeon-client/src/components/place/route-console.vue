@@ -1,22 +1,38 @@
 <template>
     <div>
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
-            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" :outDirection="outDirection" @moveTo="moveTo" @buildRoute="buildRoute" @closeDrawer="closeDrawer()" @reloadConsole="reload()"></route-drawer>
+            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" :outDirection="outDirection"
+                          @moveTo="moveTo" @buildRoute="buildRoute" @closeDrawer="closeDrawer()"
+                          @reloadConsole="reload()"></route-drawer>
         </md-drawer>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
-            <md-switch v-model="walkFast" class="md-primary">Walk fast</md-switch>
-            <md-switch v-model="createFast" class="md-primary">Create fast</md-switch>
-            <div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
-                <span v-if="edit">{{ item.place_in }}</span>
-                <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
-                <md-icon v-else class="fa fa-arrow-up"></md-icon>
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item">
+                    <md-switch v-model="walkFast" class="md-primary">Walk fast</md-switch>
+                </div>
+                <div class="md-layout-item">
+                    <md-switch v-model="createFast" class="md-primary">Create fast</md-switch>
+                </div>
+            </div>
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item">
+                    <div class="cross"><div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in, item.out_direction)"
+                         :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
+                        <span v-if="edit">{{ item.place_in }}</span>
+                        <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
+                        <md-icon v-else class="fa fa-arrow-up"></md-icon>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
     import RouteDrawer from "./route-drawer";
+
     export default {
         name: "route-console",
         components: {RouteDrawer},
@@ -46,7 +62,7 @@
             this.init();
         },
         watch: {
-            placeId: function(value) {
+            placeId: function (value) {
                 if (0 < value) this.getRoutesByPlace(value)
             }
         },
@@ -75,7 +91,7 @@
                 }
                 // being in display mode
                 // 0 = no route, we don't do nothing
-                if (0 >=  placeIn) return;
+                if (0 >= placeIn) return;
 
                 // being in display mode, moving to next place
                 this.$emit('moveTo', placeIn);
@@ -152,17 +168,60 @@
     }
 </script>
 <style scoped>
-    .console {width:99px;}
-    .console > div {width:33%;float:left;}
-    .inner {height:100%;width:100%;}
-    .btn {font-size:20px;cursor:pointer;display:block; padding:0;text-align: center;}
-    .btn1 {transform: rotate(-45deg);}
-    .btn2 {}
-    .btn3 {transform: rotate(45deg);}
-    .btn4 {transform: rotate(-90deg);}
-    .btn5 {opacity: 0;}
-    .btn6 {transform: rotate(90deg);}
-    .btn7 {transform: rotate(-135deg);}
-    .btn8 {transform: rotate(180deg);}
-    .btn9 {transform: rotate(135deg);}
+    .cross {
+        width: 99px;
+    }
+
+    .cross > div {
+        width: 33%;
+        float: left;
+    }
+
+    .inner {
+        height: 100%;
+        width: 100%;
+    }
+
+    .btn {
+        font-size: 20px;
+        cursor: pointer;
+        display: block;
+        padding: 0;
+        text-align: center;
+    }
+
+    .btn1 {
+        transform: rotate(-45deg);
+    }
+
+    .btn2 {
+    }
+
+    .btn3 {
+        transform: rotate(45deg);
+    }
+
+    .btn4 {
+        transform: rotate(-90deg);
+    }
+
+    .btn5 {
+        opacity: 0;
+    }
+
+    .btn6 {
+        transform: rotate(90deg);
+    }
+
+    .btn7 {
+        transform: rotate(-135deg);
+    }
+
+    .btn8 {
+        transform: rotate(180deg);
+    }
+
+    .btn9 {
+        transform: rotate(135deg);
+    }
 </style>
