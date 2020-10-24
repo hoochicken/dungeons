@@ -1,7 +1,7 @@
 <template>
     <div>
         <md-drawer v-if="showRouteDrawer" :md-active.sync="showRouteDrawer" md-swipeable>
-            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" @closeDrawer="closeDrawer()" @reloadConsole="reload()"></route-drawer>
+            <route-drawer :place-id="placeId" :place-in="placeIn" :route-id="routeId" :outDirection="outDirection" @buildRoute="buildRoute" @closeDrawer="closeDrawer()" @reloadConsole="reload()"></route-drawer>
         </md-drawer>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
@@ -76,9 +76,10 @@
                 // being in display mode, moving to next place
                 this.$emit('moveTo', placeIn);
             },
-            async buildRoute(placeId, out_direction) {
+            async buildRoute() {
+                console.log('buildRoute');
                 try {
-                    if (5 === out_direction) {
+                    if (5 === this.outDirection) {
                         return;
                     }
                     this.$emit('setLoading', true);
@@ -88,7 +89,7 @@
                     let newPlaceId = await this.initiatePlace();
 
                     // create route
-                    await this.createRoute(placeId, newPlaceId, out_direction);
+                    await this.createRoute(this.placeId, newPlaceId, this.outDirection);
 
                     // move to new place
                     this.$emit('moveTo', newPlaceId);

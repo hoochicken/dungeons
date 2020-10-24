@@ -4,7 +4,7 @@
             <span class="md-title">Route</span>
         </md-toolbar>
         <div class="md-content md-layout-default">
-            <md-button v-if="0 === routeId" class="md-raised md-primary" @click="createRoute">Create</md-button>
+            <md-button v-if="0 === routeId" class="md-raised md-primary" @click="$emit('buildRoute')">Create</md-button>
             <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="moveTo(newPlace)">Walk To ({{ newPlace }})
             </md-button>
             <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
@@ -52,6 +52,9 @@
             },
             placeIn: {
                 type: Number
+            },
+            outDirection: {
+                type: Number
             }
         },
         data() {
@@ -73,24 +76,6 @@
         },
         methods: {
 
-            async createRoute(placeId, out_direction) {
-                try {
-                    // this.$emit('setLoading', true);
-                    this.error = {};
-
-                    // create place
-                    let newPlaceId = await this.initiatePlace();
-
-                    // create route
-                    await this.createRoute(placeId, newPlaceId, out_direction);
-
-                    // move to new place
-                    // this.moveTo(newPlaceId);
-                } catch (error) {
-                    this.error = error.response;
-                    this.$emit('sendError', this.error);
-                }
-            },
             async updateRoute()
             {
                 try {
