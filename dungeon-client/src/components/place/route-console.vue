@@ -51,8 +51,13 @@
                 this.response = await this.getRoutesByPlace(this.placeId);
             },
             async useRoute(routeId, placeId, placeIn, outDirection) {
+                if (5 === outDirection) {
+                    return;
+                }
+
                 // being in edit mode, opening drawer console to update route
-                if (this.edit && routeId > 0) {
+                // if (this.edit && routeId > 0) {
+                if (this.edit) {
                     this.outDirection = outDirection;
                     this.routeId = routeId;
                     this.placeIn = placeIn;
