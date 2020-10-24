@@ -30,14 +30,6 @@
             edit: {
                 type: Boolean,
                 default: false
-            },
-            walkFast: {
-                type: Boolean,
-                default: false
-            },
-            createFast: {
-                type: Boolean,
-                default: false
             }
         },
         data() {
@@ -45,6 +37,8 @@
                 error: {},
                 response: {},
                 routes: {},
+                walkFast: false,
+                createFast: false,
                 showRouteDrawer: false
             }
         },
