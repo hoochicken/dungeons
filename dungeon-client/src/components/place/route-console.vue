@@ -5,6 +5,8 @@
         </md-drawer>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
+            <md-switch v-model="walkFast" class="md-primary">Walk fast</md-switch>
+            <md-switch v-model="createFast" class="md-primary">Create fast</md-switch>
             <div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in, item.out_direction)" :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
                 <span v-if="edit">{{ item.place_in }}</span>
                 <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
@@ -26,6 +28,14 @@
                 type: Number
             },
             edit: {
+                type: Boolean,
+                default: false
+            },
+            walkFast: {
+                type: Boolean,
+                default: false
+            },
+            createFast: {
                 type: Boolean,
                 default: false
             }
