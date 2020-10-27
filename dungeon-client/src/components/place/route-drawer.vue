@@ -3,6 +3,7 @@
         <md-toolbar class="md-transparent" md-elevation="0">
             <span class="md-title">Route</span>
         </md-toolbar>
+        {{ loading }}
         <div class="md-content md-layout-default">
             <md-button v-if="0 === routeId" class="md-raised md-primary" @click="$emit('buildRoute')">Create</md-button>
             <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})
@@ -35,7 +36,7 @@
             <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
         </div>
 
-        <vue-loading v-if="loading"></vue-loading>
+        <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
 
