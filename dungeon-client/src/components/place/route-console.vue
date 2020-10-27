@@ -10,7 +10,7 @@
         <div class="console">
             <div v-if="edit" class="md-layout md-gutter">
                 <div class="md-layout-item">
-                    <md-switch v-model="walkFast" class="md-primary">Walk fast</md-switch>
+                    <md-switch v-model="walkFastIntern" class="md-primary" @change="$emit('setWalkFast', walkFastIntern)">Walk fast</md-switch>
                 </div>
                 <div class="md-layout-item">
                     <md-switch v-model="createFast" class="md-primary">Create fast</md-switch>

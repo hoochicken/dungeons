@@ -94,7 +94,7 @@
             moveTo(placeId)
             {
                 this.$router.push('/place/update/' + placeId);
-                location.reload();
+                // location.reload();
                 /*
                 this.$router.push({
                     name: 'placeUpdate',
