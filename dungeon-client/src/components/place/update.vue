@@ -4,7 +4,7 @@
             <div class="description-console md-layout-item md-size-50">
                 <button-display :clickRoute="'/place/display/' + item.id"></button-display>
                 <vue-loading :active="loading"></vue-loading>
-                <route-console :edit="true" :place-id="placeId" :key="placeId" @moveTo="moveTo" @setLoading="setLoading" @sendError="methDisplayError" class="route-console"></route-console>
+                <route-console :edit="true" :place-id="placeId" :walk-fast="walkFast" :create-fast="createFast" :key="placeId" @moveTo="moveTo" @setLoading="setLoading" @setWalkFast="setWalkFast" @setCreateFast="setCreateFast" @sendError="methDisplayError" class="route-console"></route-console>
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <place-form :item=item @save="updatePlace" @cancel="$router.push('/place/list')"
@@ -39,6 +39,8 @@
                 },
                 response: {},
                 placeId: 0,
+                walkFast: false,
+                createFast: false,
                 error: {data: {errors: {}}},
                 msgtype: 'info',
                 loading: false,
@@ -101,6 +103,12 @@
             },
             async setLoading(loading) {
                 this.loading = loading;
+            },
+            async setWalkFast(walkFast) {
+                this.walkFast = walkFast;
+            },
+            async setCreateFast(createFast) {
+                this.createFast = createFast;
             }
         }
     }
