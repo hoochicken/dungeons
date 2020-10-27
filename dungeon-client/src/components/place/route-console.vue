@@ -40,9 +40,6 @@
             placeId: {
                 type: Number
             },
-            outDirection: {
-                type: Number
-            },
             edit: {
                 type: Boolean,
                 default: false
