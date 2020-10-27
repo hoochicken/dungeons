@@ -8,7 +8,7 @@
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="console">
-            <div class="md-layout md-gutter">
+            <div v-if="edit" class="md-layout md-gutter">
                 <div class="md-layout-item">
                     <md-switch v-model="walkFast" class="md-primary">Walk fast</md-switch>
                 </div>
