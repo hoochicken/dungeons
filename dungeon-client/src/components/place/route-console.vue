@@ -40,7 +40,7 @@
             placeId: {
                 type: Number
             },
-            OutDirection: {
+            outDirection: {
                 type: Number
             },
             edit: {
@@ -109,7 +109,7 @@
                     let newPlaceId = await this.initiatePlace();
 
                     // create route
-                    await this.createRoute(this.placeId, newPlaceId, this.outDirection);
+                    await this.createRoute(placeId, newPlaceId, outDirection);
 
                     // move to new place
                     this.$emit('moveTo', newPlaceId);
