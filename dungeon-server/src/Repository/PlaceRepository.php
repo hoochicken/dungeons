@@ -32,7 +32,7 @@ class PlaceRepository extends ServiceEntityRepository
         $firstResult = $maxResults * $currentPage;
         $qb = $this->createQueryBuilder('h');
 
-        if (!empty($value)) {
+        if (!empty($value) && 3 <= strlen($value)) {
             $qb->andWhere('h.name LIKE :val')
                 ->setParameter('val', '%' . $value . '%');
         }
