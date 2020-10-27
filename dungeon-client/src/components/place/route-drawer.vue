@@ -13,6 +13,7 @@
         placeId {{ placeId }}<br />
         placeIn {{ placeIn }}<br />
         newPlace {{ newPlace }}<br />
+        listState {{ listState }}<br />
         <div class="md-content md-layout-default">
             <div v-if="0 < routeId">
                 <md-field>
@@ -60,10 +61,10 @@
         data() {
             return {
                 places: [],
-                listStateDefault: {
+                listState: {
                     maxResults: 30,
-                    currentPage: 0,
-                    totalPage: 0,
+                    currentPage: 1,
+                    totalPage: 1,
                     totalItems: 0
                 },
                 newPlace: 0,
@@ -117,8 +118,9 @@
                 this.loading = true;
                 let params = new URLSearchParams();
                 params.append('listState', JSON.stringify(this.listState));
-                let response = await this.axios.get('/place/list', params);
+                const response = await this.axios.post('/place/list', params);
                 this.places = response.data.items;
+                this.listState = response.data.listState;
                 this.loading = false;
             }
         }
