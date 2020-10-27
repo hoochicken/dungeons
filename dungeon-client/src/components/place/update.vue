@@ -105,7 +105,6 @@
                 this.loading = loading;
             },
             async setWalkFast(walkFast) {
-                console.log('setWalkFast');
                 this.walkFast = walkFast;
             },
             async setCreateFast(createFast) {
