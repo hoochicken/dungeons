@@ -37,9 +37,12 @@ class PlaceRepository extends ServiceEntityRepository
                 ->setParameter('val', '%' . $value . '%');
         }
 
-        $qb->setFirstResult($firstResult)
-            ->setMaxResults($maxResults)
-            ->orderBy('h.id', 'ASC');
+        $qb->setFirstResult($firstResult);
+
+        if (0 < $maxResults) {
+            $qb->setMaxResults($maxResults);
+        }
+        $qb->orderBy('h.id', 'ASC');
 
         $query = $qb->getQuery();
         $items = $query->getResult();

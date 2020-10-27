@@ -62,7 +62,7 @@
             return {
                 places: [],
                 listState: {
-                    maxResults: 30,
+                    maxResults: 0,
                     currentPage: 1,
                     totalPage: 1,
                     totalItems: 0
