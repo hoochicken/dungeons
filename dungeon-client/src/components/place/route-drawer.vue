@@ -3,18 +3,12 @@
         <md-toolbar class="md-transparent" md-elevation="0">
             <span class="md-title">Route</span>
         </md-toolbar>
-        {{ loading }}
         <div class="md-content md-layout-default">
             <md-button v-if="0 === routeId" class="md-raised md-primary" @click="$emit('buildRoute')">Create</md-button>
             <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})
             </md-button>
             <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
         </div>
-        route {{ routeId }}<br />
-        placeId {{ placeId }}<br />
-        placeIn {{ placeIn }}<br />
-        newPlace {{ newPlace }}<br />
-        listState {{ listState }}<br />
         <div class="md-content md-layout-default">
             <div v-if="0 < routeId">
                 <md-field>
@@ -26,16 +20,13 @@
                 </md-field>
             </div>
         </div>
-
         <div class="md-content md-layout-default">
             <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="updateRoute()">Update (R{{ routeId }})
             </md-button>
         </div>
-
         <div class="md-content md-layout-default">
             <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
         </div>
-
         <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
