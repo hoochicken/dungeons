@@ -12,7 +12,7 @@
         <div class="md-content md-layout-default">
             <div v-if="0 < routeId">
                 <md-field>
-                    <label for="newPlace">Place</label>
+                    <label v-if="0 === places.length" for="newPlace">Place</label>
                     <select class="new-place" v-model="newPlace" name="newPlace" id="newPlace">
                         <option v-for="item in places" v-bind:value="item.id" :key="item.id">{{ item.name }} ({{ item.id }})
                         </option>
