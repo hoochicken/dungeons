@@ -128,7 +128,6 @@
                 }
             },
             async createRoute(placeOut, placeIn, direction) {
-                console.log(placeOut + '#' + placeIn + '#' + direction);
                 try {
                     // create route
                     let params = {
