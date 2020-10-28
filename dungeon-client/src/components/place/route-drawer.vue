@@ -4,7 +4,6 @@
             <span class="md-title">Route</span>
         </md-toolbar>
         <div class="md-content md-layout-default">
-            {{routeId}}-{{ newPlace }}
             <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})</md-button>
             <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="updateRoute">Update Route ({{ newPlace }})</md-button>
             <md-button v-else-if="0 < newPlace" class="md-raised md-primary" @click="createRoute">Create Route ({{ newPlace }})</md-button>
