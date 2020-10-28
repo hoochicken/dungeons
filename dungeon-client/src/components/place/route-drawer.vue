@@ -4,6 +4,7 @@
             <span class="md-title">Route</span>
         </md-toolbar>
         <div class="md-content md-layout-default">
+            {{routeId}}-{{ newPlace }}
             <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})</md-button>
             <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="updateRoute">Update Route ({{ newPlace }})</md-button>
             <md-button v-else-if="0 < newPlace" class="md-raised md-primary" @click="createRoute">Create Route ({{ newPlace }})</md-button>
@@ -81,16 +82,17 @@
                     this.error = error.response;
                 }
             },
-            async buildRoute()
+            async createRoute()
             {
                 let params = {
                     place_out: this.placeId,
                     place_in: this.newPlace,
-                    out_direction: this.out_direction
+                    out_direction: this.outDirection
                 };
                 await this.axios.post('/route/create', params);
+                this.$emit('closeDrawer');
             },
-            async createRoute()
+            async buildRoute()
             {
                 // create new place and new route
                 this.$emit('buildRoute', this.placeId);
