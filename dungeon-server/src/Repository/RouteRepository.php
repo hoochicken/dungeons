@@ -53,6 +53,15 @@ class RouteRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    // /**
+    //  * @return Route[] Returns an array of Route objects
+    //  */
+    public function checkRouteAlreadyUsed($placeOut, $placeIn, $direction)
+    {
+        //
+        return false;
+    }
+
     /**
      * @param int $placeId
      * @param array $items
