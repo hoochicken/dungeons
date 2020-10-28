@@ -5,8 +5,8 @@
         </md-toolbar>
         <div class="md-content md-layout-default">
             <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})</md-button>
-            <md-button v-else-if="0 < routeId" class="md-raised md-primary" @click="updateRoute">Update Route ({{ newPlace }})</md-button>
-            <md-button v-else class="md-raised md-primary" @click="$emit('buildRoute', newPlace)">Create Route</md-button>
+            <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="updateRoute">Update Route ({{ newPlace }})</md-button>
+            <md-button v-else class="md-raised md-primary" @click="$emit('buildRoute', placeId)">Create New Place</md-button>
             <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
         </div>
         <div class="md-content md-layout-default">
