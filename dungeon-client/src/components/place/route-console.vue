@@ -83,7 +83,7 @@
                 }
                 // being in edit mode, creating new rout and moving there
                 else if (this.edit) {
-                    this.buildRoute(placeId, outDirection);
+                    this.buildRoute(placeId);
                     return;
                 }
                 // being in display mode
@@ -106,7 +106,7 @@
                     let newPlaceId = await this.initiatePlace();
 
                     // create route
-                    await this.createRoute(placeId, newPlaceId, outDirection);
+                    await this.createRoute(placeId, newPlaceId, this.outDirection);
 
                     // move to new place
                     this.$emit('moveTo', newPlaceId);
@@ -128,6 +128,7 @@
                 }
             },
             async createRoute(placeOut, placeIn, direction) {
+                console.log(placeOut + '#' + placeIn + '#' + direction);
                 try {
                     // create route
                     let params = {

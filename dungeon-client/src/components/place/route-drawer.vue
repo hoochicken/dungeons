@@ -4,18 +4,18 @@
             <span class="md-title">Route</span>
         </md-toolbar>
         <div class="md-content md-layout-default">
-            <md-button v-if="0 === routeId" class="md-raised md-primary" @click="$emit('buildRoute')">Create</md-button>
-            <md-button v-if="0 !== routeId" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})
-            </md-button>
+            <md-button v-if="0 < routeId && 0 < newPlace" class="md-raised md-primary" @click="$emit('moveTo', newPlace)">Walk To ({{ newPlace }})</md-button>
+            <md-button v-else-if="0 < routeId" class="md-raised md-primary" @click="updateRoute">Update Route ({{ newPlace }})</md-button>
+            <md-button v-else class="md-raised md-primary" @click="$emit('buildRoute', newPlace)">Create Route</md-button>
             <md-button class="md-raised" @click="$emit('closeDrawer');">Cancel</md-button>
         </div>
         <div class="md-content md-layout-default">
-            <div v-if="0 < routeId">
+            <div>
                 <md-field>
                     <label v-if="0 === places.length" for="newPlace">Place</label>
                     <select class="new-place" v-model="newPlace" name="newPlace" id="newPlace">
-                        <option v-for="item in places" v-bind:value="item.id" :key="item.id">{{ item.name }} ({{ item.id }})
-                        </option>
+                        <option value="0">- New Place -</option>
+                        <option v-for="item in places" v-bind:value="item.id" :key="item.id">{{ item.name }} ({{ item.id }})</option>
                     </select>
                 </md-field>
             </div>
