@@ -80,20 +80,6 @@
                     this.error = error.response;
                 }
             },
-            moveTo(placeId)
-            {
-                this.$emit('moveTo', placeId);
-                // this.$router.push('/place/update/' + placeId);
-                // location.reload();
-                /*
-                this.$router.push({
-                    name: 'placeUpdate',
-                    // path: '/place/update/',
-                    id: placeId
-                });
-                */
-
-            },
             async deleteRoute()
             {
                 this.loading = true;
