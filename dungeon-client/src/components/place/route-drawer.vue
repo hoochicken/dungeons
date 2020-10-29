@@ -98,6 +98,9 @@
             },
             async deleteRoute()
             {
+                if (!confirm('Really delete this route???')) {
+                    return;
+                }
                 this.loading = true;
                 await this.axios.post('/route/delete/' + this.routeId);
                 this.$emit('closeDrawer');
