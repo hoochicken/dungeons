@@ -6,6 +6,7 @@ use App\Entity\Place;
 use App\Entity\Route;
 use App\Modules\Dater;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\BrowserKit\Request;
 
@@ -151,5 +152,14 @@ class RouteRepository extends ServiceEntityRepository
         $return['attributes'] = $route->getAttributes();
         $return['state'] = $route->getState();
         return $return;
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    private function getSql(QueryBuilder $query)
+    {
+        return $query->prepare(Yii::$app->db->queryBuilder)->createCommand()->rawSql;
     }
 }
