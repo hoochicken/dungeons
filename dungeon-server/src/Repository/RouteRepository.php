@@ -17,6 +17,8 @@ use Symfony\Component\BrowserKit\Request;
  */
 class RouteRepository extends ServiceEntityRepository
 {
+    const DIRECTION_MOM = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Route::class);
@@ -53,13 +55,18 @@ class RouteRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    // /**
-    //  * @return Route[] Returns an array of Route objects
-    //  */
-    public function checkRouteAlreadyUsed($placeOut, $placeIn, $direction)
+    /**
+     * returns value of reverse direction
+     * @param $direction
+     * @return int
+     * @throws \Exception
+     */
+    public function getReverseDirection($direction)
     {
-        //
-        return false;
+        if (5 === $direction) {
+            throw new \Exception('Direction of 5 is irreversable');
+        }
+        return self::DIRECTION_MOM - $direction;
     }
 
     /**
