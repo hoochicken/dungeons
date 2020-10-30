@@ -56,6 +56,23 @@ class RouteRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    // /**
+    //  * @return Route[] Returns an array of Route objects
+    //  */
+    public function getRouteUsedByPlace($place, $direction, $debug = false)
+    {
+        $reverseDirection = $this->getReverseDirection($direction);
+        $query = $this->createQueryBuilder('r')
+            ->where('r.direction = :direction AND r.place_out = :place', ['place' => $place, 'direction' => $direction])
+            ->orWhere('r.direction = :direction AND r.place_in = :place', ['place' => $place, 'direction' => $reverseDirection])
+            ->andWhere('r.state = 1')
+            ->setParameter('place', $place)
+            ->setParameter('direction', $reverseDirection)
+            ->getQuery();
+        $queryRaw = $query->getSQL();
+        if ($debug) return $queryRaw;
+    }
+
     /**
      * returns value of reverse direction
      * @param $direction
