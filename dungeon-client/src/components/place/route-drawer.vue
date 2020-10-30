@@ -91,6 +91,15 @@
                 await this.axios.post('/route/create', params);
                 this.$emit('closeDrawer');
             },
+            async routeExists(placeId, direction)
+            {
+                try {
+                    let data = await this.axios.post('/route/exists/' + placeId + '/' + direction);
+                    return data.exists;
+                } catch (error) {
+                    this.error = error.response;
+                }
+            },
             async buildRoute()
             {
                 // create new place and new route
