@@ -77,3 +77,7 @@ routeDelete:
 routeUpdate:
   path: /route/update/{id}
   controller: App\Controller\RouteController::update
+
+routeToPlaceExists:
+  path: /route/exists/{place}/{direction}
+  controller: App\Controller\RouteController::routeToPlaceExists
