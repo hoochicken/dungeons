@@ -71,16 +71,18 @@
         methods: {
             async updateRoute()
             {
-                let exists = await this.routeExists(this.newPlace, this.outDirection);
-                if (exists) {
-                    this.error = 'Route to place ' + this.newPlace + ' already exists';
-                    if (!confirm('Force overwrite existing route?')) {
-                        this.error = '';
-                        return;
-                    }
-                }
                 try {
                     this.loading = true;
+                    let exists = await this.routeExists(this.newPlace, this.outDirection);
+                    if (exists) {
+                        this.error = 'Route to place ' + this.newPlace + ' already exists';
+                        if (!confirm('Force overwrite existing route?')) {
+                            this.error = '';
+                            return;
+                        } else {
+                            // this.deleteRoutesAll(this.newPlace, this.outDirection);
+                        }
+                    }
                     let params = {
                         place_out: this.placeId,
                         place_in: this.newPlace
@@ -136,6 +138,15 @@
                 this.places = response.data.items;
                 this.listState = response.data.listState;
                 this.loading = false;
+            },
+            async removeRouteByPlaceAndDirection(placeId, direction)
+            {
+                try {
+                    let data = await this.axios.post('/route/delete/' + placeId + '/' + direction);
+                    return true || data.exists;
+                } catch (error) {
+                    this.error = error.response;
+                }
             }
         }
     }
