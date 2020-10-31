@@ -125,7 +125,7 @@ class RouteController extends ApiController
      */
     public function routeToPlaceExists($place, $direction, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
     {
-        $route = $routeRepository->getRouteToPlace($place, $direction);
+        $route = $routeRepository->getRouteToPlaceByDirection($place, $direction);
         $exists = 0 < count($route);
         $data = [
             'place' => $place,

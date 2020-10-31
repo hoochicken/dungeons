@@ -59,7 +59,7 @@ class RouteRepository extends ServiceEntityRepository
     // /**
     //  * @return Route[] Returns an array of Route objects
     //  */
-    public function getRouteToPlace($place, $direction, $debug = false)
+    public function getRouteToPlaceByDirection($place, $direction, $debug = false)
     {
         $reverseDirection = $this->getReverseDirection($direction);
         $query = $this->createQueryBuilder('r')
