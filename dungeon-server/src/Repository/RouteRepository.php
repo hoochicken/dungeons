@@ -63,11 +63,12 @@ class RouteRepository extends ServiceEntityRepository
     {
         $reverseDirection = $this->getReverseDirection($direction);
         $query = $this->createQueryBuilder('r')
-            ->where('r.outDirection = :direction AND r.placeIn = :place')
-            ->orWhere('r.outDirection = :direction AND r.placeOut = :place')
+            ->where('r.outDirection = :strictDirection AND r.placeIn = :place')
+            ->orWhere('r.outDirection = :reverseDirection AND r.placeOut = :place')
             ->andWhere('r.state = 1')
+            ->setParameter('reverseDirection', $reverseDirection)
+            ->setParameter('strictDirection', $direction)
             ->setParameter('place', $place)
-            ->setParameter('direction', $reverseDirection)
             ->getQuery();
 
         if ($debug) return $query->getSQL();
