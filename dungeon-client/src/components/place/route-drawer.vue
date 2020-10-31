@@ -73,14 +73,21 @@
             {
                 try {
                     this.loading = true;
-                    let exists = await this.routeExists(this.newPlace, this.outDirection);
+                    let exists = await this.getRoutesExisting(this.newPlace, this.outDirection);
                     if (exists) {
                         this.error = 'Route to place ' + this.newPlace + ' already exists';
                         if (!confirm('Force overwrite existing route?')) {
                             this.error = '';
+                            this.loading = false;
                             return;
                         } else {
-                            // this.deleteRoutesAll(this.newPlace, this.outDirection);
+                            console.log(exists);
+
+                            for (let i = 0; i < exists.length; i++) {
+                                console.log(exists[i]['id']);
+                                await this.axios.post('/route/delete/' + exists[i]['id']);
+                            }
+                            this.loading = false;
                         }
                     }
                     let params = {
@@ -105,11 +112,11 @@
                 await this.axios.post('/route/create', params);
                 this.$emit('closeDrawer');
             },
-            async routeExists(placeId, direction)
+            async getRoutesExisting(placeId, direction)
             {
                 try {
                     let response = await this.axios.post('/route/exists/' + placeId + '/' + direction);
-                    return response.data.exists;
+                    return response.data.routes;
                 } catch (error) {
                     this.error = error.response;
                 }
@@ -138,15 +145,6 @@
                 this.places = response.data.items;
                 this.listState = response.data.listState;
                 this.loading = false;
-            },
-            async removeRouteByPlaceAndDirection(placeId, direction)
-            {
-                try {
-                    let data = await this.axios.post('/route/delete/' + placeId + '/' + direction);
-                    return true || data.exists;
-                } catch (error) {
-                    this.error = error.response;
-                }
             }
         }
     }
