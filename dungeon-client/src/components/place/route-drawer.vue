@@ -74,7 +74,10 @@
                 let exists = await this.routeExists(this.newPlace, this.outDirection);
                 if (exists) {
                     this.error = 'Route to place ' + this.newPlace + ' already exists';
-                    return;
+                    if (!confirm('Force overwrite existing route?')) {
+                        this.error = '';
+                        return;
+                    }
                 }
                 let test = true;
                 if (test) return;
@@ -90,6 +93,7 @@
                 } catch (error) {
                     this.error = error.response;
                 }
+                this.error = '';
             },
             async createRoute()
             {
