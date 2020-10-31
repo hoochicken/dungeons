@@ -73,22 +73,7 @@
             {
                 try {
                     this.loading = true;
-                    let routes = await this.getRoutesExistingExcept(this.newPlace, this.outDirection);
-                    if (0 < routes.length) {
-                        this.error = 'Route to place ' + this.newPlace + ' already exists';
-                        if (!confirm('Force overwrite existing route?')) {
-                            this.error = '';
-                            this.loading = false;
-                            return;
-                        } else {
-                            for (let i = 0; i < routes.length; i++) {
-                                // delete only foreign routes, NOT the one we want to update
-                                if (this.placeId === routes[i]['place_in'] || this.placeId === routes[i]['place_out']) continue;
-                                await this.axios.post('/route/delete/' + routes[i]['id']);
-                            }
-                            this.loading = false;
-                        }
-                    }
+                    await this.overwriteRoutesExisting();
                     let params = {
                         place_out: this.placeId,
                         place_in: this.newPlace
@@ -124,6 +109,22 @@
                 } catch (error) {
                     this.error = error.response;
                 }
+            },
+            async overwriteRoutesExisting()
+            {
+                let routes = await this.getRoutesExistingExcept(this.newPlace, this.outDirection);
+                if (0 >= routes.length) {
+                    return true;
+                }
+                this.error = 'Route to place ' + this.newPlace + ' already exists';
+                if (confirm('Force overwrite existing route?')) {
+                    for (let i = 0; i < routes.length; i++) {
+                        // delete only foreign routes, NOT the one we want to update
+                        if (this.placeId === routes[i]['place_in'] || this.placeId === routes[i]['place_out']) continue;
+                        await this.axios.post('/route/delete/' + routes[i]['id']);
+                    }
+                }
+                return true;
             },
             async getRoutesExisting(placeId, direction)
             {
