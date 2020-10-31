@@ -131,7 +131,7 @@ class RouteController extends ApiController
             'place' => $place,
             'direction' => $direction,
             'exists' => $exists,
-            'route' => $routeRepository->transformAll($route),
+            'routes' => $routeRepository->transformAll($route),
         ];
         return $this->respond($data);
     }

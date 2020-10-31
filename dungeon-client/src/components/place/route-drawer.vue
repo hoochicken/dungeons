@@ -73,19 +73,16 @@
             {
                 try {
                     this.loading = true;
-                    let exists = await this.getRoutesExisting(this.newPlace, this.outDirection);
-                    if (exists) {
+                    let routes = await this.getRoutesExisting(this.newPlace, this.outDirection);
+                    if (0 < routes.length) {
                         this.error = 'Route to place ' + this.newPlace + ' already exists';
                         if (!confirm('Force overwrite existing route?')) {
                             this.error = '';
                             this.loading = false;
                             return;
                         } else {
-                            console.log(exists);
-
-                            for (let i = 0; i < exists.length; i++) {
-                                console.log(exists[i]['id']);
-                                await this.axios.post('/route/delete/' + exists[i]['id']);
+                            for (let i = 0; i < routes.length; i++) {
+                                await this.axios.post('/route/delete/' + routes[i]['id']);
                             }
                             this.loading = false;
                         }
