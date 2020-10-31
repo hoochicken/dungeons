@@ -73,7 +73,7 @@
             {
                 try {
                     this.loading = true;
-                    let routes = await this.getRoutesExisting(this.newPlace, this.outDirection);
+                    let routes = await this.getRoutesExistingExcept(this.newPlace, this.outDirection);
                     if (0 < routes.length) {
                         this.error = 'Route to place ' + this.newPlace + ' already exists';
                         if (!confirm('Force overwrite existing route?')) {
@@ -82,6 +82,8 @@
                             return;
                         } else {
                             for (let i = 0; i < routes.length; i++) {
+                                // delete only foreign routes, NOT the one we want to update
+                                if (this.placeId === routes[i]['place_in'] || this.placeId === routes[i]['place_out']) continue;
                                 await this.axios.post('/route/delete/' + routes[i]['id']);
                             }
                             this.loading = false;
@@ -108,6 +110,20 @@
                 };
                 await this.axios.post('/route/create', params);
                 this.$emit('closeDrawer');
+            },
+            async getRoutesExistingExcept(placeId, direction)
+            {
+                try {
+                    let routes = await this.getRoutesExisting(placeId, direction);
+                    let routesExcept = [];
+                    for (let i = 0; i < routes.length; i++ ) {
+                        if (routes[i]['id'] === this.routeId) continue;
+                        routesExcept.push(routes[i]);
+                    }
+                    return routesExcept;
+                } catch (error) {
+                    this.error = error.response;
+                }
             },
             async getRoutesExisting(placeId, direction)
             {
