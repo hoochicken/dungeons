@@ -24,15 +24,17 @@
         <div class="md-content md-layout-default">
             <md-button v-if="0 < routeId" class="md-raised md-accent" @click="deleteRoute">Delete</md-button>
         </div>
+        <message-box v-if="0 < error.length">{{ error }}</message-box>
         <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
 
 <script>
     import VueLoading from "vue-loading-overlay/src/js/Component";
+    import MessageBox from "../global/message-box";
     export default {
         name: "route-drawer",
-        components: {VueLoading},
+        components: {MessageBox, VueLoading},
         props: {
             placeId: {
                 type: Number
@@ -57,6 +59,8 @@
                     totalItems: 0
                 },
                 newPlace: 0,
+                hully: false,
+                error: '',
                 loading: false
             }
         },
@@ -65,9 +69,15 @@
             this.newPlace = this.placeIn;
         },
         methods: {
-
             async updateRoute()
             {
+                let exists = await this.routeExists(this.newPlace, this.outDirection);
+                if (exists) {
+                    this.error = 'Route to place ' + this.newPlace + ' already exists';
+                    return;
+                }
+                let test = true;
+                if (test) return;
                 try {
                     this.loading = true;
                     let params = {
@@ -95,7 +105,7 @@
             {
                 try {
                     let data = await this.axios.post('/route/exists/' + placeId + '/' + direction);
-                    return data.exists;
+                    return true || data.exists;
                 } catch (error) {
                     this.error = error.response;
                 }
