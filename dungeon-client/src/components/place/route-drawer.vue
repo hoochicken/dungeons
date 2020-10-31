@@ -125,7 +125,6 @@
                     for (let i = 0; i < routes.length; i++) {
                         // delete only foreign routes, NOT the one we want to update
                         if (this.placeId === routes[i]['place_in'] || this.placeId === routes[i]['place_out']) continue;
-                        console.log(routes[i]['id']);
                         await this.axios.post('/route/delete/' + routes[i]['id']);
                     }
                 } catch (error) {
