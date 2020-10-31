@@ -69,6 +69,29 @@
             this.newPlace = this.placeIn;
         },
         methods: {
+            async getPlaces()
+            {
+                this.loading = true;
+                let params = new URLSearchParams();
+                params.append('listState', JSON.stringify(this.listState));
+                const response = await this.axios.post('/place/list', params);
+                this.places = response.data.items;
+                this.listState = response.data.listState;
+                this.loading = false;
+            },
+            async createRoute()
+            {
+                this.loading = true;
+                if (!await this.overwriteRoutesExisting()) return;
+                let params = {
+                    place_out: this.placeId,
+                    place_in: this.newPlace,
+                    out_direction: this.outDirection
+                };
+                await this.axios.post('/route/create', params);
+                this.loading = false;
+                this.$emit('closeDrawer');
+            },
             async updateRoute()
             {
                 try {
@@ -86,41 +109,29 @@
                 }
                 this.error = '';
             },
-            async createRoute()
+            async buildRoute()
             {
-                this.loading = true;
-                if (!await this.overwriteRoutesExisting()) return;
-                let params = {
-                    place_out: this.placeId,
-                    place_in: this.newPlace,
-                    out_direction: this.outDirection
-                };
-                await this.axios.post('/route/create', params);
-                this.loading = false;
-                this.$emit('closeDrawer');
+                // create new place and new route
+                this.$emit('buildRoute', this.placeId);
             },
-            async getRoutesExistingExcept(placeId, direction)
+            async deleteRoute()
             {
-                try {
-                    let routes = await this.getRoutesExisting(placeId, direction);
-                    let routesExcept = [];
-                    for (let i = 0; i < routes.length; i++ ) {
-                        if (routes[i]['id'] === this.routeId) continue;
-                        routesExcept.push(routes[i]);
-                    }
-                    return routesExcept;
-                } catch (error) {
-                    this.error = error.response;
+                if (!confirm('Really delete this route???')) {
+                    return;
                 }
+                this.loading = true;
+                await this.axios.post('/route/delete/' + this.routeId);
+                this.$emit('closeDrawer');
+                this.loading = false;
             },
             async overwriteRoutesExisting()
             {
-                let routes = await this.getRoutesExistingExcept(this.newPlace, this.outDirection);
-                if (0 >= routes.length) {
-                    return true;
-                }
-                this.error = 'Route to place ' + this.newPlace + ' already exists';
                 try {
+                    let routes = await this.getRoutesExisting(this.newPlace, this.outDirection);
+                    if (0 >= routes.length) {
+                        return true;
+                    }
+                    this.error = 'Route to place ' + this.newPlace + ' already exists';
                     if (!confirm('Force overwrite existing route?')) return false;
                     for (let i = 0; i < routes.length; i++) {
                         // delete only foreign routes, NOT the one we want to update
@@ -140,31 +151,6 @@
                 } catch (error) {
                     this.error = error.response;
                 }
-            },
-            async buildRoute()
-            {
-                // create new place and new route
-                this.$emit('buildRoute', this.placeId);
-            },
-            async deleteRoute()
-            {
-                if (!confirm('Really delete this route???')) {
-                    return;
-                }
-                this.loading = true;
-                await this.axios.post('/route/delete/' + this.routeId);
-                this.$emit('closeDrawer');
-                this.loading = false;
-            },
-            async getPlaces()
-            {
-                this.loading = true;
-                let params = new URLSearchParams();
-                params.append('listState', JSON.stringify(this.listState));
-                const response = await this.axios.post('/place/list', params);
-                this.places = response.data.items;
-                this.listState = response.data.listState;
-                this.loading = false;
             }
         }
     }
