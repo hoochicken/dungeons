@@ -73,7 +73,7 @@
             {
                 try {
                     this.loading = true;
-                    await this.overwriteRoutesExisting();
+                    if (!await this.overwriteRoutesExisting()) return;
                     let params = {
                         place_out: this.placeId,
                         place_in: this.newPlace
@@ -89,6 +89,7 @@
             async createRoute()
             {
                 this.loading = true;
+                if (!await this.overwriteRoutesExisting()) return;
                 let params = {
                     place_out: this.placeId,
                     place_in: this.newPlace,
@@ -119,12 +120,11 @@
                     return true;
                 }
                 this.error = 'Route to place ' + this.newPlace + ' already exists';
-                if (confirm('Force overwrite existing route?')) {
-                    for (let i = 0; i < routes.length; i++) {
-                        // delete only foreign routes, NOT the one we want to update
-                        if (this.placeId === routes[i]['place_in'] || this.placeId === routes[i]['place_out']) continue;
-                        await this.axios.post('/route/delete/' + routes[i]['id']);
-                    }
+                if (!confirm('Force overwrite existing route?')) return false;
+                for (let i = 0; i < routes.length; i++) {
+                    // delete only foreign routes, NOT the one we want to update
+                    if (this.placeId === routes[i]['place_in'] || this.placeId === routes[i]['place_out']) continue;
+                    await this.axios.post('/route/delete/' + routes[i]['id']);
                 }
                 return true;
             },
