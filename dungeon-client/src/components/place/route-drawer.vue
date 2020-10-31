@@ -79,8 +79,6 @@
                         return;
                     }
                 }
-                let test = true;
-                if (test) return;
                 try {
                     this.loading = true;
                     let params = {
@@ -108,8 +106,8 @@
             async routeExists(placeId, direction)
             {
                 try {
-                    let data = await this.axios.post('/route/exists/' + placeId + '/' + direction);
-                    return true || data.exists;
+                    let response = await this.axios.post('/route/exists/' + placeId + '/' + direction);
+                    return response.data.exists;
                 } catch (error) {
                     this.error = error.response;
                 }
