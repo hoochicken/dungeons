@@ -88,12 +88,14 @@
             },
             async createRoute()
             {
+                this.loading = true;
                 let params = {
                     place_out: this.placeId,
                     place_in: this.newPlace,
                     out_direction: this.outDirection
                 };
                 await this.axios.post('/route/create', params);
+                this.loading = false;
                 this.$emit('closeDrawer');
             },
             async getRoutesExistingExcept(placeId, direction)
