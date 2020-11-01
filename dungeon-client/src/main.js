@@ -21,6 +21,8 @@ import PlaceList from './components/place/list.vue'
 import PlaceCreate from './components/place/create.vue'
 import PlaceUpdate from './components/place/update.vue'
 import PlaceDisplay from './components/place/display.vue'
+
+import RouteList from './components/route/list.vue'
 // Import stylesheet
 
 Vue.config.productionTip = false;
@@ -44,6 +46,7 @@ const routes = [
   { path: '/place/create', component: PlaceCreate },
   { path: '/place/update/:id', component: PlaceUpdate },
   { path: '/place/display/:id', component: PlaceDisplay },
+  { path: '/route/list', component: RouteList },
   { path: '/', component: App },
 ];
 
