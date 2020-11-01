@@ -62,22 +62,24 @@ placeDelete:
   path: /place/delete/{id}
   controller: App\Controller\PlaceController::delete
 
-routePlace:
-  path: /route/place/{place}
-  controller: App\Controller\RouteController::place
-
 routeCreate:
   path: /route/create
   controller: App\Controller\RouteController::create
-
-routeDelete:
-  path: /route/delete/{id}
-  controller: App\Controller\RouteController::delete
 
 routeUpdate:
   path: /route/update/{id}
   controller: App\Controller\RouteController::update
 
+routeDelete:
+  path: /route/delete/{id}
+  controller: App\Controller\RouteController::delete
+
 routeToPlaceExists:
   path: /route/exists/{place}/{direction}
   controller: App\Controller\RouteController::routeToPlaceExists
+
+routePlace:
+  path: /route/place/{place}
+  controller: App\Controller\RouteController::place
+
+

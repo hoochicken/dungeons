@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Route;
 use App\Modules\Dater;
 use App\Repository\RouteRepository;
+use Doctrine\ORM\EntityManager;
 use mysql_xdevapi\Exception;
 use phpDocumentor\Reflection\DocBlock\Tags\Example;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -46,6 +47,18 @@ class RouteController extends ApiController
         $arr = $routeRepository->transform($route);
         // return $this->respondCreated(['route' => $routeRepository->transform($route)]);
         return $this->respondCreated($arr);
+    }
+
+    /**
+     * @param Request $request
+     * @param RouteRepository $routeRepository
+     * @param EntityManager $em
+     * @return JsonResponse
+     */
+    public function list(Request $request, RouteRepository $routeRepository, EntityManager $em): JsonResponse
+    {
+        $routes = $routeRepository->transformAll($routeRepository->findAll());
+        return $this->respond(['routes' => $routes]);
     }
 
     /**
