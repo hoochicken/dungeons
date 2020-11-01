@@ -1,6 +1,50 @@
 <template>
     <div>
-        Route List
+        <h1>Routes</h1>
+        <search @resetSearch="resetSearch" @search="search" />
+        <md-table>
+            <thead>
+            <md-table-row>
+                <md-table-head>ID</md-table-head>
+                <md-table-head>From</md-table-head>
+                <md-table-head>To</md-table-head>
+                <md-table-head>State</md-table-head>
+                <md-table-head></md-table-head>
+                <md-table-head></md-table-head>
+            </md-table-row>
+            </thead>
+            <tbody>
+            <template v-for="item in routes">
+                <md-table-row v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
+                    <md-table-cell>{{ item.id }}</md-table-cell>
+                    <md-table-cell>{{ item.place_out }}</md-table-cell>
+                    <md-table-cell>{{ item.place_in}}</md-table-cell>
+                    <md-table-cell>State</md-table-cell>
+                    <md-table-cell>
+                        <md-button class="md-raised md-primary update" @click="updateRoute(item.id)">Update
+                        </md-button>
+                    </md-table-cell>
+                    <md-table-cell>
+                        <md-button class="md-raised md-accent delete" @click="deleteRoute(item.id)">Delete</md-button>
+                    </md-table-cell>
+                </md-table-row>
+            </template>
+            <md-table-row>
+                <md-table-cell></md-table-cell>
+                <md-table-cell><i>New route</i></md-table-cell>
+                <md-table-cell></md-table-cell>
+                <md-table-cell></md-table-cell>
+                <md-table-cell>
+                    <md-button class="md-raised md-primary" @click="$router.push('/route/create')">Create</md-button>
+                </md-table-cell>
+                <md-table-cell>
+                    <md-button disabled class="md-raised md-accent">Delete</md-button>
+                </md-table-cell>
+            </md-table-row>
+            </tbody>
+        </md-table>
+
+        {{ routes }}
         <vue-loading v-if="loading"></vue-loading>
         <!--pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination-->
         <pagination :totalPage="5" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
@@ -49,6 +93,26 @@
                     this.loading = false;
                 }
 
+            },
+            async deleteRoute(id) {
+                if (!confirm('Really delete this route???')) {
+                    return;
+                }
+                await this.axios.post('/route/delete/' + id);
+                this.list();
+            },
+            updateRoute(id) {
+                this.$router.push('/route/update/' + id);
+            },
+            async search(searchterm) {
+                this.searchterm = searchterm;
+                this.listState = this.listStateDefault;
+                this.list();
+            },
+            async resetSearch() {
+                this.searchterm = '';
+                this.listState = this.listStateDefault;
+                this.list();
             },
             changePage : function(n) {
                 this.listState.currentPage = n > 0 ? n - 1 : n;
