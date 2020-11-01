@@ -44,7 +44,7 @@
             </tbody>
         </md-table>
 
-        {{ routes }}
+        {{ places }}
         <vue-loading v-if="loading"></vue-loading>
         <!--pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination-->
         <pagination :totalPage="5" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
@@ -53,9 +53,10 @@
 
 <script>
     import VueLoading from "vue-loading-overlay/src/js/Component";
+    import Search from "../global/search";
     export default {
         name: "route-list",
-        components: {VueLoading},
+        components: {Search, VueLoading},
         data() {
             return {
                 routes: {},
@@ -66,13 +67,15 @@
                     totalPage: 0,
                     totalItems: 0
                 },
+                currentId: 0,
                 searchterm: '',
                 listStateDefault: {
                     maxResults: 3,
                     currentPage:0,
                     totalPage: 0,
                     totalItems: 0
-                }
+                },
+                places: {}
             }
         },
         mounted() {
@@ -117,6 +120,9 @@
             changePage : function(n) {
                 this.listState.currentPage = n > 0 ? n - 1 : n;
                 this.list();
+            },
+            async getPlaces() {
+                this.places = await this.axios.post('place/list');
             }
         }
     }
