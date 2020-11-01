@@ -52,13 +52,13 @@ class RouteController extends ApiController
     /**
      * @param Request $request
      * @param RouteRepository $routeRepository
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function list(Request $request, RouteRepository $routeRepository, EntityManager $em): JsonResponse
+    public function list(Request $request, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
     {
         $routes = $routeRepository->transformAll($routeRepository->findAll());
-        return $this->respond(['routes' => $routes]);
+        return $this->respond(['items' => $routes]);
     }
 
     /**
