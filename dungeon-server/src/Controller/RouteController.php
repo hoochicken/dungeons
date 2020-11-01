@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\Route;
@@ -15,25 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RouteController extends ApiController
 {
-
-    /**
-     * @param int $place
-     * @param RouteRepository $routeRepository
-     * @return JsonResponse
-     */
-    public function place(int $place, RouteRepository $routeRepository): JsonResponse
-    {
-        $debug = false;
-
-        // get items and pagination info
-        $result = $routeRepository->findByPlace($place, $debug);
-        if ($debug) return $this->respond(['items' => $result]);
-        $routesRaw = $routeRepository->transformAll($result);
-        $routes = $routeRepository->unifyRoutesAll($place, $routesRaw);
-
-        // build return array
-        return $this->respond(['items' => $routes]);
-    }
 
     /**
      * @param Request $request
@@ -68,26 +50,6 @@ class RouteController extends ApiController
 
     /**
      * @param int $id
-     * @param RouteRepository $routeRepository
-     * @param EntityManagerInterface $em
-     * @return JsonResponse
-     */
-    public function delete($id, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
-    {
-        $route = $routeRepository->find($id);
-        if (null === $route) {
-            return $this->respond('Route with id ' . $id . ' was not found. (Already removed?)');
-        }
-        $route->setDeleted(Dater::get());
-        $route->setState(0);
-        $em->remove($route);
-        $em->flush();
-        return $this->respond(['delete' => true]);
-    }
-
-
-    /**
-     * @param int $id
      * @param Request $request
      * @param RouteRepository $routeRepository
      * @param EntityManagerInterface $em
@@ -117,6 +79,25 @@ class RouteController extends ApiController
     }
 
     /**
+     * @param int $id
+     * @param RouteRepository $routeRepository
+     * @param EntityManagerInterface $em
+     * @return JsonResponse
+     */
+    public function delete($id, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
+    {
+        $route = $routeRepository->find($id);
+        if (null === $route) {
+            return $this->respond('Route with id ' . $id . ' was not found. (Already removed?)');
+        }
+        $route->setDeleted(Dater::get());
+        $route->setState(0);
+        $em->remove($route);
+        $em->flush();
+        return $this->respond(['delete' => true]);
+    }
+
+    /**
      * @param $place
      * @param $direction
      * @param RouteRepository $routeRepository
@@ -134,5 +115,25 @@ class RouteController extends ApiController
             'routes' => $routeRepository->transformAll($route),
         ];
         return $this->respond($data);
+    }
+
+    /**
+     * find all route emerging from or leading to the place given
+     * @param int $place
+     * @param RouteRepository $routeRepository
+     * @return JsonResponse
+     */
+    public function place(int $place, RouteRepository $routeRepository): JsonResponse
+    {
+        $debug = false;
+
+        // get items and pagination info
+        $result = $routeRepository->findByPlace($place, $debug);
+        if ($debug) return $this->respond(['items' => $result]);
+        $routesRaw = $routeRepository->transformAll($result);
+        $routes = $routeRepository->unifyRoutesAll($place, $routesRaw);
+
+        // build return array
+        return $this->respond(['items' => $routes]);
     }
 }
