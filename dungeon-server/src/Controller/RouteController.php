@@ -135,25 +135,4 @@ class RouteController extends ApiController
         ];
         return $this->respond($data);
     }
-
-    /**
-     * @param int $id
-     * @param Request $request
-     * @param RouteRepository $routeRepository
-     * @param EntityManagerInterface $em
-     * @return JsonResponse
-     */
-    public function deletePlace($id, Request $request, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
-    {
-        $place = $routeRepository->find($id);
-        if (null === $place) {
-            return $this->respond('Place with id ' . $id . ' was not found. (Already removed?)');
-        }
-        $place->setDeleted(Dater::get());
-        $place->setState(0);
-
-        // $em->remove($place);
-        $em->flush();
-        return $this->respond(['delete' => true]);
-    }
 }
