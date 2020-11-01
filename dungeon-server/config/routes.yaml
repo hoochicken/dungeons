@@ -66,6 +66,10 @@ routeCreate:
   path: /route/create
   controller: App\Controller\RouteController::create
 
+routeList:
+  path: /route/list
+  controller: App\Controller\RouteController::list
+
 routeUpdate:
   path: /route/update/{id}
   controller: App\Controller\RouteController::update
