@@ -86,4 +86,3 @@ routePlace:
   path: /route/place/{place}
   controller: App\Controller\RouteController::place
 
-
