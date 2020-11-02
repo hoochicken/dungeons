@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Route - Update{{ id }}</h1>
+        <h1>Route - Update {{ id }}</h1>
     </div>
 </template>
 
