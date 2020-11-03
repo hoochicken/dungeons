@@ -1,22 +1,25 @@
 <template>
     <div>
         <h1>Route - Update {{ routeId }}</h1>
-        <md-field v-if="item.id > 0">
-            <label for="id">Id</label>
-            <md-input id="id" name="id" disabled v-model="item.id" />
-        </md-field>
-        <md-field>
-            <label for="placeOut">Place Out</label>
-            <md-input name="placeOut" id="placeOut" v-model="item.placeOut" />
-        </md-field>
-        <md-field>
-            <label for="outDirection">Out Direction</label>
-            <md-input name="outDirection" id="outDirection" v-model="item.outDirection" />
-        </md-field>
-        <md-field>
-            <label for="placeIn">Place In</label>
-        <md-input name="placeIn" id="placeIn" v-model="item.placeIn" />
-        </md-field>
+        {{ item }}
+        <div v-if="undefined !== item">
+            <md-field>
+                <label for="id">Id</label>
+                <md-input id="id" name="id" disabled v-model="item.id" />
+            </md-field>
+            <md-field>
+                <label for="placeOut">Place Out</label>
+                <md-input name="placeOut" id="placeOut" v-model="item.placeOut" />
+            </md-field>
+            <md-field>
+                <label for="outDirection">Out Direction</label>
+                <md-input name="outDirection" id="outDirection" v-model="item.outDirection" />
+            </md-field>
+            <md-field>
+                <label for="placeIn">Place In</label>
+                <md-input name="placeIn" id="placeIn" v-model="item.placeIn" />
+            </md-field>
+        </div>
         {{ item }}
 
         <vue-loading :active="loading"></vue-loading>
@@ -45,7 +48,7 @@
             }
         },
         async mounted() {
-            this.item = await this.getRoute(this.$route.params.id);
+            await this.getRoute(this.$route.params.id);
         },
         methods: {
             async getRoute(id) {
