@@ -70,6 +70,10 @@ routeList:
   path: /route/list
   controller: App\Controller\RouteController::list
 
+routeGet:
+  path: /route/get/{id}
+  controller: App\Controller\RouteController::get
+
 routeUpdate:
   path: /route/update/{id}
   controller: App\Controller\RouteController::update

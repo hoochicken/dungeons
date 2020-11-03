@@ -94,6 +94,20 @@ class RouteController extends ApiController
     /**
      * @param int $id
      * @param RouteRepository $routeRepository
+     * @return JsonResponse
+     */
+    public function get($id, RouteRepository $routeRepository): JsonResponse
+    {
+        $route = $routeRepository->find($id);
+        if (null === $route) {
+            return $this->respond('Route with id ' . $id . ' was not found. (Already removed?)');
+        }
+        return $this->respond($routeRepository->transform($route));
+    }
+
+    /**
+     * @param int $id
+     * @param RouteRepository $routeRepository
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
