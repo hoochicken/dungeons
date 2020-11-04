@@ -8,8 +8,11 @@
                 <md-input id="id" name="id" disabled v-model="item.id" />
             </md-field>
             <md-field>
-                <label for="placeOut">Place Out</label>
-                <md-input name="placeOut" id="placeOut" v-model="item.place_out" />
+                <place-dropdown :placeId="item.place_out" @placeIdChanged="placeIdChanged"></place-dropdown>
+            </md-field>
+            <md-field>
+                <label for="placeOut2">Place Out2</label>
+                <md-input name="placeOut2" id="placeOut2" v-model="item.place_out" />
             </md-field>
             <md-field>
                 <label for="outDirection">Out Direction</label>
@@ -30,9 +33,10 @@
 <script>
     import VueLoading from "vue-loading-overlay/src/js/Component";
     import MessageBox from "../global/message-box";
+    import PlaceDropdown from "../global/place-dropdown";
     export default {
         name: "route-update",
-        components: {MessageBox, VueLoading},
+        components: {PlaceDropdown, MessageBox, VueLoading},
         data() {
             return {
                 loading: false,
@@ -64,7 +68,11 @@
                     this.displayError = true;
                     this.loading = true;
                 }
+            },
+            async placeIdChanged(placeId)  {
+                this.item.place_out = placeId;
             }
+
         }
     }
 </script>
