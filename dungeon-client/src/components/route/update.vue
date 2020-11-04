@@ -9,15 +9,15 @@
             </md-field>
             <md-field>
                 <label for="placeOut">Place Out</label>
-                <md-input name="placeOut" id="placeOut" v-model="item.placeOut" />
+                <md-input name="placeOut" id="placeOut" v-model="item.place_out" />
             </md-field>
             <md-field>
                 <label for="outDirection">Out Direction</label>
-                <md-input name="outDirection" id="outDirection" v-model="item.outDirection" />
+                <md-input name="outDirection" id="outDirection" v-model="item.out_direction" />
             </md-field>
             <md-field>
                 <label for="placeIn">Place In</label>
-                <md-input name="placeIn" id="placeIn" v-model="item.placeIn" />
+                <md-input name="placeIn" id="placeIn" v-model="item.place_in" />
             </md-field>
         </div>
         {{ item }}
@@ -40,9 +40,9 @@
                 displayError: false,
                 item: {
                     id: 0,
-                    placeOut: 0,
-                    placeIn: 0,
-                    outDirection: 0,
+                    place_out: 0,
+                    place_in: 0,
+                    out_direction: 0,
                     state: 0
                 }
             }
