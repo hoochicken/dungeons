@@ -1,12 +1,7 @@
 <template>
     <div>
         <md-field>
-            <span v-if="false">
-                placeId {{placeId}}<br />
-                newPlace{{newPlace}}<br/>
-                {{places}}
-            </span>
-            <label v-if="0 === places.length" for="newPlace">Place</label>
+            <label v-if="0 === places.length" for="newPlace">{{ placeLabel }}</label>
             <select @change="$emit('placeIdChanged', newPlace)" class="new-place" v-model="newPlace" name="newPlace" id="newPlace">
                 <option v-if="displayZeroPlace" value="0">- New Place -</option>
                 <option v-for="item in places" v-bind:value="item.id" :key="item.id">{{ item.name }} ({{ item.id }})</option>
@@ -22,6 +17,10 @@
             placeId: {
                 type: Number,
                 default: 0,
+            },
+            placeLabel: {
+                type: String,
+                default: 'Place'
             },
             displayZeroPlace: {
                 type: Boolean,
