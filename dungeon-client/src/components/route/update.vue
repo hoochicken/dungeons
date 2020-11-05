@@ -8,19 +8,14 @@
                 <md-input id="id" name="id" disabled v-model="item.id" />
             </md-field>
             <md-field>
-                <place-dropdown :placeId="item.place_out" @placeIdChanged="placeIdChanged"></place-dropdown>
-            </md-field>
-            <md-field>
-                <label for="placeOut2">Place Out2</label>
-                <md-input name="placeOut2" id="placeOut2" v-model="item.place_out" />
+                <place-dropdown :placeId="item.place_out" @placeIdChanged="placeOutIdChanged"></place-dropdown>
             </md-field>
             <md-field>
                 <label for="outDirection">Out Direction</label>
                 <md-input name="outDirection" id="outDirection" v-model="item.out_direction" />
             </md-field>
             <md-field>
-                <label for="placeIn">Place In</label>
-                <md-input name="placeIn" id="placeIn" v-model="item.place_in" />
+                <place-dropdown :placeId="item.place_in" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
             </md-field>
         </div>
         {{ item }}
@@ -69,10 +64,12 @@
                     this.loading = true;
                 }
             },
-            async placeIdChanged(placeId)  {
+            async placeOutIdChanged(placeId)  {
+                this.item.place_out = placeId;
+            },
+            async placeInIdChanged(placeId)  {
                 this.item.place_out = placeId;
             }
-
         }
     }
 </script>
