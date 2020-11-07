@@ -14,14 +14,11 @@
                 <direction-select @setDirection="setDirection" :routeId="routeId" :direction="item.out_direction" :edit="true"></direction-select>
             </md-field>
             <md-field>
-                <label for="outDirection">Out Direction</label>
-                <md-input name="outDirection" id="outDirection" v-model="item.out_direction" />
-            </md-field>
-            <md-field>
                 <place-dropdown :placeId="item.place_in" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
             </md-field>
         </div>
 
+        <button-line :itemId="routeId" @cancel="$router.push('/route/list')" @delete="deleteRoute" @update="update" @create="create"></button-line>
         <vue-loading :active="loading"></vue-loading>
         <message-box v-if="displayError">{{ error }}</message-box>
     </div>
@@ -32,9 +29,10 @@
     import MessageBox from "../global/message-box";
     import PlaceDropdown from "../global/place-dropdown";
     import DirectionSelect from "../global/direction-select";
+    import ButtonLine from "../global/button-line";
     export default {
         name: "route-update",
-        components: {DirectionSelect, PlaceDropdown, MessageBox, VueLoading},
+        components: {ButtonLine, DirectionSelect, PlaceDropdown, MessageBox, VueLoading},
         data() {
             return {
                 loading: false,
@@ -74,8 +72,17 @@
             async placeInIdChanged(placeId)  {
                 this.item.place_out = placeId;
             },
-            async setDirection(direction)  {
-                this.item.out_direction = direction;
+            async setDirection(directionNew)  {
+                this.item.out_direction = directionNew;
+            },
+            async create()  {
+                await this.axios.post('route/create');
+            },
+            async update()  {
+                await this.axios.post('route/update/' + this.routeId);
+            },
+            async deleteRoute()  {
+                await this.axios.post('route/delete/' + this.routeId);
             }
         }
     }
