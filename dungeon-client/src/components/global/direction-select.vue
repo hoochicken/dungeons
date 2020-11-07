@@ -46,7 +46,6 @@
         },
         methods: {
             async getDirections() {
-                console.log('getDirections');
                 try {
                     let response = await this.axios.post('/route/directions');
                     this.directions = response.data.items;
