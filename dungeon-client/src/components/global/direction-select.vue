@@ -3,8 +3,6 @@
         <select id="directionNew" required v-model="directionNew">
             <option v-for="item in directions" :key="item.out_direction" :selected="directionNew == item.out_direction"
                     :value="item.out_direction">{{ item.label }} ({{ item.out_direction }})
-                <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
-                <md-icon v-else class="fa fa-arrow-up"></md-icon>
             </option>
         </select>
     </div>
