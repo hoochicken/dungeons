@@ -19,6 +19,7 @@ use Symfony\Component\BrowserKit\Request;
 class RouteRepository extends ServiceEntityRepository
 {
     const DIRECTION_MOM = 10;
+    const ROUTE_MIDDLE_BUTTON_INDEX = 5;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -119,7 +120,7 @@ class RouteRepository extends ServiceEntityRepository
             $routes[$direction] = $unifiedAll[$direction];
         }
         // middle button is center
-        $routes[4]['type'] = 'center';
+        $routes[self::ROUTE_MIDDLE_BUTTON_INDEX]['type'] = 'center';
         return $routes;
     }
 
