@@ -11,6 +11,9 @@
                 <place-dropdown :placeId="item.place_out" @placeIdChanged="placeOutIdChanged"></place-dropdown>
             </md-field>
             <md-field>
+                <direction-select @setDirection="setDirection" :routeId="routeId" :direction="item.out_direction" :edit="true"></direction-select>
+            </md-field>
+            <md-field>
                 <label for="outDirection">Out Direction</label>
                 <md-input name="outDirection" id="outDirection" v-model="item.out_direction" />
             </md-field>
@@ -18,7 +21,6 @@
                 <place-dropdown :placeId="item.place_in" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
             </md-field>
         </div>
-        {{ item }}
 
         <vue-loading :active="loading"></vue-loading>
         <message-box v-if="displayError">{{ error }}</message-box>
@@ -29,9 +31,10 @@
     import VueLoading from "vue-loading-overlay/src/js/Component";
     import MessageBox from "../global/message-box";
     import PlaceDropdown from "../global/place-dropdown";
+    import DirectionSelect from "../global/direction-select";
     export default {
         name: "route-update",
-        components: {PlaceDropdown, MessageBox, VueLoading},
+        components: {DirectionSelect, PlaceDropdown, MessageBox, VueLoading},
         data() {
             return {
                 loading: false,
@@ -43,7 +46,8 @@
                     place_in: 0,
                     out_direction: 0,
                     state: 0
-                }
+                },
+                routes: {}
             }
         },
         async mounted() {
@@ -69,6 +73,9 @@
             },
             async placeInIdChanged(placeId)  {
                 this.item.place_out = placeId;
+            },
+            async setDirection(direction)  {
+                this.item.out_direction = direction;
             }
         }
     }
