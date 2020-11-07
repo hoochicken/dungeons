@@ -19,7 +19,16 @@ use Symfony\Component\BrowserKit\Request;
 class RouteRepository extends ServiceEntityRepository
 {
     const DIRECTION_MOM = 10;
-    const ROUTE_MIDDLE_BUTTON_INDEX = 5;
+    const DIRECTION_MIDDLE_BUTTON_INDEX = 5;
+    private static $DIRECTION_1 = 'NW';
+    private static $DIRECTION_2 = 'N';
+    private static $DIRECTION_3 = 'NE';
+    private static $DIRECTION_4 = 'W';
+    private static $DIRECTION_5 = 'C';
+    private static $DIRECTION_6 = 'E';
+    private static $DIRECTION_7 = 'SW';
+    private static $DIRECTION_8 = 'S';
+    private static $DIRECTION_9 = 'SE';
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -120,7 +129,33 @@ class RouteRepository extends ServiceEntityRepository
             $routes[$direction] = $unifiedAll[$direction];
         }
         // middle button is center
-        $routes[self::ROUTE_MIDDLE_BUTTON_INDEX]['type'] = 'center';
+        $routes[self::DIRECTION_MIDDLE_BUTTON_INDEX]['type'] = 'center';
+        return $routes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDirections()
+    {
+        $default = [
+            'id' => 0,
+            'place_out' => 0,
+            'place_in' => 0,
+            'out_direction' => 0,
+            'label' => '',
+            'type' => 'btn'
+        ];
+
+        $routes = [];
+        foreach (range(1,9) as $direction) {
+            $routes[$direction] = $default;
+            $routes[$direction]['out_direction'] = $direction;
+            $constant = 'DIRECTION_' . $direction;
+            $routes[$direction]['label'] = self::$$constant;
+        }
+        // middle button is center
+        $routes[self::DIRECTION_MIDDLE_BUTTON_INDEX]['type'] = 'center';
         return $routes;
     }
 

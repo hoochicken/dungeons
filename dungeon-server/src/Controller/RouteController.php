@@ -163,4 +163,14 @@ class RouteController extends ApiController
         // build return array
         return $this->respond(['items' => $routes]);
     }
+
+    /**
+     * get all directions
+     * @param RouteRepository $routeRepository
+     * @return JsonResponse
+     */
+    public function getDirections(RouteRepository $routeRepository): JsonResponse
+    {
+        return $this->respond(['items' => $routeRepository->getDirections()]);
+    }
 }
