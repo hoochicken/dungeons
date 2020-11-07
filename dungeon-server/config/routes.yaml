@@ -90,3 +90,7 @@ routePlace:
   path: /route/place/{place}
   controller: App\Controller\RouteController::place
 
+routeDirections:
+  path: /route/directions
+  controller: App\Controller\RouteController::getDirections
+
