@@ -23,6 +23,7 @@ import PlaceUpdate from './components/place/update.vue'
 import PlaceDisplay from './components/place/display.vue'
 
 import RouteList from './components/route/list.vue'
+import RouteCreate from './components/route/create.vue'
 import RouteUpdate from './components/route/update.vue'
 // Import stylesheet
 
@@ -48,6 +49,7 @@ const routes = [
   { path: '/place/update/:id', component: PlaceUpdate },
   { path: '/place/display/:id', component: PlaceDisplay },
   { path: '/route/list', component: RouteList },
+  { path: '/route/create', component: RouteCreate},
   { path: '/route/update/:id', component: RouteUpdate},
   { path: '/', component: App },
 ];
