@@ -70,7 +70,7 @@
                 this.item.place_out = placeId;
             },
             async placeInIdChanged(placeId)  {
-                this.item.place_out = placeId;
+                this.item.place_in = placeId;
             },
             async setDirection(directionNew)  {
                 this.item.out_direction = directionNew;
@@ -79,7 +79,19 @@
                 await this.axios.post('route/create');
             },
             async update()  {
-                await this.axios.post('route/update/' + this.routeId);
+                try {
+                    this.loading = true;
+                    this.routeId = parseInt(this.routeId);
+                    let params = JSON.stringify(this.item);
+                    this.response = await this.axios.post('route/update/' + this.routeId, params);
+                    this.item = this.response.data;
+                    this.displayError = false;
+                    this.loading = false;
+                } catch (error) {
+                    this.error = error;
+                    this.displayError = true;
+                    this.loading = true;
+                }
             },
             async deleteRoute()  {
                 await this.axios.post('route/delete/' + this.routeId);
