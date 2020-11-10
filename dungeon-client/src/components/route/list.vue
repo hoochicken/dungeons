@@ -7,6 +7,7 @@
             <md-table-row>
                 <md-table-head>ID</md-table-head>
                 <md-table-head>From</md-table-head>
+                <md-table-head>Direction</md-table-head>
                 <md-table-head>To</md-table-head>
                 <md-table-head>State</md-table-head>
                 <md-table-head></md-table-head>
@@ -18,6 +19,7 @@
                 <md-table-row v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
                     <md-table-cell>{{ item.id }}</md-table-cell>
                     <md-table-cell>{{ item.place_out }}</md-table-cell>
+                    <md-table-cell>{{ item.out_direction }}</md-table-cell>
                     <md-table-cell>{{ item.place_in}}</md-table-cell>
                     <md-table-cell>State</md-table-cell>
                     <md-table-cell>
