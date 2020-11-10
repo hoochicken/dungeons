@@ -19,7 +19,7 @@
                 <md-table-row v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
                     <md-table-cell>{{ item.id }}</md-table-cell>
                     <md-table-cell>{{ item.place_out }}</md-table-cell>
-                    <md-table-cell>{{ item.out_direction }}</md-table-cell>
+                    <md-table-cell><direction :direction="item.out_direction" :place_in="item.place_in" :type="item.type" /></md-table-cell>
                     <md-table-cell>{{ item.place_in}}</md-table-cell>
                     <md-table-cell>State</md-table-cell>
                     <md-table-cell>
@@ -56,9 +56,10 @@
 <script>
     import VueLoading from "vue-loading-overlay/src/js/Component";
     import Search from "../global/search";
+    import Direction from "../global/direction";
     export default {
         name: "route-list",
-        components: {Search, VueLoading},
+        components: {Direction, Search, VueLoading},
         data() {
             return {
                 routes: {},
