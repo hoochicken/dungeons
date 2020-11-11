@@ -32,18 +32,6 @@
 </script>
 
 <style scoped>
-
-    .fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    .fa-arrow-up:before {
-        content: "\f062";
-    }
     .btn {
         font-size: 20px;
         cursor: pointer;
