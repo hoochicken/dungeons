@@ -18,7 +18,7 @@
             </md-field>
         </div>
 
-        <button-line :itemId="routeId" @cancel="$router.push('/route/list')" @delete="deleteRoute" @update="update" @create="create"></button-line>
+        <button-line :itemId="routeId" @cancel="backToList" @delete="deleteRoute" @update="update" @create="create"></button-line>
         <vue-loading :active="loading"></vue-loading>
         <message-box v-if="displayError">{{ error }}</message-box>
     </div>
@@ -95,6 +95,10 @@
             },
             async deleteRoute()  {
                 await this.axios.post('route/delete/' + this.routeId);
+                this.backToList();
+            },
+            async backToList()  {
+                this.$router.push('/route/list')
             }
         }
     }
