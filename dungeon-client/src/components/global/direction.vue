@@ -1,9 +1,9 @@
 <template>
     <div :class="'btn btn' + direction + ' ' + type">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <span v-if="show_place">{{ place_in }}</span>
         <md-icon v-if="place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
         <md-icon v-else class="fa fa-arrow-up"></md-icon>
-        <md-icon class="fa fa-arrow-up"></md-icon>->
     </div>
 </template>
 
@@ -32,6 +32,18 @@
 </script>
 
 <style scoped>
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .fa-arrow-up:before {
+        content: "\f062";
+    }
     .btn {
         font-size: 20px;
         cursor: pointer;
