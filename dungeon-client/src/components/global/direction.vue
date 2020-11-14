@@ -34,7 +34,6 @@
 <style scoped>
     .btn {
         font-size: 20px;
-        cursor: pointer;
         display: block;
         padding: 0;
         text-align: center;
