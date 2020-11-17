@@ -54,7 +54,7 @@ class Place
      *
      * @ORM\Column(name="type", type="integer", nullable=true)
      */
-    private $type = '0';
+    private $type;
 
     /**
      * @var string
@@ -82,7 +82,7 @@ class Place
      *
      * @ORM\Column(name="created_user", type="integer", nullable=false)
      */
-    private $createdUser = '0';
+    private $createdUser;
 
     /**
      * @var \DateTime|null
@@ -96,7 +96,7 @@ class Place
      *
      * @ORM\Column(name="updated_user", type="integer", nullable=false)
      */
-    private $updatedUser = '0';
+    private $updatedUser;
 
     /**
      * @var \DateTime|null
@@ -110,7 +110,7 @@ class Place
      *
      * @ORM\Column(name="deleted_user", type="integer", nullable=false)
      */
-    private $deletedUser = '0';
+    private $deletedUser;
 
     public function getId(): ?int
     {

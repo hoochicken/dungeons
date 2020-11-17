@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Route
  *
- * @ORM\Table(name="route")
+ * @ORM\Table(name="route", indexes={@ORM\Index(name="IDX_2C42079A6C15F13", columns={"place_out_id"})})
  * @ORM\Entity
  */
 class Route
@@ -68,7 +68,7 @@ class Route
      *
      * @ORM\Column(name="created_user", type="integer", nullable=false)
      */
-    private $createdUser = '0';
+    private $createdUser;
 
     /**
      * @var \DateTime|null
@@ -82,7 +82,7 @@ class Route
      *
      * @ORM\Column(name="updated_user", type="integer", nullable=false)
      */
-    private $updatedUser = '0';
+    private $updatedUser;
 
     /**
      * @var \DateTime|null
@@ -96,7 +96,17 @@ class Route
      *
      * @ORM\Column(name="deleted_user", type="integer", nullable=false)
      */
-    private $deletedUser = '0';
+    private $deletedUser;
+
+    /**
+     * @var \Place
+     *
+     * @ORM\ManyToOne(targetEntity="Place")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="place_out_id", referencedColumnName="id")
+     * })
+     */
+    private $placeOut2;
 
     public function getId(): ?int
     {
@@ -231,6 +241,18 @@ class Route
     public function setDeletedUser(int $deletedUser): self
     {
         $this->deletedUser = $deletedUser;
+
+        return $this;
+    }
+
+    public function getPlaceOut2(): ?Place
+    {
+        return $this->placeOut2;
+    }
+
+    public function setPlaceOut2(?Place $placeOut2): self
+    {
+        $this->placeOut2 = $placeOut2;
 
         return $this;
     }
