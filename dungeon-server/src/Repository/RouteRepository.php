@@ -201,7 +201,7 @@ class RouteRepository extends ServiceEntityRepository
     {
         $return = [];
         $return['id'] = $route->getId();
-        $return['place_out'] = $route->getPlaceOut();
+        $return['place_out'] = is_null($route->getPlaceOut2()) ? null : $route->getPlaceOut2()->getId();
         $return['place_in'] = $route->getPlaceIn();
         $return['out_direction'] = $route->getOutDirection();
         $return['attributes'] = $route->getAttributes();
