@@ -61,7 +61,7 @@ class Category
      *
      * @ORM\Column(name="created_user", type="integer", nullable=false)
      */
-    private $createdUser = '0';
+    private $createdUser;
 
     /**
      * @var \DateTime
@@ -75,7 +75,7 @@ class Category
      *
      * @ORM\Column(name="updated_user", type="integer", nullable=false)
      */
-    private $updatedUser = '0';
+    private $updatedUser;
 
     /**
      * @var \DateTime
@@ -89,7 +89,7 @@ class Category
      *
      * @ORM\Column(name="deleted_user", type="integer", nullable=false)
      */
-    private $deletedUser = '0';
+    private $deletedUser;
 
     public function getId(): ?int
     {

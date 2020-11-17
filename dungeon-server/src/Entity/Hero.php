@@ -75,14 +75,14 @@ class Hero
      *
      * @ORM\Column(name="ae", type="integer", nullable=false)
      */
-    private $ae = '0';
+    private $ae;
 
     /**
      * @var int
      *
      * @ORM\Column(name="ae_current", type="integer", nullable=false)
      */
-    private $aeCurrent = '0';
+    private $aeCurrent;
 
     /**
      * @var string
@@ -138,7 +138,7 @@ class Hero
      *
      * @ORM\Column(name="created_user", type="integer", nullable=false)
      */
-    private $createdUser = '0';
+    private $createdUser;
 
     /**
      * @var \DateTime|null
@@ -152,7 +152,7 @@ class Hero
      *
      * @ORM\Column(name="updated_user", type="integer", nullable=false)
      */
-    private $updatedUser = '0';
+    private $updatedUser;
 
     /**
      * @var \DateTime|null
@@ -166,7 +166,7 @@ class Hero
      *
      * @ORM\Column(name="deleted_user", type="integer", nullable=false)
      */
-    private $deletedUser = '0';
+    private $deletedUser;
 
     public function getId(): ?int
     {
