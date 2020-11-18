@@ -18,7 +18,7 @@
             <template v-for="item in routes">
                 <md-table-row v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
                     <md-table-cell>{{ item.id }}</md-table-cell>
-                    <md-table-cell>{{ item.place_out }}</md-table-cell>
+                    <md-table-cell>{{ item.place_out_name }}{{ item.place_out_id }}</md-table-cell>
                     <md-table-cell><direction :direction="item.out_direction" :place_in="item.place_in" :type="item.type" /></md-table-cell>
                     <md-table-cell>{{ item.place_in}}</md-table-cell>
                     <md-table-cell>State</md-table-cell>
