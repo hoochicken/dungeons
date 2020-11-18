@@ -108,7 +108,6 @@ class RouteRepository extends ServiceEntityRepository
     {
         $unifiedAll = [];
         foreach($items as $item) {
-            if (is_null($item)) continue;
             $unified = $this->unifyRoute($placeId, $item);
             $tmpDirection = $unified['out_direction'];
             $unifiedAll[$tmpDirection] = $unified;
