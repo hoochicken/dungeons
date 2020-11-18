@@ -108,6 +108,7 @@ class RouteRepository extends ServiceEntityRepository
     {
         $unifiedAll = [];
         foreach($items as $item) {
+            if (is_null($item)) continue;
             $unified = $this->unifyRoute($placeId, $item);
             $tmpDirection = $unified['out_direction'];
             $unifiedAll[$tmpDirection] = $unified;
@@ -115,7 +116,7 @@ class RouteRepository extends ServiceEntityRepository
 
         $default = [
             'id' => 0,
-            'place_out' => $placeId,
+            'place_out_id' => $placeId,
             'place_in' => 0,
             'out_direction' => 0,
             'type' => 'btn',
@@ -140,7 +141,7 @@ class RouteRepository extends ServiceEntityRepository
     {
         $default = [
             'id' => 0,
-            'place_out' => 0,
+            'place_out_id' => 0,
             'place_in' => 0,
             'out_direction' => 0,
             'label' => '',
@@ -167,15 +168,15 @@ class RouteRepository extends ServiceEntityRepository
     public function unifyRoute(int $placeId, array $item)
     {
         // if place out correct => return original array
-        if ($placeId == $item['place_out']) {
+        if ($placeId == $item['place_out_id']) {
             return $item;
         }
         // if now, reverse routing
         $return = $item;
 
         // swap in and out places
-        $return['place_out'] = $item['place_in'];
-        $return['place_in'] = $item['place_out'];
+        $return['place_out_id'] = $item['place_in'];
+        $return['place_in'] = $item['place_out_id'];
         $return['out_direction'] = 10 - (int) $item['out_direction'];
         return $return;
     }
