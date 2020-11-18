@@ -24,13 +24,6 @@ class Route
     /**
      * @var int
      *
-     * @ORM\Column(name="place_out", type="integer", nullable=false)
-     */
-    private $placeOut;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="place_in", type="integer", nullable=false)
      */
     private $placeIn;
@@ -106,23 +99,11 @@ class Route
      *   @ORM\JoinColumn(name="place_out_id", referencedColumnName="id")
      * })
      */
-    private $placeOut2;
+    private $placeOut;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPlaceOut(): ?int
-    {
-        return $this->placeOut;
-    }
-
-    public function setPlaceOut(int $placeOut): self
-    {
-        $this->placeOut = $placeOut;
-
-        return $this;
     }
 
     public function getPlaceIn(): ?int
@@ -245,14 +226,14 @@ class Route
         return $this;
     }
 
-    public function getPlaceOut2(): ?Place
+    public function getPlaceOut(): ?Place
     {
-        return $this->placeOut2;
+        return $this->placeOut;
     }
 
-    public function setPlaceOut2(?Place $placeOut2): self
+    public function setPlaceOut(?Place $placeOut): self
     {
-        $this->placeOut2 = $placeOut2;
+        $this->placeOut = $placeOut;
 
         return $this;
     }
