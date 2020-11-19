@@ -59,10 +59,8 @@ php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entit
 php bin/console make:entity --regenerate App
 # this should generate repository a well, but doesn't, so:
 
-# got to entity file
-# add "* @ORM\Entity(repositoryClass="App\Repository\ActionRepository")" within class comment
-# regenerate class
-php bin/console make:entity --regenerate App
+# make migration ?????
+php bin/console doctrine:migrations:migrate
 ~~~
 
 B. Generate New Entity By Doctrine
