@@ -24,17 +24,18 @@ class RouteController extends ApiController
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function create(Request $request, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
+    public function create(Request $request, RouteRepository $routeRepository, PlaceRepository $placeRepository, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
 
-        $placeOut = $request->request->get('place_out', 0);
+        $placeOutId = $request->request->get('place_out_id', 0);
         $placeIn = $request->request->get('place_in', 0);
         $direction = $request->request->get('out_direction', 0);
 
         $route = new Route();
 
+        $placeOut = $placeRepository->find($placeOutId);
         $route->setPlaceOut($placeOut);
         $route->setPlaceIn($placeIn);
         $route->setOutDirection($direction);
@@ -68,7 +69,7 @@ class RouteController extends ApiController
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function update($id, Request $request, RouteRepository $routeRepository, EntityManagerInterface $em): JsonResponse
+    public function update($id, Request $request, RouteRepository $routeRepository, EntityManagerInterface $em, PlaceRepository $placeRepository): JsonResponse
     {
         $route = $routeRepository->find($id);
         if (null === $route) {
@@ -77,10 +78,12 @@ class RouteController extends ApiController
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
 
-        $placeOut = $request->request->get('place_out', 0);
+        $placeOutId = $request->request->get('place_out_id', 0);
         $placeIn = $request->request->get('place_in', 0);
 
         $route = $routeRepository->find($id);
+
+        $placeOut = $placeRepository->find($placeOutId);
         $route->setPlaceOut($placeOut);
         $route->setPlaceIn($placeIn);
 
