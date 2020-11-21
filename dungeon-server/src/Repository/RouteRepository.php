@@ -116,7 +116,7 @@ class RouteRepository extends ServiceEntityRepository
         $default = [
             'id' => 0,
             'place_out_id' => $placeId,
-            'place_in' => 0,
+            'place_in_id' => 0,
             'out_direction' => 0,
             'type' => 'btn',
         ];
@@ -141,7 +141,7 @@ class RouteRepository extends ServiceEntityRepository
         $default = [
             'id' => 0,
             'place_out_id' => 0,
-            'place_in' => 0,
+            'place_in_id' => 0,
             'out_direction' => 0,
             'label' => '',
             'type' => 'btn'
@@ -174,8 +174,8 @@ class RouteRepository extends ServiceEntityRepository
         $return = $item;
 
         // swap in and out places
-        $return['place_out_id'] = $item['place_in'];
-        $return['place_in'] = $item['place_out_id'];
+        $return['place_out_id'] = $item['place_in_id'];
+        $return['place_in_id'] = $item['place_out_id'];
         $return['out_direction'] = 10 - (int) $item['out_direction'];
         return $return;
     }
@@ -203,7 +203,8 @@ class RouteRepository extends ServiceEntityRepository
         $return['id'] = $route->getId();
         $return['place_out_id'] = is_null($route->getPlaceOut()) ? null : $route->getPlaceOut()->getId();
         $return['place_out_name'] = is_null($route->getPlaceOut()) ? null : $route->getPlaceOut()->getName();
-        $return['place_in'] = $route->getPlaceIn();
+        $return['place_in_id'] = is_null($route->getPlaceIn()) ? null : $route->getPlaceIn()->getId();
+        $return['place_in_name'] = is_null($route->getPlaceIn()) ? null : $route->getPlaceIn()->getName();
         $return['out_direction'] = $route->getOutDirection();
         $return['attributes'] = $route->getAttributes();
         $return['state'] = $route->getState();
