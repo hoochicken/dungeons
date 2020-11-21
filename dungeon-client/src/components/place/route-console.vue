@@ -18,10 +18,10 @@
             <div class="md-layout md-gutter">
                 <div class="md-layout-item">
                     <div class="cross">
-                        <div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in, item.out_direction)"
+                        <div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in_id, item.out_direction)"
                              :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
                             <span v-if="edit" :title="item.place_in_name">{{ item.place_in_id }}</span>
-                            <md-icon v-if="item.place_in > 0" class="fa fa-arrow-up md-primary"></md-icon>
+                            <md-icon v-if="item.place_in_id > 0" class="fa fa-arrow-up md-primary"></md-icon>
                             <md-icon v-else class="fa fa-arrow-up"></md-icon>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                     // create route
                     let params = {
                         place_out_id: placeOut,
-                        place_in: placeIn,
+                        place_in_id: placeIn,
                         out_direction: direction
                     };
                     this.response = await this.axios.post('/route/create', params);
