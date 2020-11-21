@@ -58,9 +58,6 @@ php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entit
 # add getter/setter methods
 php bin/console make:entity --regenerate App
 # this should generate repository a well, but doesn't, so:
-
-# make migration ?????
-php bin/console doctrine:migrations:migrate
 ~~~
 
 B. Generate New Entity By Doctrine
