@@ -9,7 +9,7 @@
             </div>
             <div class="ambient-console md-layout-item md-size-50">
                 <div class="pic">{{ item.pic }}</div>
-                <youtube-audio :video-id="item.misc"></youtube-audio>
+                <youtube-audio v-if="0 < item.misc.length" :video-id="item.misc"></youtube-audio>
             </div>
         </div>
         <vue-loading :active="loading"></vue-loading>
