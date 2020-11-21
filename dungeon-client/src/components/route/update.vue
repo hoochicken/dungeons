@@ -8,13 +8,13 @@
                 <md-input id="id" name="id" disabled v-model="item.id" />
             </md-field>
             <md-field>
-                <place-dropdown :placeId="item.place_out" @placeIdChanged="placeOutIdChanged"></place-dropdown>
+                <place-dropdown :placeId="item.place_out_id" @placeIdChanged="placeOutIdChanged"></place-dropdown>
             </md-field>
             <md-field>
                 <direction-select @setDirection="setDirection" :routeId="routeId" :direction="item.out_direction" :edit="true"></direction-select>
             </md-field>
             <md-field>
-                <place-dropdown :placeId="item.place_in" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
+                <place-dropdown :placeId="item.place_in_id" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
             </md-field>
         </div>
 
@@ -40,8 +40,8 @@
                 displayError: false,
                 item: {
                     id: 0,
-                    place_out: 0,
-                    place_in: 0,
+                    place_out_id: 0,
+                    place_in_id: 0,
                     out_direction: 0,
                     state: 0
                 },
@@ -67,10 +67,10 @@
                 }
             },
             async placeOutIdChanged(placeId)  {
-                this.item.place_out = placeId;
+                this.item.place_out_id = placeId;
             },
             async placeInIdChanged(placeId)  {
-                this.item.place_in = placeId;
+                this.item.place_in_id = placeId;
             },
             async setDirection(directionNew)  {
                 this.item.out_direction = directionNew;
