@@ -24,13 +24,6 @@ class Route
     /**
      * @var int
      *
-     * @ORM\Column(name="place_in", type="integer", nullable=false)
-     */
-    private $placeIn;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="out_direction", type="integer", nullable=false)
      */
     private $outDirection;
@@ -101,21 +94,19 @@ class Route
      */
     private $placeOut;
 
+    /**
+     * @var \Place
+     *
+     * @ORM\ManyToOne(targetEntity="Place")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="place_in_id", referencedColumnName="id")
+     * })
+     */
+    private $placeIn;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPlaceIn(): ?int
-    {
-        return $this->placeIn;
-    }
-
-    public function setPlaceIn(int $placeIn): self
-    {
-        $this->placeIn = $placeIn;
-
-        return $this;
     }
 
     public function getOutDirection(): ?int
@@ -234,6 +225,18 @@ class Route
     public function setPlaceOut(?Place $placeOut): self
     {
         $this->placeOut = $placeOut;
+
+        return $this;
+    }
+
+    public function getPlaceIn(): ?place
+    {
+        return $this->placeIn;
+    }
+
+    public function setPlaceIn(?place $placeIn): self
+    {
+        $this->placeIn = $placeIn;
 
         return $this;
     }
