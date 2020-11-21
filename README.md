@@ -83,8 +83,8 @@ cd adv-server
 
 # create entity 
 php bin/console make:entity
-# enter: tablename wherein you want to add relation
-# enter: place_in
+# enter: `tablename` wherein you want to add relation
+# enter: placeIn
 # enter: relation
 # enter: place
 # enter: ManyToOne or whatever it needs
