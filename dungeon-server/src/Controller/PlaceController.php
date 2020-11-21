@@ -59,6 +59,7 @@ class PlaceController extends ApiController
         $place->setMisc($request->get('misc', ''));
         $place->setState($request->get('state', true));
         $place->setCreated(Dater::get());
+        $place->setCreatedUser(0);
 
         // return $this->respondCreated(['place' => $placeRepository->transform($place)]);
 

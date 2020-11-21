@@ -99,9 +99,9 @@ class Item
     private $updated;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="updated_user", type="integer", nullable=false)
+     * @ORM\Column(name="updated_user", type="integer", nullable=true)
      */
     private $updatedUser;
 
@@ -113,9 +113,9 @@ class Item
     private $deleted;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="deleted_user", type="integer", nullable=false)
+     * @ORM\Column(name="deleted_user", type="integer", nullable=true)
      */
     private $deletedUser;
 
@@ -261,7 +261,7 @@ class Item
         return $this->updatedUser;
     }
 
-    public function setUpdatedUser(int $updatedUser): self
+    public function setUpdatedUser(?int $updatedUser): self
     {
         $this->updatedUser = $updatedUser;
 
@@ -285,7 +285,7 @@ class Item
         return $this->deletedUser;
     }
 
-    public function setDeletedUser(int $deletedUser): self
+    public function setDeletedUser(?int $deletedUser): self
     {
         $this->deletedUser = $deletedUser;
 
