@@ -131,7 +131,7 @@
                 try {
                     // create route
                     let params = {
-                        place_out: placeOut,
+                        place_out_id: placeOut,
                         place_in: placeIn,
                         out_direction: direction
                     };
