@@ -76,6 +76,42 @@ php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 ~~~ 
 
+C. Replace simple int column by entity-driven relation
+
+~~~ 
+cd adv-server
+
+# create entity 
+php bin/console make:entity
+# enter: tablename wherein you want to add relation
+# enter: place_in
+# enter: relation
+# enter: place
+# enter: ManyToOne or whatever it needs
+# answer the following questions according to needs
+
+# that done? so: 
+php bin/console make:migration
+
+# and
+php bin/console doctrine:migrations:migrate
+~~~
+
+
+D. Remove Property From Entity
+
+1. Remove attribute in entity file
+
+2. Run following command line stff
+
+~~~
+# generate a migration file under the /migrations folder. This file will contain the SQL that doctrine will execute. It allows you to verify if the query is what you expect, if not you can directly modify it in that file or adapt your entity and generate a new migration file.
+php bin/console doctrine:migrations:diff
+
+# When you are happy with it, you can execute it with :
+php bin/console doctrine:migrations:migrate
+~~~
+
 ## Trouble shooting
 
 (1) npm rebuild node-sass
