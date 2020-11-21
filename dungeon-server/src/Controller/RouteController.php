@@ -30,13 +30,15 @@ class RouteController extends ApiController
         $request->request->replace(is_array($data) ? $data : array());
 
         $placeOutId = $request->request->get('place_out_id', 0);
-        $placeIn = $request->request->get('place_in', 0);
+        $placeInId = $request->request->get('place_in_id', 0);
         $direction = $request->request->get('out_direction', 0);
 
         $route = new Route();
 
         $placeOut = $placeRepository->find($placeOutId);
         $route->setPlaceOut($placeOut);
+
+        $placeIn = $placeRepository->find($placeInId);
         $route->setPlaceIn($placeIn);
         $route->setOutDirection($direction);
 
@@ -79,12 +81,14 @@ class RouteController extends ApiController
         $request->request->replace(is_array($data) ? $data : array());
 
         $placeOutId = $request->request->get('place_out_id', 0);
-        $placeIn = $request->request->get('place_in', 0);
+        $placeInId = $request->request->get('place_in_id', 0);
 
         $route = $routeRepository->find($id);
 
         $placeOut = $placeRepository->find($placeOutId);
         $route->setPlaceOut($placeOut);
+
+        $placeIn = $placeRepository->find($placeInId);
         $route->setPlaceIn($placeIn);
 
         $em->persist($route);
