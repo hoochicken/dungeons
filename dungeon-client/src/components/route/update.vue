@@ -2,18 +2,20 @@
     <div>
         <h1>Route - Update {{ routeId }}</h1>
         {{ item }}
-        <div v-if="undefined !== item">
-            <md-field>
+        <div class="md-layout" v-if="undefined !== item">
+            <md-field class="md-layout-item">
                 <label for="id">Id</label>
                 <md-input id="id" name="id" disabled v-model="item.id" />
             </md-field>
-            <md-field>
+        </div>
+        <div class="md-layout" v-if="undefined !== item">
+            <md-field class="md-layout-item">
                 <place-dropdown :placeId="item.place_out_id" @placeIdChanged="placeOutIdChanged"></place-dropdown>
             </md-field>
-            <md-field>
+            <md-field class="md-layout-item">
                 <direction-select @setDirection="setDirection" :routeId="routeId" :direction="item.out_direction" :edit="true"></direction-select>
             </md-field>
-            <md-field>
+            <md-field class="md-layout-item">
                 <place-dropdown :placeId="item.place_in_id" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
             </md-field>
         </div>
