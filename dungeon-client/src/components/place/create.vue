@@ -30,7 +30,7 @@
             async createPlace(item) {
                 try {
                     this.error = {};
-                    var params = JSON.stringify(item);
+                    let params = JSON.stringify(item);
                     this.response = await this.axios.post('/place/create', params);
                     this.$router.push('/place/update/' + this.response.data.id)
                 } catch (error) {
