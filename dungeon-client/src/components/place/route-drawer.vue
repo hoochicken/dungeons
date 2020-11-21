@@ -93,7 +93,6 @@
                         place_in_id: this.newPlace,
                         out_direction: this.outDirection
                     };
-                    console.log(params);
                     await this.axios.post('/route/create', params);
                     this.loading = false;
                     this.$emit('closeDrawer');

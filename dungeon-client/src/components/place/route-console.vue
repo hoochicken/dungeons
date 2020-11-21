@@ -122,15 +122,12 @@
                         name: 'New Place'
                     };
                     this.response = await this.axios.post('/place/create', params);
-                    console.log(this.response.data);
                     return this.response.data.id;
                 } catch (error) {
                     this.error = error.response;
                 }
             },
             async createRoute(placeOut, placeIn, direction) {
-                console.log(placeOut);
-                console.log(placeIn);
                 try {
                     // create route
                     let params = {
