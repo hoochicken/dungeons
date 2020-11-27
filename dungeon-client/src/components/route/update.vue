@@ -14,6 +14,7 @@
             </md-field>
             <md-field class="md-layout-item">
                 <direction-select @setDirection="setDirection" :routeId="routeId" :direction="item.out_direction" :edit="true"></direction-select>
+                <direction-cross></direction-cross>
             </md-field>
             <md-field class="md-layout-item">
                 <place-dropdown :placeId="item.place_in_id" :placeLabel="'Place In'" @placeIdChanged="placeInIdChanged"></place-dropdown>
@@ -32,9 +33,10 @@
     import PlaceDropdown from "../global/place-dropdown";
     import DirectionSelect from "../global/direction-select";
     import ButtonLine from "../global/button-line";
+    import DirectionCross from "../global/direction-cross";
     export default {
         name: "route-update",
-        components: {ButtonLine, DirectionSelect, PlaceDropdown, MessageBox, VueLoading},
+        components: {DirectionCross, ButtonLine, DirectionSelect, PlaceDropdown, MessageBox, VueLoading},
         data() {
             return {
                 loading: false,

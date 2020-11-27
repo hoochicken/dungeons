@@ -1,11 +1,12 @@
 <template>
     <div class="cross">
-        routeId{{ routeId }}x
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--routeId{{ routeId }}x
         directions{{ directions }}x
-        response{{ response }}x
-        <div v-for="item in directions" @click="$emit('clickedDirection', item.direction)"
-             :key="item.direction" :class="'btn btn' + item.direction + ' ' + item.type">
-            <span v-if="edit">{{item.direction}}{{ item.placeId }}</span>
+        response{{ response }}-->
+        <div v-for="item in directions" @click="$emit('clickedDirection', item.out_direction)"
+             :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
+            <span v-if="edit">{{item.out_direction}}{{ item.place_out_id }}</span>
             <md-icon v-if="item.placeId > 0" class="fa fa-arrow-up md-primary"></md-icon>
             <md-icon v-else class="fa fa-arrow-up"></md-icon>
         </div>
@@ -38,12 +39,21 @@
         async mounted() {
             // this.directions = await this.getRoutesByPlace(this.placeId);
             await this.getRouteById(this.routeId);
+            await this.getDirections(0);
         },
         methods: {
             async getRouteById(routeId) {
                 try {
                     if (routeId <= 0) return;
                     this.response = await this.axios.post('/route/get/' + routeId);
+                    this.directions = this.response.data.items;
+                } catch (error) {
+                    this.error = error.response;
+                }
+            },
+            async getDirections() {
+                try {
+                    this.response = await this.axios.post('/route/directions');
                     this.directions = this.response.data.items;
                 } catch (error) {
                     this.error = error.response;
