@@ -161,6 +161,8 @@
 </script>
 
 <style scoped>
+    .md-content button:first-child {margin-left:0;}
+    .md-content button:last-child {margin-right:0;}
     .md-content {padding:0 20px;}
     .new-place {width:100%;}
 </style>

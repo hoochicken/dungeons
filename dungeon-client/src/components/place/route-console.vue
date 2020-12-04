@@ -21,15 +21,17 @@
                 </div>
             </div>
         </div>
+        <message-box v-if="error.length > 0">{{error}}</message-box>
     </div>
 </template>
 <script>
     import RouteDrawer from "./route-drawer";
     import WindRose from "../global/wind-rose";
+    import MessageBox from "../global/message-box";
 
     export default {
         name: "route-console",
-        components: {WindRose, RouteDrawer},
+        components: {MessageBox, WindRose, RouteDrawer},
         props: {
             placeId: {
                 type: Number
@@ -62,6 +64,7 @@
                 this.response = await this.getRoutesByPlace(this.placeId);
             },
             async useRoute(routeId, placeId, placeIn, outDirection) {
+                this.errorMessage = '';
                 if (5 === outDirection) {
                     return;
                 }
