@@ -1,7 +1,7 @@
 <template>
     <div class="wind-rose">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <div v-for="item in directions" @click="$emit('clickedDirection', item.out_direction)"
+        <div v-for="item in directions" @click="$emit('clickDirection', item.out_direction)"
              :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
             <span v-if="routes[item.out_direction] !== undefined">
                 <span v-if="edit">
@@ -11,7 +11,6 @@
                 <md-icon v-else class="fa fa-arrow-up"></md-icon>
             </span>
         </div>
-        {{ routes }}
     </div>
 </template>
 

@@ -17,14 +17,7 @@
             </div>
             <div class="md-layout md-gutter">
                 <div class="md-layout-item">
-                    <div class="cross">
-                        <div v-for="item in routes" @click="useRoute(item.id, placeId, item.place_in_id, item.out_direction)"
-                             :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
-                            <span v-if="edit" :title="item.place_in_name">{{ item.place_in_id }}</span>
-                            <md-icon v-if="item.place_in_id > 0" class="fa fa-arrow-up md-primary"></md-icon>
-                            <md-icon v-else class="fa fa-arrow-up"></md-icon>
-                        </div>
-                    </div>
+                    <wind-rose :routes="routes" :edit="edit" @clickDirection="clickDirection"></wind-rose>
                 </div>
             </div>
         </div>
@@ -32,10 +25,11 @@
 </template>
 <script>
     import RouteDrawer from "./route-drawer";
+    import WindRose from "../global/wind-rose";
 
     export default {
         name: "route-console",
-        components: {RouteDrawer},
+        components: {WindRose, RouteDrawer},
         props: {
             placeId: {
                 type: Number
