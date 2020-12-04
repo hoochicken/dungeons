@@ -3,10 +3,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div v-for="item in directions" @click="$emit('clickedDirection', item.out_direction)"
              :key="item.out_direction" :class="'btn btn' + item.out_direction + ' ' + item.type">
-            <span v-if="edit">{{item.out_direction}}{{ item.place_out_id }}</span>
-            <md-icon v-if="item.placeId > 0" class="fa fa-arrow-up md-primary"></md-icon>
-            <md-icon v-else class="fa fa-arrow-up"></md-icon>
+            <span v-if="routes[item.out_direction] !== undefined">
+                <span v-if="edit">
+                    {{ routes[item.out_direction].place_in_id }}
+                </span>
+                <md-icon v-if="routes[item.out_direction].place_in_id > 0" class="fa fa-arrow-up md-primary"></md-icon>
+                <md-icon v-else class="fa fa-arrow-up"></md-icon>
+            </span>
         </div>
+        {{ routes }}
     </div>
 </template>
 
@@ -14,10 +19,15 @@
     export default {
         name: "wind-rose",
         props: {
-           routes: {
-               type: Array,
-               default: () => []
-           }
+            routes: {
+                type: Object,
+                default: () => {
+                }
+            },
+            edit: {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {
