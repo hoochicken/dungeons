@@ -14,10 +14,10 @@
     export default {
         name: "wind-rose",
         props: {
-           /*routes: {
+           routes: {
                type: Array,
-               default: []
-           }*/
+               default: () => []
+           }
         },
         data() {
             return {
