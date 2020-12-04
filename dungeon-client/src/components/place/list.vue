@@ -18,7 +18,7 @@
                 <md-table-row v-bind:key="item.id" v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
                     <md-table-cell>{{ item.id }}</md-table-cell>
                     <md-table-cell>{{ item.name }}</md-table-cell>
-                    <md-table-cell>{{ item.description }}</md-table-cell>
+                    <md-table-cell>{{ item.description.slice(0, descriptionLength) }}</md-table-cell>
                     <md-table-cell>Place A, place B, place C</md-table-cell>
                     <md-table-cell>
                         <md-button class="md-raised md-primary update" @click="updatePlace(item.id)">Update
@@ -58,6 +58,7 @@
         return {
             places: [],
             currentId: 0,
+            descriptionLength: 50,
             response: {},
             searchterm: '',
             loading: false,
