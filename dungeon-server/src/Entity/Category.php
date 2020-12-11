@@ -96,11 +96,6 @@ class Category
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $parent;
-
     public function getId(): ?int
     {
         return $this->id;
