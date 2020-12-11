@@ -96,6 +96,11 @@ class Category
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $parentaux;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -241,6 +246,18 @@ class Category
     public function setParent(?int $parent): self
     {
         $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getParentaux(): ?int
+    {
+        return $this->parentaux;
+    }
+
+    public function setParentaux(int $parentaux): self
+    {
+        $this->parentaux = $parentaux;
 
         return $this;
     }
