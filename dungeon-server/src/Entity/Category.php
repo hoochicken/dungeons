@@ -91,6 +91,16 @@ class Category
      */
     private $deletedUser;
 
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $parent;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -212,6 +222,30 @@ class Category
     public function setDeletedUser(?int $deletedUser): self
     {
         $this->deletedUser = $deletedUser;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getParent(): ?int
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?int $parent): self
+    {
+        $this->parent = $parent;
 
         return $this;
     }
