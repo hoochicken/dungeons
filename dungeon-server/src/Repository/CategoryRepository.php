@@ -75,15 +75,15 @@ class CategoryRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-    public function transform(Category $Category)
+    public function transform(Category $category)
     {
         return [
-            'id'    => (int) $Category->getId(),
-            'name' => (string) $Category->getName(),
-            // 'parent' => (string) $Category->getParent(),
-            'description' => (string) $Category->getDescription(),
-            'attributes' => (string) $Category->getAttributes(),
-            'state' => (string) $Category->getState(),
+            'id'    => (int) $category->getId(),
+            'name' => (string) $category->getName(),
+            // 'parent' => (string) $category->getParent(),
+            'description' => (string) $category->getDescription(),
+            'attributes' => (string) $category->getAttributes(),
+            'state' => (string) $category->getState(),
         ];
     }
 
@@ -93,11 +93,11 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public function transformAll($heros)
     {
-        $CategoryArray = [];
-        foreach ($heros as $Category) {
-            $CategoryArray[] = $this->transform($Category);
+        $categoryArray = [];
+        foreach ($heros as $category) {
+            $categoryArray[] = $this->transform($category);
         }
-        return $CategoryArray;
+        return $categoryArray;
     }
 
     /**
