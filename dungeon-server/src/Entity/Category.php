@@ -31,7 +31,7 @@ class Category
     /**
      * @var int
      *
-     * @ORM\Column(name="target", type="integer", nullable=false)
+     * @ORM\Column(name="target", type="integer", nullable=true)
      */
     private $target;
 
@@ -66,9 +66,9 @@ class Category
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
-    private $updated = 'CURRENT_TIMESTAMP';
+    private $updated;
 
     /**
      * @var int|null
@@ -80,9 +80,9 @@ class Category
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deleted", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="deleted", type="datetime", nullable=true)
      */
-    private $deleted = 'CURRENT_TIMESTAMP';
+    private $deleted;
 
     /**
      * @var int|null
@@ -238,18 +238,6 @@ class Category
         return $this;
     }
 
-    public function getParent(): ?int
-    {
-        return $this->parent;
-    }
-
-    public function setParent(?int $parent): self
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
     public function getParentaux(): ?int
     {
         return $this->parentaux;
@@ -261,6 +249,5 @@ class Category
 
         return $this;
     }
-
 
 }

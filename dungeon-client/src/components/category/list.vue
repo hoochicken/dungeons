@@ -7,6 +7,7 @@
                 <md-table-row>
                     <md-table-head>ID</md-table-head>
                     <md-table-head>Name</md-table-head>
+                    <md-table-head>Parent (aux)</md-table-head>
                     <md-table-head></md-table-head>
                 </md-table-row>
             </thead>
@@ -16,6 +17,7 @@
                                   v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
                         <md-table-cell>{{ item.id }}</md-table-cell>
                         <md-table-cell>{{ item.name}}</md-table-cell>
+                        <md-table-cell>{{ item.parentaux}}</md-table-cell>
                         <md-table-cell>
                             <md-button class="md-raised md-primary update" @click="updateCategory(item.id)">Update
                             </md-button>
@@ -26,6 +28,7 @@
                     </md-table-row>
                 </template>
                 <md-table-row>
+                    <md-table-cell></md-table-cell>
                     <md-table-cell></md-table-cell>
                     <md-table-cell></md-table-cell>
                     <md-table-cell>

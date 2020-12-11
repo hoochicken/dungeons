@@ -13,20 +13,10 @@
         data () {
             return {
                 item: {
-                    id: 0,
                     name: '',
-                    type: 1,
-                    class: 0,
                     description: '',
-                    pic: '',
-                    le: 0,
-                    le_current: 0,
-                    ae: 0,
-                    ae_current: 0,
-                    inventory: '',
-                    weapon: 1,
-                    at: 0,
-                    pa: 0,
+                    parentaux: 0,
+                    target: 0,
                     attributes: '{}',
                     state: 1
                 },

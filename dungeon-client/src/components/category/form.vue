@@ -1,7 +1,6 @@
 <template>
     <div>
         <form>
-            c{{ categoryclass }}c
             <md-field v-if="item.id > 0">
                 <label for="id">ID</label>
                 <md-input id="id" v-model="item.id"/>
@@ -11,62 +10,16 @@
                 <md-input id="name" v-model="item.name"/>
             </md-field>
             <md-field>
-                <label for="class">class</label>
-                <!--md-input id="class" v-model="item.class"/-->
-                <md-select id="class" required v-model="item.class">
-                    <option value="0"> - please choose -</option>
-                    <option v-for="hcls in categoryclass" :key="hcls.id" :selected="hcls.id === item.class"
-                            :value="hcls.id">{{ hcls.label }} ({{ hcls.id }})
-                    </option>
-                </md-select>
-            </md-field>
-            <md-field>
                 <label for="description">description</label>
-                <md-textarea id="description"
-                             v-model="item.description"></md-textarea>
+                <md-textarea id="description" v-model="item.description"></md-textarea>
             </md-field>
             <md-field>
-                <label for="pic">pic</label>
-                <md-input id="pic" v-model="item.pic"/>
-            </md-field>
-            <md-field v-if="item.id > 0">
-                <label for="le">le</label>
-                <md-input id="le" type="number" v-model.number="item.le"/>
-                <md-input id="le_current" type="number" v-model.number="item.le_current"/>
-            </md-field>
-            <md-field v-else>
-                <label for="le">le</label>
-                <md-input id="le" type="number" v-model.number="item.le"/>
-            </md-field>
-            <md-field v-if="item.id > 0">
-                <label for="ae">ae</label>
-                <md-input id="ae" type="number" v-model.number="item.ae"/>
-                <md-input id="ae_current" type="number" v-model.number="item.ae_current"/>
-            </md-field>
-            <md-field v-else>
-                <label for="ae">ae</label>
-                <md-input id="ae" type="number" v-model.number="item.ae"/>
+                <label for="parentaux">parentaux</label>
+                <md-input id="parentaux" v-model="item.parentaux"/>
             </md-field>
             <md-field>
-                <label for="inventory">inventory</label>
-                <md-input id="inventory" v-model="item.inventory"/>
-            </md-field>
-            <md-field>
-                <label for="weapon">weapon</label>
-                <md-input id="weapon" v-model="item.weapon"/>
-            </md-field>
-            <md-field>
-                <label for="at">at</label>
-                <md-input id="at" type="number" v-model.number="item.at"/>
-            </md-field>
-            <md-field>
-                <label for="pa">pa</label>
-                <md-input id="pa" type="number" v-model.number="item.pa"/>
-            </md-field>
-            <md-field>
-                <label for="attributes">attributes</label>
-                <md-textarea id="attributes"
-                             v-model="item.attributes"></md-textarea>
+                <label for="target">target</label>
+                <md-input id="target" v-model="item.target"></md-input>
             </md-field>
             <md-field>
                 <label for="state">state</label>
@@ -93,13 +46,8 @@
         props: {item: {}},
         data() {
             return {
-                categoryclass: {},
                 errors: []
             }
-        },
-        async mounted() {
-            let classResponse = await this.axios.post('/category/getClass', {});
-            this.categoryclass = classResponse.data;
         },
         methods: {
             saveItem: function () {
@@ -112,12 +60,6 @@
                 this.errors = [];
 
                 if (!this.item.name) this.errors.push("Name required.");
-                if (!this.item.class) this.errors.push('Your category must have a class.');
-                if (this.item.le < 1) this.errors.push('Life energy must be greater than 0.');
-                if (this.item.ae < 1) this.errors.push('Astral energy must be greater than 0.');
-                if (this.item.at < 1) this.errors.push('Attack value must be greater than 0.');
-                if (this.item.pa < 1) this.errors.push('Parade value must be greater than 0.');
-
                 if (!this.errors.length) return true;
             },
         }

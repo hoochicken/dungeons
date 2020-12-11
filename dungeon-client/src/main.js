@@ -57,7 +57,7 @@ const routes = [
   { path: '/route/update/:id', component: RouteUpdate},
   { path: '/category/list', component: CategoryList },
   { path: '/category/create', component: CategoryCreate },
-  { path: '/category/update', component: CategoryUpdate },
+  { path: '/category/update/:id', component: CategoryUpdate },
   { path: '/', component: App },
 ];
 

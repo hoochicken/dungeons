@@ -16,19 +16,9 @@
                 item: {
                     id: 0,
                     name: '',
-                    type: 1,
-                    class: 0,
+                    target: 1,
+                    parentaux: 0,
                     description: '',
-                    pic: '',
-                    le: 0,
-                    le_current: 0,
-                    ae: 0,
-                    ae_current: 0,
-                    inventory: '',
-                    weapon: 1,
-                    at: 0,
-                    pa: 0,
-                    attributes: '{}',
                     state: 1
                 },
                 response: {}

@@ -1,10 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Modules\Dater;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Entity\Hero;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,24 +50,16 @@ class CategoryController extends ApiController
         }
 
         // persist the new hero
-        $category = new Hero;
+        $category = new Category();
         $category->setName($request->get('name'));
-        $category->setClass($request->get('class'));
-        $category->setType($request->get('type'));
+        $category->setTarget($request->get('target'));
         $category->setDescription($request->get('description'));
-        $category->setPic($request->get('pic'));
-        $category->setLe($request->get('le'));
-        $category->setLeCurrent($request->get('le'));
-        $category->setAe($request->get('ae'));
-        $category->setAeCurrent($request->get('ae'));
-        $category->setInventory($request->get('inventory'));
-        $category->setWeapon($request->get('weapon'));
-        $category->setAt($request->get('at'));
-        $category->setPa($request->get('pa'));
         $category->setAttributes($request->get('attributes'));
+        $category->setParentaux($request->get('parentaux'));
         $category->setState($request->get('state'));
 
         $category->setCreated(Dater::get());
+        $category->setCreatedUser(0);
 
         $em->persist($category);
         $em->flush();
@@ -83,7 +75,7 @@ class CategoryController extends ApiController
     public function get(int $id, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
         $category = $categoryRepository->find($id);
-        return $this->respondCreated($categoryRepository->transform($category));
+        return $this->respond($categoryRepository->transform($category));
     }
 
     /**
@@ -106,18 +98,9 @@ class CategoryController extends ApiController
         // persist the new hero
         $category = $categoryRepository->find($id);
         $category->setName($request->get('name'));
-        $category->setClass($request->get('class'));
-        $category->setType($request->get('type'));
+        $category->setTarget($request->get('type'));
         $category->setDescription($request->get('description'));
-        $category->setPic($request->get('pic'));
-        $category->setLe($request->get('le'));
-        $category->setLeCurrent($request->get('le_current'));
-        $category->setAe($request->get('ae'));
-        $category->setAeCurrent($request->get('ae_current'));
-        $category->setInventory($request->get('inventory'));
-        $category->setWeapon($request->get('weapon'));
-        $category->setAt($request->get('at'));
-        $category->setPa($request->get('pa'));
+        $category->setParentaux($request->get('parentaux'));
         $category->setAttributes($request->get('attributes'));
         $category->setState($request->get('state'));
 
@@ -125,7 +108,7 @@ class CategoryController extends ApiController
 
         $em->persist($category);
         $em->flush();
-        return $this->respondCreated($categoryRepository->transform($hero));
+        return $this->respond($categoryRepository->transform($category));
     }
 
     /**
@@ -138,7 +121,7 @@ class CategoryController extends ApiController
     {
         $category = $categoryRepository->find($id);
         if (null === $category) {
-            return $this->respondCreated('Hero with id ' . $id . ' was not found. (Already removed?)');
+            return $this->respondCreated('Category with id ' . $id . ' was not found. (Already removed?)');
         }
         $em->remove($category);
         $em->flush();
