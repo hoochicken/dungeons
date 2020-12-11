@@ -29,7 +29,7 @@
 
         <md-list-item>
           <md-icon>error</md-icon>
-          <span class="md-list-item-text" @click="$router.push('/hero/list')">Routes</span>
+          <span class="md-list-item-text" @click="$router.push('/route/list')">Routes</span>
         </md-list-item>
 
         <md-list-item>
