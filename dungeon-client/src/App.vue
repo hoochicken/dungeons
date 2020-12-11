@@ -23,6 +23,11 @@
         </md-list-item>
 
         <md-list-item>
+          <md-icon>category</md-icon>
+          <span class="md-list-item-text" @click="$router.push('/category/list')">Categories</span>
+        </md-list-item>
+
+        <md-list-item>
           <md-icon>eco</md-icon>
           <span class="md-list-item-text" @click="$router.push('/place/list')">Places</span>
         </md-list-item>
