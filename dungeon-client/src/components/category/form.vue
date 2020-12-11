@@ -1,7 +1,7 @@
 <template>
     <div>
         <form>
-            c{{ heroclass }}c
+            c{{ categoryclass }}c
             <md-field v-if="item.id > 0">
                 <label for="id">ID</label>
                 <md-input id="id" v-model="item.id"/>
@@ -15,7 +15,7 @@
                 <!--md-input id="class" v-model="item.class"/-->
                 <md-select id="class" required v-model="item.class">
                     <option value="0"> - please choose -</option>
-                    <option v-for="hcls in heroclass" :key="hcls.id" :selected="hcls.id === item.class"
+                    <option v-for="hcls in categoryclass" :key="hcls.id" :selected="hcls.id === item.class"
                             :value="hcls.id">{{ hcls.label }} ({{ hcls.id }})
                     </option>
                 </md-select>
@@ -88,18 +88,18 @@
     import ButtonLine from "../global/button-line";
 
     export default {
-        name: "hero-form",
+        name: "category-form",
         components: {ButtonLine},
         props: {item: {}},
         data() {
             return {
-                heroclass: {},
+                categoryclass: {},
                 errors: []
             }
         },
         async mounted() {
-            let classResponse = await this.axios.post('/hero/getClass', {});
-            this.heroclass = classResponse.data;
+            let classResponse = await this.axios.post('/category/getClass', {});
+            this.categoryclass = classResponse.data;
         },
         methods: {
             saveItem: function () {
@@ -112,7 +112,7 @@
                 this.errors = [];
 
                 if (!this.item.name) this.errors.push("Name required.");
-                if (!this.item.class) this.errors.push('Your hero must have a class.');
+                if (!this.item.class) this.errors.push('Your category must have a class.');
                 if (this.item.le < 1) this.errors.push('Life energy must be greater than 0.');
                 if (this.item.ae < 1) this.errors.push('Astral energy must be greater than 0.');
                 if (this.item.at < 1) this.errors.push('Attack value must be greater than 0.');
