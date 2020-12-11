@@ -25,6 +25,10 @@ import PlaceDisplay from './components/place/display.vue'
 import RouteList from './components/route/list.vue'
 import RouteCreate from './components/route/create.vue'
 import RouteUpdate from './components/route/update.vue'
+
+import CategoryList from './components/category/list.vue'
+import CategoryCreate from './components/category/create.vue'
+import CategoryUpdate from './components/category/update.vue'
 // Import stylesheet
 
 Vue.config.productionTip = false;
@@ -51,6 +55,9 @@ const routes = [
   { path: '/route/list', component: RouteList },
   { path: '/route/create', component: RouteCreate},
   { path: '/route/update/:id', component: RouteUpdate},
+  { path: 'category/list', component: CategoryList },
+  { path: 'category/create', component: CategoryCreate },
+  { path: 'category/update', component: CategoryUpdate },
   { path: '/', component: App },
 ];
 
