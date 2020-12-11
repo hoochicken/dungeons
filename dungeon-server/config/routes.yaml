@@ -36,11 +36,27 @@ decrease:
   # methods: GET|PATCH|POST|HEAD
   schemes: [http]
 
+categoryCreate:
+  path: /category/create
+  controller: App\Controller\CategoryController::create
+
+categoryGet:
+  path: /category/get/{id}
+  controller: App\Controller\CategoryController::get
+
+categoryUpdate:
+  path: /category/update/{id}
+  controller: App\Controller\CategoryController\update
+
 categoryList:
   path: /category/list
   controller: App\Controller\CategoryController::list
   # methods: GET|PATCH|POST|HEAD
   schemes: [http]
+
+categoryDelete:
+  path: /category/delete
+  controller: App\Controller\CategoryController::delete
 
 placeList:
   path: /place/list

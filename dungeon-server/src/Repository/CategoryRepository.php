@@ -80,10 +80,11 @@ class CategoryRepository extends ServiceEntityRepository
         return [
             'id'    => (int) $category->getId(),
             'name' => (string) $category->getName(),
-            // 'parent' => (string) $category->getParent(),
+            'parentaux' => (string) $category->getParentaux(),
             'description' => (string) $category->getDescription(),
             'attributes' => (string) $category->getAttributes(),
             'state' => (string) $category->getState(),
+            'target' => (int) $category->getTarget(),
         ];
     }
 
