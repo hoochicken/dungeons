@@ -18,22 +18,22 @@
 
       <md-list class="navigation">
         <md-list-item>
-          <md-icon>move_to_inbox</md-icon>
+          <md-icon>face</md-icon>
           <span class="md-list-item-text" @click="$router.push('/hero/list')">Heros</span>
         </md-list-item>
 
         <md-list-item>
-          <md-icon>send</md-icon>
+          <md-icon>eco</md-icon>
           <span class="md-list-item-text" @click="$router.push('/place/list')">Places</span>
         </md-list-item>
 
         <md-list-item>
-          <md-icon>error</md-icon>
+          <md-icon>sync_alt</md-icon>
           <span class="md-list-item-text" @click="$router.push('/route/list')">Routes</span>
         </md-list-item>
 
         <md-list-item>
-          <md-icon>delete</md-icon>
+          <md-icon>build</md-icon>
           <span class="md-list-item-text" @click="$router.push('/item/list')">Items</span>
         </md-list-item>
 
