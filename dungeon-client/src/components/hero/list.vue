@@ -7,6 +7,7 @@
                 <md-table-row>
                     <md-table-head>ID</md-table-head>
                     <md-table-head>Name</md-table-head>
+                    <md-table-head>Category</md-table-head>
                     <md-table-head>LE</md-table-head>
                     <md-table-head>gerade</md-table-head>
                     <md-table-head>asd</md-table-head>
@@ -18,6 +19,7 @@
                                   v-bind:class="(currentId === item.id) ? 'bg-dark text-light' : ''">
                         <md-table-cell>{{ item.id }}</md-table-cell>
                         <md-table-cell>{{ item.name}}</md-table-cell>
+                        <md-table-cell>{{ item.category_label }} ({{ item.category }})</md-table-cell>
                         <md-table-cell>{{ item.le }}</md-table-cell>
                         <md-table-cell>{{ item.le_current }}</md-table-cell>
                         <md-table-cell>
