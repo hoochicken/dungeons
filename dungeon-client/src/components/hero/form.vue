@@ -111,7 +111,7 @@
                 this.errors = [];
 
                 if (!this.item.name) this.errors.push("Name required.");
-                if (!this.item.class) this.errors.push('Your hero must have a class.');
+                if (!this.item.category) this.errors.push('Your hero must have a category.');
                 if (this.item.le < 1) this.errors.push('Life energy must be greater than 0.');
                 if (this.item.ae < 1) this.errors.push('Astral energy must be greater than 0.');
                 if (this.item.at < 1) this.errors.push('Attack value must be greater than 0.');
