@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Create</h1>
+        {{ item }}
         <category-form :item=item @save="createCategory" @cancel="$router.push('/category/list')"></category-form>
     </div>
 </template>
@@ -15,8 +16,8 @@
                 item: {
                     name: '',
                     description: '',
+                    target: '',
                     parentaux: 0,
-                    target: 0,
                     attributes: '{}',
                     state: 1
                 },
