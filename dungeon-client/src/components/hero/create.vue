@@ -16,7 +16,7 @@
                     id: 0,
                     name: '',
                     type: 1,
-                    class: 0,
+                    category: 0,
                     description: '',
                     pic: '',
                     le: 0,

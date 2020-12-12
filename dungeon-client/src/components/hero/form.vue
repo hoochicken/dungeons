@@ -1,7 +1,7 @@
 <template>
     <div>
         <form>
-            c{{ heroclass }}c
+            c{{ categories }}c
             <md-field v-if="item.id > 0">
                 <label for="id">ID</label>
                 <md-input id="id" v-model="item.id"/>
@@ -11,14 +11,13 @@
                 <md-input id="name" v-model="item.name"/>
             </md-field>
             <md-field>
-                <label for="class">class</label>
-                <!--md-input id="class" v-model="item.class"/-->
-                <md-select id="class" required v-model="item.class">
-                    <option value="0"> - please choose -</option>
-                    <option v-for="hcls in heroclass" :key="hcls.id" :selected="hcls.id === item.class"
-                            :value="hcls.id">{{ hcls.label }} ({{ hcls.id }})
+                <label v-if="0 === item.category" for="category">category</label>
+                <select id="category" required v-model="item.category">
+                    <option v-if="0 !== item.category" value="0"> - please choose -</option>
+                    <option v-for="cat in categories" :key="cat.id" :selected="cat.id === item.category"
+                            :value="cat.id">{{ cat.name }} ({{ cat.id }})
                     </option>
-                </md-select>
+                </select>
             </md-field>
             <md-field>
                 <label for="description">description</label>
@@ -93,13 +92,13 @@
         props: {item: {}},
         data() {
             return {
-                heroclass: {},
+                categories: {},
                 errors: []
             }
         },
         async mounted() {
-            let classResponse = await this.axios.post('/hero/getClass', {});
-            this.heroclass = classResponse.data;
+            let response = await this.axios.post('/category/list', {});
+            this.categories  = response.data.items;
         },
         methods: {
             saveItem: function () {
