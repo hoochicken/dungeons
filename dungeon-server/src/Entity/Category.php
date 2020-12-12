@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -100,6 +102,16 @@ class Category
      * @ORM\Column(type="integer")
      */
     private $parentaux;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Hero::class, mappedBy="category")
+     */
+    private $heroes;
+
+    public function __construct()
+    {
+        $this->heroes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -246,6 +258,37 @@ class Category
     public function setParentaux(int $parentaux): self
     {
         $this->parentaux = $parentaux;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hero[]
+     */
+    public function getHeroes(): Collection
+    {
+        return $this->heroes;
+    }
+
+    public function addHero(Hero $hero): self
+    {
+        if (!$this->heroes->contains($hero)) {
+            $this->heroes[] = $hero;
+            $hero->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHero(Hero $hero): self
+    {
+        if ($this->heroes->contains($hero)) {
+            $this->heroes->removeElement($hero);
+            // set the owning side to null (unless already changed)
+            if ($hero->getCategory() === $this) {
+                $hero->setCategory(null);
+            }
+        }
 
         return $this;
     }

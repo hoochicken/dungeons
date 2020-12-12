@@ -168,6 +168,11 @@ class Hero
      */
     private $deletedUser;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="heroes")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -421,6 +426,18 @@ class Hero
     public function setDeletedUser(?int $deletedUser): self
     {
         $this->deletedUser = $deletedUser;
+
+        return $this;
+    }
+
+    public function getCategory(): ?category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
