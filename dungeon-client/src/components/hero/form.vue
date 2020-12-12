@@ -97,7 +97,7 @@
             }
         },
         async mounted() {
-            let response = await this.axios.post('/category/list', {});
+            let response = await this.axios.post('/category/list/hero', {});
             this.categories  = response.data.items;
         },
         methods: {

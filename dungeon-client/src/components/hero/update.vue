@@ -16,7 +16,7 @@
                 item: {
                     id: 0,
                     name: '',
-                    type: 1,
+                    type: '',
                     category: 0,
                     description: '',
                     pic: '',
