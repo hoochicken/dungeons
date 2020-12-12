@@ -35,6 +35,27 @@ class HeroController extends ApiController
     }
 
     /**
+     * @param string $type
+     * @param Request $request
+     * @param HeroRepository $heroRepository
+     * @return JsonResponse
+     */
+    public function listByType(string $type, Request $request, HeroRepository $heroRepository): JsonResponse
+    {
+        // retrieve data from request query
+        $listState = json_decode($request->request->get('listState'));
+        $currentPage = $listState->currentPage ?? 0;
+        $maxResult = $listState->maxResults ?? 0;
+
+        // get items and pagination info
+        $result = $heroRepository->findByType($type, $currentPage, $maxResult);
+        $items = $heroRepository->transformAll($result['items']);
+
+        // build return array
+        return $this->respond(['info' => $result['info'], 'items' => $items, 'listState' => $result['listState']]);
+    }
+
+    /**
      * @param Request $request
      * @param HeroRepository $heroRepository
      * @param CategoryRepository $categoryRepository
@@ -111,7 +132,7 @@ class HeroController extends ApiController
         $hero = $heroRepository->find($id);
         $hero->setName($request->get('name'));
         $hero->setCategory($categoryRepository->find($request->get('category')));
-        // $hero->setType($request->get('type'));
+        $hero->setType($request->get('type'));
         $hero->setDescription($request->get('description'));
         $hero->setPic($request->get('pic'));
         $hero->setLe($request->get('le'));

@@ -57,6 +57,32 @@ class HeroRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param $value
+     * @param int $currentPage
+     * @param int $maxResults
+     * @return Hero[] Returns an array of Hero objects
+     */
+    public function findByType($value, int $currentPage = 0, int $maxResults = 0)
+    {
+        $firstResult = $maxResults * $currentPage;
+        $qb = $this->createQueryBuilder('h');
+
+        if (!empty($value)) {
+            $qb->andWhere('h.target = :target')
+                ->setParameter('target', $value);
+        }
+
+        $qb->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->orderBy('h.id', 'ASC');
+
+        $query = $qb->getQuery();
+        $items = $query->getResult();
+
+        return ['info' => '', 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+    }
+
+    /**
      * @return Hero[] Returns an array of Hero objects
      */
     public function findAll()
