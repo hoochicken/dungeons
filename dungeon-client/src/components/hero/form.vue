@@ -21,8 +21,7 @@
             </md-field>
             <md-field>
                 <label for="description">description</label>
-                <md-textarea id="description"
-                             v-model="item.description"></md-textarea>
+                <md-textarea id="description" v-model="item.description"></md-textarea>
             </md-field>
             <md-field>
                 <label for="pic">pic</label>
