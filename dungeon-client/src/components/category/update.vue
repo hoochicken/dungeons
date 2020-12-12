@@ -2,6 +2,7 @@
     <div>
         {{ response }}
         <h1>Update</h1>
+        {{ item }}
         <category-form :item=item @save="updateCategory" @cancel="$router.push('/category/list')" @delete="deleteCategory"></category-form>
     </div>
 </template>
@@ -16,7 +17,7 @@
                 item: {
                     id: 0,
                     name: '',
-                    target: 1,
+                    target: '',
                     parentaux: 0,
                     description: '',
                     state: 1
