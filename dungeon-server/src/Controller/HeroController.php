@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Modules\Dater;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Hero;
 use App\Repository\HeroRepository;
@@ -36,12 +37,14 @@ class HeroController extends ApiController
     /**
      * @param Request $request
      * @param HeroRepository $heroRepository
+     * @param CategoryRepository $categoryRepository
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function create(Request $request, HeroRepository $heroRepository, EntityManagerInterface $em): JsonResponse
+    public function create(Request $request, HeroRepository $heroRepository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        // return $this->respond((array) $request);
         $request->request->replace(is_array($data) ? $data : array());
 
         // validate the title
@@ -52,7 +55,7 @@ class HeroController extends ApiController
         // persist the new hero
         $hero = new Hero;
         $hero->setName($request->get('name'));
-        $hero->setCategory($request->get('category'));
+        $hero->setCategory($categoryRepository->find($request->get('category')));
         $hero->setType($request->get('type'));
         $hero->setDescription($request->get('description'));
         $hero->setPic($request->get('pic'));
@@ -90,10 +93,11 @@ class HeroController extends ApiController
      * @param int $id
      * @param Request $request
      * @param HeroRepository $heroRepository
+     * @param CategoryRepository $categoryRepository
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function update(int $id, Request $request, HeroRepository $heroRepository, EntityManagerInterface $em): JsonResponse
+    public function update(int $id, Request $request, HeroRepository $heroRepository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
@@ -106,8 +110,8 @@ class HeroController extends ApiController
         // persist the new hero
         $hero = $heroRepository->find($id);
         $hero->setName($request->get('name'));
-        $hero->setCategory($request->get('category'));
-        $hero->setType($request->get('type'));
+        $hero->setCategory($categoryRepository->find($request->get('category')));
+        // $hero->setType($request->get('type'));
         $hero->setDescription($request->get('description'));
         $hero->setPic($request->get('pic'));
         $hero->setLe($request->get('le'));

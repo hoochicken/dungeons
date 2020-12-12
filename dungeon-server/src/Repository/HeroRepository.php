@@ -104,7 +104,8 @@ class HeroRepository extends ServiceEntityRepository
         return [
             'id'    => (int) $hero->getId(),
             'name' => (string) $hero->getName(),
-            'category' => (string) $hero->getCategory(),
+            'category' => is_null($hero->getCategory()) ? null : $hero->getCategory()->getId(),
+            'category_label' => is_null($hero->getCategory()) ? null : $hero->getCategory()->getName(),
             'type' => (string) $hero->getType(),
             'description' => (string) $hero->getDescription(),
             'pic' => (string) $hero->getPic(),
