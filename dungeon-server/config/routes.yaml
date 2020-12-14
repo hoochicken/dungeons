@@ -46,7 +46,7 @@ categoryGet:
 
 categoryUpdate:
   path: /category/update/{id}
-  controller: App\Controller\CategoryController\update
+  controller: App\Controller\CategoryController::update
 
 categoryListByType:
   path: /category/list/{type}
