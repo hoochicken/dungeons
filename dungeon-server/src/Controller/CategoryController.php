@@ -119,7 +119,7 @@ class CategoryController extends ApiController
         // persist the new hero
         $category = $categoryRepository->find($id);
         $category->setName($request->get('name'));
-        $category->setTarget($request->get('type'));
+        $category->setTarget($request->get('target'));
         $category->setDescription($request->get('description'));
         $category->setParentaux($request->get('parentaux'));
         $category->setAttributes($request->get('attributes'));
