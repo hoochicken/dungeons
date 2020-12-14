@@ -34,6 +34,27 @@ class CategoryController extends ApiController
     }
 
     /**
+     * @param string $target
+     * @param Request $request
+     * @param CategoryRepository $categoryRepository
+     * @return JsonResponse
+     */
+    public function listByTarget(string $target, Request $request, CategoryRepository $categoryRepository): JsonResponse
+    {
+        // retrieve data from request query
+        $listState = json_decode($request->request->get('listState'));
+        $currentPage = $listState->currentPage ?? 0;
+        $maxResult = $listState->maxResults ?? 0;
+
+        // get items and pagination info
+        $result = $categoryRepository->findByTarget($target, $currentPage, $maxResult);
+        $items = $categoryRepository->transformAll($result['items']);
+
+        // build return array
+        return $this->respond(['info' => $result['info'], 'items' => $items, 'listState' => $result['listState']]);
+    }
+
+    /**
      * @param Request $request
      * @param CategoryRepository $categoryRepository
      * @param EntityManagerInterface $em

@@ -46,7 +46,32 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Category[] Returns an array of Hero objects
+     * @param $value
+     * @param int $currentPage
+     * @param int $maxResults
+     * @return Category[] Returns an array of Category objects
+     */
+    public function findByTarget($value, int $currentPage = 0, int $maxResults = 0)
+    {
+        $firstResult = $maxResults * $currentPage;
+        $qb = $this->createQueryBuilder('h');
+
+        if (!empty($value)) {
+            $qb->andWhere('h.target = :target')
+                ->setParameter('target', $value);
+        }
+
+        $qb->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->orderBy('h.id', 'ASC');
+
+        $query = $qb->getQuery();
+        $items = $query->getResult();
+        return ['info' => $value. $query->getDQL(), 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+    }
+
+    /**
+     * @return Category[] Returns an array of Category objects
      */
     public function findAll()
     {

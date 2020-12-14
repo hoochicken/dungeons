@@ -49,8 +49,8 @@ categoryUpdate:
   controller: App\Controller\CategoryController::update
 
 categoryListByType:
-  path: /category/list/{type}
-  controller: App\Controller\CategoryController::listByType
+  path: /category/list/{target}
+  controller: App\Controller\CategoryController::listByTarget
   # methods: GET|PATCH|POST|HEAD
   schemes: [http]
 
