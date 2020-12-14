@@ -31,7 +31,7 @@ class Category
     private $name;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(name="target", type="string", nullable=true)
      */
@@ -135,7 +135,7 @@ class Category
         return $this->target;
     }
 
-    public function setTarget(string $target): self
+    public function setTarget(?string $target): self
     {
         $this->target = $target;
 
