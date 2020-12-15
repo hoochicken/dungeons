@@ -28,7 +28,7 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public function findByName($value, int $currentPage = 0, int $maxResults = 0)
     {
-        $firstResult = $maxResults * $currentPage;
+        $firstResult = $this->getFirstResult($maxResults, $currentPage);
         $qb = $this->createQueryBuilder('h');
 
         if (!empty($value)) {
@@ -42,23 +42,25 @@ class CategoryRepository extends ServiceEntityRepository
 
         $query = $qb->getQuery();
         $items = $query->getResult();
-        return ['info' => '', 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+        $info = 'sql:' . $query->getDQL();
+        return ['info' => $info, 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
     }
 
     /**
-     * @param $value
+     * @param $target
      * @param int $currentPage
      * @param int $maxResults
      * @return Category[] Returns an array of Category objects
      */
-    public function findByTarget($value, int $currentPage = 0, int $maxResults = 0)
+    public function findByTarget($target, int $currentPage = 0, int $maxResults = 0)
     {
-        $firstResult = $maxResults * $currentPage;
+        $maxResults = 20; $currentPage = 0;
+        $firstResult = $this->getFirstResult($maxResults, $currentPage);
         $qb = $this->createQueryBuilder('h');
 
-        if (!empty($value)) {
+        if (!empty($target)) {
             $qb->andWhere('h.target = :target')
-                ->setParameter('target', $value);
+                ->setParameter('target', $target);
         }
 
         $qb->setFirstResult($firstResult)
@@ -67,7 +69,8 @@ class CategoryRepository extends ServiceEntityRepository
 
         $query = $qb->getQuery();
         $items = $query->getResult();
-        return ['info' => $value. $query->getDQL(), 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+        $info = 'target:' . $target . '; sql:' . $query->getDQL() . ';';
+        return ['info' => $info, 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
     }
 
     /**
@@ -159,6 +162,11 @@ class CategoryRepository extends ServiceEntityRepository
             'totalItems' => $totalItems,
         ];
         return $listState;
+    }
+
+    private function getFirstResult($maxResults, $currentPage)
+    {
+        return $maxResults * $currentPage;
     }
 
     // /**
