@@ -96,7 +96,7 @@
 <style lang="scss" scoped>
   .page-container {
     min-height: 300px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     position: relative;
     border: 1px solid rgba(#000, .12);
   }
