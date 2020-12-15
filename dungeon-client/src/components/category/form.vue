@@ -18,8 +18,14 @@
                 <md-input id="parentaux" v-model="item.parentaux"/>
             </md-field>
             <md-field>
-                <label for="target">target</label>
-                <md-input id="target" v-model="item.target"></md-input>
+                <!--label for="target">target</label-->
+                <!--md-input id="target" v-model="item.target"></md-input-->
+                <select id="target" v-model="item.target">
+                    <option>- please choose target entity - </option>
+                    <option value="hero">Hero</option>
+                    <option value="monster">Monster</option>
+                    <option value="item">Item</option>
+                </select>
             </md-field>
             <md-field>
                 <label for="state">state</label>
