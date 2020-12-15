@@ -1,7 +1,6 @@
 <template>
     <div>
         <form>
-            c{{ categories }}c
             <md-field v-if="item.id > 0">
                 <label for="id">ID</label>
                 <md-input id="id" v-model="item.id"/>

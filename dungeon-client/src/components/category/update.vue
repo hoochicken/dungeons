@@ -1,8 +1,6 @@
 <template>
     <div>
-        {{ response }}
         <h1>Update</h1>
-        {{ item }}
         <category-form :item=item @save="updateCategory" @cancel="$router.push('/category/list')" @delete="deleteCategory"></category-form>
     </div>
 </template>
