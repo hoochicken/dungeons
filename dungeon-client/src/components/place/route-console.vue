@@ -12,7 +12,7 @@
                     <md-switch v-model="walkFastIntern" class="md-primary" @change="$emit('setWalkFast', walkFastIntern)">Walk fast</md-switch>
                 </div>
                 <div class="md-layout-item">
-                    <md-switch v-model="createFast" class="md-primary">Create fast</md-switch>
+                    <md-switch v-model="createFastIntern" class="md-primary" @change="$emit('setCreateFast', createFastIntern)">Create fast</md-switch>
                 </div>
             </div>
             <div class="md-layout md-gutter">
@@ -39,6 +39,12 @@
             edit: {
                 type: Boolean,
                 default: false
+            },
+            walkFast: {
+                type: Boolean
+            },
+            createFast: {
+                type: Boolean
             }
         },
         data() {
@@ -46,13 +52,16 @@
                 error: {},
                 response: {},
                 routes: {},
-                walkFast: false,
-                createFast: false,
-                showRouteDrawer: false
+                showRouteDrawer: false,
+                walkFastIntern: false,
+                outDirection: 0,
+                createFastIntern: false
             }
         },
         async mounted() {
-            this.init();
+            await this.init();
+            this.walkFastIntern = this.walkFast;
+            this.createFastIntern = this.createFast;
         },
         watch: {
             placeId: function (value) {
@@ -69,10 +78,24 @@
                     return;
                 }
 
+                this.outDirection = outDirection;
+
+                // fast walk options
+                if (this.walkFastIntern && placeIn > 0) {
+                    this.$emit('moveTo', placeIn);
+                    return;
+                }
+
                 // being in edit mode, opening drawer console to update route
                 // if (this.edit && routeId > 0) {
                 if (this.edit) {
-                    this.outDirection = outDirection;
+
+                    // fast create option
+                    if (this.createFast && placeIn === 0) {
+                        this.buildRoute(placeId);
+                        return;
+                    }
+
                     this.routeId = routeId;
                     this.placeIn = placeIn;
                     this.showRouteDrawer = true;
@@ -90,8 +113,18 @@
                 // being in display mode, moving to next place
                 this.$emit('moveTo', placeIn);
             },
-            async buildRoute() {
-                console.log('buildRoute');
+            async clickDirection(outDirection) {
+                this.error = '';
+                if (this.routes[outDirection] === undefined) {
+                    this.error = 'Route with direction ' + outDirection + ' was not found.';
+                    return;
+                }
+                let placeId = this.routes[outDirection];
+                let routeId = this.routes[outDirection].id;
+                let placeIn = this.routes[outDirection].place_in_id;
+                await this.useRoute(routeId, placeId, placeIn, outDirection);
+            },
+            async buildRoute(placeId) {
                 try {
                     if (5 === this.outDirection) {
                         return;
