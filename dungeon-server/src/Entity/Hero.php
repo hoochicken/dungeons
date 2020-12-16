@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -172,6 +174,16 @@ class Hero
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="heroes")
      */
     private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="heroes")
+     */
+    private $item;
+
+    public function __construct()
+    {
+        $this->item = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -438,6 +450,32 @@ class Hero
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Item[]
+     */
+    public function getItem(): Collection
+    {
+        return $this->item;
+    }
+
+    public function addItem(Item $item): self
+    {
+        if (!$this->item->contains($item)) {
+            $this->item[] = $item;
+        }
+
+        return $this;
+    }
+
+    public function removeItem(Item $item): self
+    {
+        if ($this->item->contains($item)) {
+            $this->item->removeElement($item);
+        }
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -111,6 +113,16 @@ class Place
      * @ORM\Column(name="deleted_user", type="integer", nullable=true)
      */
     private $deletedUser;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=item::class, inversedBy="places")
+     */
+    private $item;
+
+    public function __construct()
+    {
+        $this->item = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -269,6 +281,32 @@ class Place
     public function setDeletedUser(?int $deletedUser): self
     {
         $this->deletedUser = $deletedUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|item[]
+     */
+    public function getItem(): Collection
+    {
+        return $this->item;
+    }
+
+    public function addItem(item $item): self
+    {
+        if (!$this->item->contains($item)) {
+            $this->item[] = $item;
+        }
+
+        return $this;
+    }
+
+    public function removeItem(item $item): self
+    {
+        if ($this->item->contains($item)) {
+            $this->item->removeElement($item);
+        }
 
         return $this;
     }
