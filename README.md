@@ -60,7 +60,7 @@ php bin/console make:entity --regenerate App
 # this should generate repository a well, but doesn't, so:
 ~~~
 
-B. Generate New Entity By Doctrine
+B. Generate New Entity or Alter Exiting One By Doctrine
 
 ~~~
 cd adv-server
