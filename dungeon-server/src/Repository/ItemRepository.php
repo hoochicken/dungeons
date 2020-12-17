@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +15,27 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ItemRepository extends ServiceEntityRepository
 {
+
+    use RepositoryTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Item::class);
+    }
+
+    /**
+     * @param Item $item
+     * @return array
+     */
+    public function transform(Item $item)
+    {
+        $return = [];
+        $return['id'] = $item->getId();
+        $return['name'] = $item->getName();
+        $return['description'] = $item->getDescription();
+        $return['pic'] = $item->getPic();
+        $return['state'] = $item->getState();
+        return $return;
     }
 
     // /**

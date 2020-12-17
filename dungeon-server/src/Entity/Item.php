@@ -33,9 +33,9 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="decription", type="string", length=1023, nullable=false)
+     * @ORM\Column(name="description", type="string", length=1023, nullable=false)
      */
-    private $decription;
+    private $description;
 
     /**
      * @var int
@@ -154,14 +154,14 @@ class Item
         return $this;
     }
 
-    public function getDecription(): ?string
+    public function getDescription(): ?string
     {
-        return $this->decription;
+        return $this->description;
     }
 
-    public function setDecription(string $decription): self
+    public function setDescription(string $description): self
     {
-        $this->decription = $decription;
+        $this->description = $description;
 
         return $this;
     }
