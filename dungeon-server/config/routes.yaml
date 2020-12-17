@@ -84,6 +84,26 @@ placeDelete:
   path: /place/delete/{id}
   controller: App\Controller\PlaceController::delete
 
+itemCreate:
+  path: /place/create
+  controller: App\Controller\ItemController::create
+
+itemList:
+  path: /item/list
+  controller: App\Controller\ItemController::list
+
+itemGet:
+  path: /item/get/{id}
+  controller: App\Controller\ItemController::get
+
+itemUpdate:
+  path: /item/update/{id}
+  controller: App\Controller\ItemController::update
+
+itemDelete:
+  path: /item/delete/{id}
+  controller: App\Controller\ItemController::delete
+
 routeCreate:
   path: /route/create
   controller: App\Controller\RouteController::create
