@@ -1,5 +1,6 @@
 <template>
     <div>
+        <search :searchterm="searchterm" @resetSearch="resetSearch"></search>
         <md-table>
             <thead v-if="header.length > 0">
             <md-table-row>
@@ -14,8 +15,10 @@
 </template>
 
 <script>
+    import Search from "../search";
     export default {
         name: "datagrid",
+        components: {Search},
         props: {
             data: {
                 type: Object,
@@ -26,7 +29,24 @@
                 type: Array,
                 default: function () {
                 }
+            }
+        },
+        data() {
+            return {
+                searchterm: '',
+            }
+        },
+        methods: {
+            async loadList(searchterm) {
+
             },
+            search(searchterm) {
+                this.loadList(searchterm);
+            },
+            resetSearch() {
+                this.searchterm = '';
+                this.search();
+            }
         }
     }
 </script>
