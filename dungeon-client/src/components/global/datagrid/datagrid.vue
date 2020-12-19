@@ -5,13 +5,15 @@
         <search :searchterm="searchterm" @resetSearch="resetSearch"></search>
         <md-table>
             <thead>
-            <md-table-row>
+            <md-table-row v-if="header !== undefined">
                 <md-table-head v-for="(item, index) in header" :key="index">{{ item }}</md-table-head>
             </md-table-row>
-            <md-table-row v-for="row in data" :key="row.id">
-                <md-table-cell v-for="item in row" v-bind:key="item.id">{{ item }}</md-table-cell>
-            </md-table-row>
             </thead>
+            <tbody v-if="data !== undefined && data.length > 0">
+            <md-table-row v-for="row in data" v-bind:key="row.id">
+                <md-table-cell v-for="(label, columnName) in header" v-bind:key="columnName">{{ row[columnName] }}</md-table-cell>
+            </md-table-row>
+            </tbody>
         </md-table>
     </div>
 </template>
