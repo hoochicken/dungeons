@@ -44,6 +44,7 @@
         },
         methods: {
             async loadList(searchterm) {
+                console.log(searchterm);
             },
             search(searchterm) {
                 this.loadList(searchterm);
