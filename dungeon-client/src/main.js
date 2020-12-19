@@ -13,6 +13,11 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 
 import Demonic from './components/demo/Demonic';
 
+import ItemList from './components/item/list.vue'
+import ItemCreate from './components/item/create.vue'
+import ItemUpdate from './components/item/update.vue'
+import ItemDisplay from './components/item/display'
+
 import HeroList from './components/hero/list.vue'
 import HeroCreate from './components/hero/create.vue'
 import HeroUpdate from './components/hero/update.vue'
@@ -45,6 +50,10 @@ Vue.axios.defaults.baseURL = `http://${process.env.VUE_APP_ENV_HOST}:${process.e
 const routes = [
   { path: '/demo', component: Demonic },
   { path: '/app', component: App },
+  { path: '/item/list', component: ItemList },
+  { path: '/item/create', component: ItemCreate },
+  { path: '/item/update/:id', component: ItemUpdate },
+  { path: '/item/display/:id', component: ItemDisplay },
   { path: '/hero/list', component: HeroList },
   { path: '/hero/create', component: HeroCreate },
   { path: '/hero/update/:id', component: HeroUpdate },
