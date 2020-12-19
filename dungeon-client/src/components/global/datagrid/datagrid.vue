@@ -34,6 +34,12 @@
         data() {
             return {
                 searchterm: '',
+                actionRoutes: {
+                    get: '',
+                    display: '',
+                    update: '',
+                    create: '',
+                }
             }
         },
         methods: {
