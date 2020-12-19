@@ -19,7 +19,7 @@
         },
         mounted() {
             this.loadList();
-            this.header = { id: 'Id', name: 'asdasd', description: '' };
+            this.header = { id: 'Id', name: 'Name', description: 'Description' };
         },
         methods: {
             async loadList() {
