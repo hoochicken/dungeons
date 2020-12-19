@@ -1,12 +1,12 @@
 <template>
     <div>
-        <table>
-            <thead v-if="header.length > 0">
+        <md-table>
+            <thead v-if="header !== undefined && header.length > 0">
                 <md-table-row>
-                    <md-table-cell v-for="item = header">{{ item }}</md-table-cell>
+                    <md-table-cell v-for="item in header" v-bind:key="item.id">{{ item }}</md-table-cell>
                 </md-table-row>
             </thead>
-        </table>
+        </md-table>
     </div>
 </template>
 
@@ -15,12 +15,12 @@
         name: "datagrid",
         props: {
             data: {
-                type: Array,
-                default: []
+                type: Object,
+                default: function () {}
             },
             header: {
                 type: Array,
-                default: []
+                default: function () {}
             },
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Item - List</h1>
-        {{ header }}
+        {{ data }}
         <datagrid :data="data" :header="header"></datagrid>
     </div>
 </template>
@@ -12,9 +12,15 @@
     export default {
         name: "list",
         components: {Datagrid},
+        data() {
+            return {
+                data: {},
+                header: []
+            }
+        },
         mounted() {
-            this.setHeader();
             this.loadList();
+            this.header = [ 'Id', 'asdasd', '',  'aas' ];
         },
         methods: {
             async loadList() {
@@ -24,9 +30,6 @@
                     {id: 5, title: 'asdtiasd a sdf tle', column: 'asdad', column2: 'sadadasdd'},
                     {id: 13, title: 'as sf dtitle', column: 'asdad', column2: 'sadadasdd'},
                 ];
-            },
-            setHeader() {
-                this.header = [ 'Id', 'asdasd', '',  'what' ];
             }
         }
     }
