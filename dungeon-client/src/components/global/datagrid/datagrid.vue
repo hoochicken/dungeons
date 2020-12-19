@@ -26,7 +26,7 @@
                 }
             },
             header: {
-                type: Array,
+                type: Object,
                 default: function () {
                 }
             }
@@ -44,7 +44,6 @@
         },
         methods: {
             async loadList(searchterm) {
-
             },
             search(searchterm) {
                 this.loadList(searchterm);

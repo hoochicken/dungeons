@@ -15,12 +15,12 @@
         data() {
             return {
                 data: {},
-                header: []
+                header: {}
             }
         },
         mounted() {
             this.loadList();
-            this.header = [ 'Id', 'asdasd', '',  'aas' ];
+            this.header = { id: 'Id', title: 'asdasd', column: '',  column2: 'aas' };
         },
         methods: {
             async loadList() {
