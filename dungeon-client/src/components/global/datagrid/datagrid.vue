@@ -2,9 +2,12 @@
     <div>
         <md-table>
             <thead v-if="header.length > 0">
-                <md-table-row>
-                    <md-table-cell v-for="item in header" v-bind:key="item.id">{{ item }}</md-table-cell>
-                </md-table-row>
+            <md-table-row>
+                <md-table-head v-for="item in header" v-bind:key="item.id">{{ item }}</md-table-head    >
+            </md-table-row>
+            <md-table-row v-for="row in data" v-bind:key="row.id">
+                <md-table-cell v-for="item in row" v-bind:key="item.id">{{ item }}</md-table-cell>
+            </md-table-row>
             </thead>
         </md-table>
     </div>
@@ -16,11 +19,13 @@
         props: {
             data: {
                 type: Object,
-                default: function () {}
+                default: function () {
+                }
             },
             header: {
                 type: Array,
-                default: function () {}
+                default: function () {
+                }
             },
         }
     }
