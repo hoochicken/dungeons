@@ -1,8 +1,7 @@
 <template>
     <div>
         <h1>Item - List</h1>
-        {{ data }}
-        <datagrid :data="data" :header="header"></datagrid>
+        <datagrid :header="header"></datagrid>
     </div>
 </template>
 
