@@ -16,7 +16,7 @@ import Demonic from './components/demo/Demonic';
 import ItemList from './components/item/list.vue'
 import ItemCreate from './components/item/create.vue'
 import ItemUpdate from './components/item/update.vue'
-import ItemDisplay from './components/item/display'
+import ItemDisplay from './components/item/display.vue'
 
 import HeroList from './components/hero/list.vue'
 import HeroCreate from './components/hero/create.vue'
