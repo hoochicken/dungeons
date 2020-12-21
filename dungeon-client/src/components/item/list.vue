@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Item - List</h1>
-        <datagrid :header="header"></datagrid>
+        <datagrid :header="header" :actionRoutes="actionRoutes"></datagrid>
     </div>
 </template>
 
@@ -14,12 +14,23 @@
         data() {
             return {
                 data: {},
-                header: {}
+                header: {},
+                actionRoutes: {
+                    get: 'item/get/:id',
+                    display: 'item/display/:id',
+                    update: 'item/update/:id',
+                    create: 'item/create/:id',
+                }
             }
         },
         mounted() {
             this.loadList();
             this.header = { id: 'Id', name: 'Name', description: 'Description' };
+            this.actionRoutes = {
+                    display: 'item/display/:id',
+                    update: 'item/update/:id',
+                    create: 'item/create/:id',
+            };
         },
         methods: {
             async loadList() {
