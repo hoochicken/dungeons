@@ -43,18 +43,23 @@
                         delete: true,
                     }
                 }
+            },
+            actionRoutes: {
+                type: Object,
+                default: function () {
+                    return {
+                        get: '',
+                        display: '',
+                        update: '',
+                        create: '',
+                    }
+                }
             }
         },
         data() {
             return {
                 searchterm: '',
                 data: {},
-                actionRoutes: {
-                    get: '',
-                    display: '',
-                    update: '',
-                    create: '',
-                },
                 loading: false,
                 listState: {
                     maxResults: 3,
