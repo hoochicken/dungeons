@@ -106,9 +106,9 @@
                 this.searchterm = '';
                 this.search();
             },
-            replaceInRoute(route) {
-                let routeNew = route;
-                return routeNew;
+            replaceInRoute(route, value) {
+                let regex = new RegExp(':' + this.idField);
+                return route.replace(regex, value);
             }
         }
     }
