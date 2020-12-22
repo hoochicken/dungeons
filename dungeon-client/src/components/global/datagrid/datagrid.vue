@@ -16,7 +16,7 @@
                 <md-table-cell v-for="(label, columnName) in header" v-bind:key="label"><span :title="label" v-if="row[columnName] !== undefined">{{ row[columnName] }}</span></md-table-cell>
                 <md-table-cell v-if="actionRoutes.display"><md-button @click="$router.push(replaceInRoute(actionRoutes.display, row[idField]))">Display</md-button></md-table-cell>
                 <md-table-cell v-if="actionRoutes.update"><md-button @click="$router.push(replaceInRoute(actionRoutes.update, row[idField]))">Update</md-button></md-table-cell>
-                <md-table-cell v-if="actionRoutes.delete"><md-button onclick="$router.push(replaceInRoute(actionRoutes.delete, row[idField]))">Delete</md-button></md-table-cell>
+                <md-table-cell v-if="actionRoutes.delete"><md-button @click="deleteById(row[idField])">Delete</md-button></md-table-cell>
             </md-table-row>
             </tbody>
         </md-table>
@@ -109,6 +109,10 @@
             replaceInRoute(route, value) {
                 let regex = new RegExp(':' + this.idField);
                 return route.replace(regex, value);
+            },
+            async deleteById(id) {
+                if (!confirm('Really deleted entry with ' + this.idField + ' \'' + id + '\'')) return;
+                alert('total anihilation!');
             }
         }
     }
