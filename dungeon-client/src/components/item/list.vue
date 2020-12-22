@@ -19,7 +19,8 @@
                     get: 'item/get/:id',
                     display: 'item/display/:id',
                     update: 'item/update/:id',
-                    create: 'item/create/:id',
+                    delete: 'item/delete/:id',
+                    create: '/item/create',
                 }
             }
         },
@@ -29,7 +30,8 @@
             this.actionRoutes = {
                     display: '/item/display/:id',
                     update: '/item/update/:id',
-                    create: '/item/create/:id',
+                    delete: '/item/delete/:id',
+                    create: '/item/create',
             };
         },
         methods: {
