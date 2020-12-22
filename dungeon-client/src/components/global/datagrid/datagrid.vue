@@ -13,10 +13,10 @@
             </thead>
             <tbody v-if="data !== undefined && data.length > 0">
             <md-table-row v-for="row in data" v-bind:key="row.id">
-                <md-table-cell v-for="(label, columnName) in header" v-bind:key="label"><span :title="label" v-if="row[columnName] !== undefined">{{ label }}|{{ columnName }}|{{ row[columnName] }}</span></md-table-cell>
-                <md-table-cell v-if="actionRoutes.display"><md-button onclick="$routes.push(replaceInRoute(actionRoutes.display))">{{ replaceInRoute(actionRoutes.display) }}Display</md-button></md-table-cell>
-                <md-table-cell v-if="actionRoutes.update"><md-button onclick="$routes.push(replaceInRoute(actionRoutes.update))">{{ replaceInRoute(actionRoutes.update) }}Update</md-button></md-table-cell>
-                <md-table-cell v-if="actionRoutes.delete"><md-button onclick="$routes.push(replaceInRoute(actionRoutes.delete))">{{ replaceInRoute(actionRoutes.delete) }}Delete</md-button></md-table-cell>
+                <md-table-cell v-for="(label, columnName) in header" v-bind:key="label"><span :title="label" v-if="row[columnName] !== undefined">{{ row[columnName] }}</span></md-table-cell>
+                <md-table-cell v-if="actionRoutes.display"><md-button @click="$router.push(replaceInRoute(actionRoutes.display, row[idField]))">Display</md-button></md-table-cell>
+                <md-table-cell v-if="actionRoutes.update"><md-button @click="$router.push(replaceInRoute(actionRoutes.update, row[idField]))">Update</md-button></md-table-cell>
+                <md-table-cell v-if="actionRoutes.delete"><md-button onclick="$router.push(replaceInRoute(actionRoutes.delete, row[idField]))">Delete</md-button></md-table-cell>
             </md-table-row>
             </tbody>
         </md-table>
