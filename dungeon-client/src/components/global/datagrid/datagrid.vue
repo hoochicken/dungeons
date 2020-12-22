@@ -34,6 +34,10 @@
                 default: function () {
                 }
             },
+            idField: {
+                type: String,
+                default: 'id'
+            },
             button: {
                 type: Object,
                 default: function () {
