@@ -27,9 +27,9 @@
             this.loadList();
             this.header = { id: 'Id', name: 'Name', description: 'Description' };
             this.actionRoutes = {
-                    display: 'item/display/:id',
-                    update: 'item/update/:id',
-                    create: 'item/create/:id',
+                    display: '/item/display/:id',
+                    update: '/item/update/:id',
+                    create: '/item/create/:id',
             };
         },
         methods: {
