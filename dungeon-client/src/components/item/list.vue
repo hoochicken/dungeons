@@ -18,8 +18,8 @@
                 actionRoutes: {
                     get: 'item/get/:id',
                     display: 'item/display/:id',
-                    update: 'item/update/:id',
-                    delete: 'item/delete/:id',
+                    update: '/item/update/:id',
+                    delete: '/item/delete/:id',
                     create: '/item/create',
                 }
             }
