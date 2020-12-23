@@ -6,7 +6,15 @@
 
 <script>
     export default {
-        name: "display"
+        name: "display",
+        mounted() {
+          this.loadItem();
+        },
+        methods: {
+            loadItem() {
+
+            }
+        }
     }
 </script>
 
