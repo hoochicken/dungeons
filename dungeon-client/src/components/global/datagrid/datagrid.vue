@@ -14,9 +14,9 @@
             <tbody v-if="data !== undefined && data.length > 0">
             <md-table-row v-for="row in data" v-bind:key="row.id">
                 <md-table-cell v-for="(label, columnName) in header" v-bind:key="label"><span :title="label" v-if="row[columnName] !== undefined">{{ row[columnName] }}</span></md-table-cell>
-                <md-table-cell v-if="actionRoutes.display"><md-button @click="$router.push(replaceInRoute(actionRoutes.display, row[idField]))">Display</md-button></md-table-cell>
-                <md-table-cell v-if="actionRoutes.update"><md-button @click="$router.push(replaceInRoute(actionRoutes.update, row[idField]))">Update</md-button></md-table-cell>
-                <md-table-cell v-if="actionRoutes.delete"><md-button @click="deleteById(row[idField])">Delete</md-button></md-table-cell>
+                <md-table-cell v-if="actionRoutes.display"><md-button class="md-raised md-primary" @click="$router.push(replaceInRoute(actionRoutes.display, row[idField]))">Display</md-button></md-table-cell>
+                <md-table-cell v-if="actionRoutes.update"><md-button class="md-raised md-primary" @click="$router.push(replaceInRoute(actionRoutes.update, row[idField]))">Update</md-button></md-table-cell>
+                <md-table-cell v-if="actionRoutes.delete"><md-button class="md-raised md-accent" @click="deleteById(row[idField])">Delete</md-button></md-table-cell>
             </md-table-row>
             </tbody>
         </md-table>
