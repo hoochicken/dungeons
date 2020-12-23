@@ -1,13 +1,25 @@
 <template>
     <div>
-        <h1>Item - Display</h1>
-        {{ item }}
+        <h1>{{ item.name }} ({{ item.id }})</h1>
+        <div class="md-layout md-gutter">
+            <button-edit :clickRoute="'/item/update/' + item.id"></button-edit>
+            <div class="md-layout-item md-size-50">
+            {{ item.description }}
+            </div>
+            <div class="md-layout-item md-size-50">{{ item.pic }}</div>
+        </div>
+        <div class="md-layout md-gutter">
+            <div class="md-layout-item">{{ item }}</div>
+            <div class="md-layout-item">{{ state }}</div>
+        </div>
     </div>
 </template>
 
 <script>
+    import ButtonEdit from "../global/button-edit";
     export default {
         name: "display",
+        components: {ButtonEdit},
         data() {
             return {
                 loading: false,
