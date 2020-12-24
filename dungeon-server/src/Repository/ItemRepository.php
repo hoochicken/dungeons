@@ -2,10 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\VarExporter\Internal\Registry;
 
 /**
  * @method Item|null find($id, $lockMode = null, $lockVersion = null)
@@ -33,6 +35,10 @@ class ItemRepository extends ServiceEntityRepository
         $return['id'] = $item->getId();
         $return['name'] = $item->getName();
         $return['description'] = $item->getDescription();
+        $return['weight'] = $item->getWeight();
+        $return['worth'] = $item->getWorth();
+        $return['attributes'] = $item->getAttributes();
+        $return['itemtype'] = $item->getItemtype();
         $return['pic'] = $item->getPic();
         $return['state'] = $item->getState();
         return $return;
