@@ -131,6 +131,11 @@ class Item
      */
     private $places;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="items")
+     */
+    private $category;
+
     public function __construct()
     {
         $this->heroes = new ArrayCollection();
@@ -362,6 +367,18 @@ class Item
             $this->places->removeElement($place);
             $place->removeItem($this);
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

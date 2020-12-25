@@ -108,9 +108,15 @@ class Category
      */
     private $heroes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="category")
+     */
+    private $items;
+
     public function __construct()
     {
         $this->heroes = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +293,37 @@ class Category
             // set the owning side to null (unless already changed)
             if ($hero->getCategory() === $this) {
                 $hero->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Item[]
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(Item $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(Item $item): self
+    {
+        if ($this->items->contains($item)) {
+            $this->items->removeElement($item);
+            // set the owning side to null (unless already changed)
+            if ($item->getCategory() === $this) {
+                $item->setCategory(null);
             }
         }
 
