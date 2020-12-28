@@ -39,7 +39,7 @@
 <script>
     import ButtonEdit from "../global/button-edit";
     export default {
-        name: "display",
+        name: "item-display",
         components: {ButtonEdit},
         data() {
             return {
