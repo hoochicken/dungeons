@@ -2,7 +2,7 @@
     <div>
         <div class="md-layout md-gutter">
             <h1 class="md-layout-item">{{ item.name }} ({{ item.id }})</h1>
-            <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/dusplay/' + item.id"></button-edit>
+            <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
         </div>
         <item-form :item="item" />
     </div>
