@@ -6,7 +6,13 @@
 
 <script>
     export default {
-        name: "display-form"
+        name: "item-form",
+        props: {
+            item: {
+                type: function() { return {}; },
+                default: {},
+            }
+        }
     }
 </script>
 
