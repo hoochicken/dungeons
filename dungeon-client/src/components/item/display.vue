@@ -1,8 +1,10 @@
 <template>
     <div>
-        <h1>{{ item.name }} ({{ item.id }})</h1>
         <div class="md-layout md-gutter">
-            <button-edit :clickRoute="'/item/update/' + item.id"></button-edit>
+            <h1 class="md-layout-item">{{ item.name }} ({{ item.id }})</h1>
+            <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/update/' + item.id"></button-edit>
+        </div>
+        <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-50">
             {{ item.description }}
             </div>
