@@ -10,7 +10,7 @@
         </div>
         <div class="md-layout md-gutter">
             <div class="md-layout-item">{{ item }}</div>
-            <div class="md-layout-item">{{ state }}</div>
+            <div class="md-layout-item">{{ item.state }}</div>
         </div>
     </div>
 </template>
