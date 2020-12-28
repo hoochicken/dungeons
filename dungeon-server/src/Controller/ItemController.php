@@ -69,9 +69,9 @@ class ItemController extends ApiController
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function get(int $id, ItemRepository $itemRepository, EntityManagerInterface $em): JsonResponse
+    public function get(int $id, ItemRepository $itemRepository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
-        return $this->traitGet($id, $itemRepository, $em);
+        return $this->traitGet($id, $itemRepository, $categoryRepository, $em);
     }
 
     /**

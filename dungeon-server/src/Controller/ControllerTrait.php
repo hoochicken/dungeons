@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,12 +35,14 @@ trait ControllerTrait
     /**
      * @param int $id
      * @param $repository
+     * @param CategoryRepository $categoryRepository
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function get(int $id, $repository, EntityManagerInterface $em): JsonResponse
+    public function get(int $id, $repository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
         $item = $repository->find($id);
+        $item->setCategory($categoryRepository->find($item->getCategory()));
         return $this->respond($repository->transform($item));
     }
 
