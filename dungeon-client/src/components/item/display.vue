@@ -9,8 +9,23 @@
             <div class="md-layout-item md-size-50">{{ item.pic }}</div>
         </div>
         <div class="md-layout md-gutter">
-            <div class="md-layout-item">{{ item }}</div>
-            <div class="md-layout-item">{{ item.state }}</div>
+            <div class="md-layout-item md-size-30">Weight</div>
+            <div class="md-layout-item md-size-70">{{ item.weight }}</div>
+        </div>
+        <div class="md-layout md-gutter">
+            <div class="md-layout-item md-size-30">Worth</div>
+            <div class="md-layout-item md-size-70">{{ item.worth}}</div>
+        </div>
+        <div class="md-layout md-gutter">
+            <div class="md-layout-item md-size-30">Attributes</div>
+            <div class="md-layout-item md-size-70">{{ item.attributes}}</div>
+        </div>
+        <div class="md-layout md-gutter">
+            <div class="md-layout-item md-size-30">State</div>
+            <div class="md-layout-item md-size-70">{{ item.state}}</div>
+        </div>
+        <div class="md-layout md-gutter md-accent">
+            <div class="md-layout-item md-accent">{{ item }}</div>
         </div>
     </div>
 </template>
