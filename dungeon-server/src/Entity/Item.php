@@ -75,9 +75,9 @@ class Item
     /**
      * @var bool
      *
-     * @ORM\Column(name="state", type="boolean", nullable=false, options={"default"="1"})
+     * @ORM\Column(name="state", type="integer", nullable=false, options={"default"="1"})
      */
-    private $state = true;
+    private $state = 1;
 
     /**
      * @var \DateTime|null
@@ -231,12 +231,12 @@ class Item
         return $this;
     }
 
-    public function getState(): ?bool
+    public function getState(): ?int
     {
         return $this->state;
     }
 
-    public function setState(bool $state): self
+    public function setState(int $state): self
     {
         $this->state = $state;
 
