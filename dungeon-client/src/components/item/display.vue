@@ -12,11 +12,11 @@
         </div>
         <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-30">Weight</div>
-            <div class="md-layout-item md-size-70">{{ item.weight }}</div>
+            <div class="md-layout-item md-size-70">{{ item.weight }} Stone</div>
         </div>
         <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-30">Worth</div>
-            <div class="md-layout-item md-size-70">{{ item.worth}}</div>
+            <div class="md-layout-item md-size-70">{{ item.worth}} Gold</div>
         </div>
         <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-30">Attributes</div>
