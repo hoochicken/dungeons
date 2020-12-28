@@ -11,20 +11,24 @@
             <div class="md-layout-item md-size-50">{{ item.pic }}</div>
         </div>
         <div class="md-layout md-gutter">
-            <div class="md-layout-item md-size-30">Weight</div>
-            <div class="md-layout-item md-size-70">{{ item.weight }} Stone</div>
+            <div class="md-layout-item md-size-20">Category</div>
+            <div class="md-layout-item md-size-80">{{ item.categoryName }}</div>
         </div>
         <div class="md-layout md-gutter">
-            <div class="md-layout-item md-size-30">Worth</div>
-            <div class="md-layout-item md-size-70">{{ item.worth}} Gold</div>
+            <div class="md-layout-item md-size-20">Weight</div>
+            <div class="md-layout-item md-size-80">{{ item.weight }} Stone</div>
         </div>
         <div class="md-layout md-gutter">
-            <div class="md-layout-item md-size-30">Attributes</div>
-            <div class="md-layout-item md-size-70">{{ item.attributes}}</div>
+            <div class="md-layout-item md-size-20">Worth</div>
+            <div class="md-layout-item md-size-80">{{ item.worth}} Gold</div>
         </div>
         <div class="md-layout md-gutter">
-            <div class="md-layout-item md-size-30">State</div>
-            <div class="md-layout-item md-size-70">{{ item.state}}</div>
+            <div class="md-layout-item md-size-20">Attributes</div>
+            <div class="md-layout-item md-size-80">{{ item.attributes}}</div>
+        </div>
+        <div class="md-layout md-gutter">
+            <div class="md-layout-item md-size-20">State</div>
+            <div class="md-layout-item md-size-80">{{ item.state}}</div>
         </div>
         <div class="md-layout md-gutter md-accent">
             <div class="md-layout-item md-accent">{{ item }}</div>

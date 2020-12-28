@@ -42,7 +42,8 @@ trait ControllerTrait
     public function get(int $id, $repository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
         $item = $repository->find($id);
-        $item->setCategory($categoryRepository->find($item->getCategory()));
+        // $item->setCategory($categoryRepository->find($item->getCategory()));
+        // $item->setCategory($item->getCategory());
         return $this->respond($repository->transform($item));
     }
 

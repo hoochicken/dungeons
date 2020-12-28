@@ -35,6 +35,8 @@ class ItemRepository extends ServiceEntityRepository
         $return['id'] = $item->getId();
         $return['name'] = $item->getName();
         $return['description'] = $item->getDescription();
+        $return['category'] = is_null($item->getCategory()) ? null : $item->getCategory()->getId();
+        $return['categoryName'] = is_null($item->getCategory()) ? null : $item->getCategory()->getName();
         $return['weight'] = $item->getWeight();
         $return['worth'] = $item->getWorth();
         $return['attributes'] = $item->getAttributes();
