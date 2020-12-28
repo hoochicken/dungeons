@@ -1,12 +1,47 @@
 <template>
     <div>
-        <h1>Item - Update</h1>
+        <div class="md-layout md-gutter">
+            <h1 class="md-layout-item">{{ item.name }} ({{ item.id }})</h1>
+            <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/dusplay/' + item.id"></button-edit>
+        </div>
+        <item-form :item="item" />
     </div>
 </template>
 
 <script>
+    import ButtonEdit from "../global/button-edit";
+    import ItemForm from "./form";
     export default {
-        name: "update"
+        name: "item-update",
+        components: {ItemForm, ButtonEdit},
+        data() {
+            return {
+                loading: false,
+                itemId: 0,
+                response: {},
+                item: {},
+                displayError: false,
+            }
+        },
+        mounted() {
+            this.loadItem(this.$route.params.id);
+        },
+        methods: {
+            async loadItem(id) {
+                try {
+                    this.loading = true;
+                    this.itemId = parseInt(id);
+                    this.response = await this.axios.get('/item/get/' + id);
+                    this.item = this.response.data;
+                    this.displayError = false;
+                    this.loading = false;
+                } catch (error) {
+                    this.error = error;
+                    this.displayError = true;
+                    this.loading = true;
+                }
+            }
+        }
     }
 </script>
 
