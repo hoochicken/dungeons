@@ -2,7 +2,7 @@
     <div>
         <div class="md-layout md-gutter">
             <h1 class="md-layout-item">{{ item.name }} ({{ item.id }})</h1>
-            <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/update/' + item.id"></button-edit>
+            <button-update :setClass="'md-primary md-layout-item'" :clickRoute="'/item/update/' + item.id"></button-update>
         </div>
         <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-50">
@@ -37,10 +37,10 @@
 </template>
 
 <script>
-    import ButtonEdit from "../global/button-edit";
+    import ButtonUpdate from "../global/button-update";
     export default {
         name: "item-display",
-        components: {ButtonEdit},
+        components: {ButtonUpdate},
         data() {
             return {
                 loading: false,
