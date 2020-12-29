@@ -2,7 +2,7 @@
     <div>
         <select v-bind:value="value" v-on:input="$emit('input', $event.target.value)">
             <option disabled>- Please choose -</option>
-            <option v-for="item in categories" :key="item.id" value="item.id">{{ item.name }} ({{ item.id }})</option>
+            <option v-for="item in categories" v-bind:key="item.id" :value="item.id">{{ item.name }} ({{ item.id }})</option>
         </select>
         <message-box v-if="displayError">
             When getting the categories something went wrong.
