@@ -5,7 +5,6 @@
                 <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
                 <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
             </div>
-            {{categories}}
             <item-form :item="item" />
         </div>
         <div v-if="displayError">
