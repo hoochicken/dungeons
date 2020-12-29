@@ -35,15 +35,13 @@ trait ControllerTrait
     /**
      * @param int $id
      * @param $repository
-     * @param CategoryRepository $categoryRepository
-     * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function get(int $id, $repository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
+    public function get(int $id, $repository): JsonResponse
     {
-        $item = $repository->find($id);
-        $item = !is_null($item) ? $repository->transform($item) : $item;
-        return $this->respond($item);
+        $entry = $repository->find($id);
+        $entry = !is_null($entry) ? $repository->transform($entry) : $entry;
+        return $this->respond($entry);
     }
 
     /**
