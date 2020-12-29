@@ -1,5 +1,9 @@
 <template>
     <div>
+        <select v-bind:value="value" v-on:input="$emit('input', $event.target.value)">
+            <option disabled>- Please choose -</option>
+            <option v-for="item in categories" :key="item.id" value="item.id">{{ item.name }} ({{ item.id }})</option>
+        </select>
         <message-box v-if="displayError">
             When getting the categories something went wrong.
         </message-box>
@@ -13,7 +17,7 @@
     export default {
         name: "select-category",
         components: {VueLoading, MessageBox},
-        props: ['target'],
+        props: ['target', 'value'],
         data: function() {
             return {
                 displayError: false,
