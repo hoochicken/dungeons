@@ -5,6 +5,7 @@
                 <label for="id">Id</label>
                 <md-input id="id" name="id" disabled v-model="item.id" />
             </md-field>
+            {{categories}}
             <md-field>
                 <label>Name</label>
                 <md-input v-model="item.name"></md-input>
@@ -54,8 +55,26 @@
         },
         data: function() {
             return {
-                test: 1
+                categories: {},
             }
+        },
+        mounted() {
+            this.loadCategories()
+        },
+        methods: {
+            async loadCategories() {
+                try {
+                    this.loading = true;
+                    let response = await this.axios.get('/category/list/item');
+                    this.categories = response.data.items;
+                    this.displayError = false;
+                    this.loading = false;
+                } catch (error) {
+                    this.error = error;
+                    this.displayError = true;
+                    this.loading = false;
+                }
+            },
         }
     }
 </script>
