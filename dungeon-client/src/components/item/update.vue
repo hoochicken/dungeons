@@ -5,6 +5,7 @@
                 <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
                 <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
             </div>
+            {{categories}}
             <item-form :item="item" />
         </div>
         <div v-if="displayError">
@@ -36,10 +37,12 @@
                 response: {},
                 item: {},
                 displayError: false,
+                categories: {},
             }
         },
         mounted() {
             this.loadItem(this.$route.params.id);
+            this.loadCategories();
         },
         methods: {
             async loadItem(id) {
@@ -51,12 +54,24 @@
                     this.displayError = false;
                     this.loading = false;
                 } catch (error) {
-                    console.log(error);
                     this.error = error;
                     this.displayError = true;
                     this.loading = false;
                 }
-            }
+            },
+            async loadCategories() {
+                try {
+                    this.loading = true;
+                    let response = await this.axios.get('/category/list/item');
+                    this.categories = response.data.items;
+                    this.displayError = false;
+                    this.loading = false;
+                } catch (error) {
+                    this.error = error;
+                    this.displayError = true;
+                    this.loading = false;
+                }
+            },
         }
     }
 </script>
