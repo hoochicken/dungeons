@@ -1,6 +1,10 @@
 <template>
     <div>
         <form>
+            <md-field v-if="item.id > 0">
+                <label for="id">Id</label>
+                <md-input id="id" name="id" disabled v-model="item.id" />
+            </md-field>
             <md-field>
                 <label>Name</label>
                 <md-input v-model="item.name"></md-input>
