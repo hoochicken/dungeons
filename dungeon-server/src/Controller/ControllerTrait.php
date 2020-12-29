@@ -44,7 +44,8 @@ trait ControllerTrait
         $item = $repository->find($id);
         // $item->setCategory($categoryRepository->find($item->getCategory()));
         // $item->setCategory($item->getCategory());
-        return $this->respond($repository->transform($item));
+        $item = !is_null($item) ? $repository->transform($item) : $item;
+        return $this->respond($item);
     }
 
     /**
