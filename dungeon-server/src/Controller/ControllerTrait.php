@@ -40,7 +40,7 @@ trait ControllerTrait
     public function get(int $id, $repository): JsonResponse
     {
         $entry = $repository->find($id);
-        $entry = !is_null($entry) ? $repository->transform($entry) : $entry;
+        $entry = !is_null($entry) ? $repository->transform($entry) : $this->respondNotFound('Entry with id ' . (string) $id . ' was not found.');
         return $this->respond($entry);
     }
 
