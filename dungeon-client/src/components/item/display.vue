@@ -3,7 +3,7 @@
         <div v-if="item.id > 0">
             <div class="md-layout md-gutter">
                 <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
-                <button-update :setClass="'md-primary md-layout-item'" @click="'/item/update/' + item.id"></button-update>
+                <button-update :setClass="'md-primary md-layout-item'" :clickRoute="'/item/update/' + item.id"></button-update>
             </div>
             <div class="md-layout md-gutter">
                 <div class="md-layout-item md-size-50">

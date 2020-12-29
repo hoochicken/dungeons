@@ -3,7 +3,7 @@
         <div v-if="item.id > 0">
             <div class="md-layout md-gutter">
                 <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
-                <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
+                <button-display :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-display>
             </div>
             <item-form :item="item" />
         </div>
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-    import ButtonEdit from "../global/button-edit";
     import ItemForm from "./form";
     import VueLoading from "vue-loading-overlay/src/js/Component";
     import MessageBox from "../global/message-box";
+    import ButtonDisplay from "../global/button-display";
     export default {
         name: "item-update",
-        components: {MessageBox, VueLoading, ItemForm, ButtonEdit},
+        components: {ButtonDisplay, MessageBox, VueLoading, ItemForm},
         data() {
             return {
                 loading: false,
