@@ -5,7 +5,6 @@
                 <label for="id">Id</label>
                 <md-input id="id" name="id" disabled v-model="item.id" />
             </md-field>
-            {{categories}}
             <md-field>
                 <label>Name</label>
                 <md-input v-model="item.name"></md-input>
@@ -15,10 +14,7 @@
                 <md-input v-model="item.description"></md-input>
             </md-field>
             <md-field>
-                <label>Category</label>
-                <select>
-                    <option>Dummie</option>
-                </select>
+                <select-category v-model="item.category" :target="'item'"></select-category>
             </md-field>
             <md-field>
                 <label>Pic</label>
@@ -47,9 +43,10 @@
 
 <script>
     import InputState from "../global/input-state";
+    import SelectCategory from "../global/select-category";
     export default {
         name: "item-form",
-        components: {InputState},
+        components: {SelectCategory, InputState},
         props: {
             item: {}
         },
