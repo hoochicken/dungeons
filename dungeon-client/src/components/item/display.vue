@@ -2,8 +2,8 @@
     <div>
         <div v-if="item.id > 0">
             <div class="md-layout md-gutter">
-                <h1 class="md-layout-item">{{ item.name }} ({{ item.id }})</h1>
-                <button-update :setClass="'md-primary md-layout-item'" :clickRoute="'/item/update/' + item.id"></button-update>
+                <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
+                <button-update :setClass="'md-primary md-layout-item'" @click="'/item/update/' + item.id"></button-update>
             </div>
             <div class="md-layout md-gutter">
                 <div class="md-layout-item md-size-50">
@@ -36,7 +36,10 @@
             </div>
         </div>
         <div v-if="displayError">
-            <h1>Item {{ itemId }}</h1>
+            <div class="md-layout">
+                <h1 class="md-layout-item">Item {{ itemId }}</h1>
+                <md-button class="md-raised md-primary md-layout-item" @click="$router.push('/item/list')">Go To Item/List</md-button>
+            </div>
             <p>Something's wrong ... you might now guess what ... look at the clue down below:</p>
             <message-box>
                 {{ error }}

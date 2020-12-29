@@ -1,13 +1,22 @@
 <template>
     <div>
-        <div class="md-layout md-gutter">
-            <h1 class="md-layout-item">{{ item.name }} ({{ item.id }})</h1>
-            <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
+        <div v-if="item.id > 0">
+            <div class="md-layout md-gutter">
+                <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
+                <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
+            </div>
+            <item-form :item="item" />
         </div>
-        x{{ item }}x
-        x{{ error }}x
-        <item-form :item="item" />
-        <message-box v-if="displayError">{{ error }}</message-box>
+        <div v-if="displayError">
+            <div class="md-layout">
+                <h1 class="md-layout-item">Item {{ itemId }}</h1>
+                <md-button class="md-raised md-primary md-layout-item" @click="$router.push('/item/list')">Go To Item/List</md-button>
+            </div>
+            <p>Something's wrong ... you might now guess what ... look at the clue down below:</p>
+            <message-box>
+                {{ error }}
+            </message-box>
+        </div>
         <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
@@ -35,13 +44,9 @@
         methods: {
             async loadItem(id) {
                 try {
-                    console.log('loadItem');
                     this.loading = true;
                     this.itemId = parseInt(id);
-                    console.log('respond');
                     this.response = await this.axios.get('/item/get/' + id);
-                    console.log('response');
-                    console.log(this.response);
                     this.item = this.response.data;
                     this.displayError = false;
                     this.loading = false;
@@ -49,7 +54,7 @@
                     console.log(error);
                     this.error = error;
                     this.displayError = true;
-                    this.loading = true;
+                    this.loading = false;
                 }
             }
         }
