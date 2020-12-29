@@ -38,7 +38,7 @@
         <div v-if="displayError">
             <div class="md-layout">
                 <h1 class="md-layout-item">Item {{ itemId }}</h1>
-                <md-button class="md-raised md-primary md-layout-item" @click="$router.push('/item/list')">Go To Item/List</md-button>
+                <div><md-button class="md-raised md-primary md-layout-item" @click="$router.push('/item/list')">Go To Item/List</md-button></div>
             </div>
             <p>Something's wrong ... you might now guess what ... look at the clue down below:</p>
             <message-box>
