@@ -5,15 +5,17 @@
             <button-edit :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-edit>
         </div>
         <item-form :item="item" />
+        <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
 
 <script>
     import ButtonEdit from "../global/button-edit";
     import ItemForm from "./form";
+    import VueLoading from "vue-loading-overlay/src/js/Component";
     export default {
         name: "item-update",
-        components: {ItemForm, ButtonEdit},
+        components: {VueLoading, ItemForm, ButtonEdit},
         data() {
             return {
                 loading: false,

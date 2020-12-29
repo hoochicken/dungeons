@@ -33,14 +33,16 @@
         <div class="md-layout md-gutter md-accent">
             <div class="md-layout-item md-accent">{{ item }}</div>
         </div>
+        <vue-loading :active="loading"></vue-loading>
     </div>
 </template>
 
 <script>
     import ButtonUpdate from "../global/button-update";
+    import VueLoading from "vue-loading-overlay/src/js/Component";
     export default {
         name: "item-display",
-        components: {ButtonUpdate},
+        components: {VueLoading, ButtonUpdate},
         data() {
             return {
                 loading: false,
