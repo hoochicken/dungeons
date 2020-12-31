@@ -82,6 +82,7 @@
                     this.loading = true;
                     let options = JSON.stringify(this.item);
                     this.response = await this.axios.post('/item/delete/' + this.item.id, options);
+                    this.$router.push('/item/list');
                 } catch (error) {
                     this.error = error;
                     this.displayError = true;
