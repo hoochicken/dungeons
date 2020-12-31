@@ -1,9 +1,11 @@
 <template>
     <div>
         <div v-if="item.id > 0">
+            y{{ item }}y<br />
+            x{{ response }}x
             <div class="md-layout md-gutter">
                 <h1 class="md-layout-item">{{ item.name }} ({{ itemId }})</h1>
-                <button-display :setClass="'md-primary md-layout-item'" :clickRoute="'/item/display/' + item.id"></button-display>
+                <button-line :item-id="itemId" @create="create" @display="display" @update="update" @delete="deleteItem" @cancel="cancel"></button-line>
             </div>
             <item-form :item="item" />
         </div>
@@ -25,10 +27,10 @@
     import ItemForm from "./form";
     import VueLoading from "vue-loading-overlay/src/js/Component";
     import MessageBox from "../global/message-box";
-    import ButtonDisplay from "../global/button-display";
+    import ButtonLine from "../global/button-line";
     export default {
         name: "item-update",
-        components: {ButtonDisplay, MessageBox, VueLoading, ItemForm},
+        components: {ButtonLine, MessageBox, VueLoading, ItemForm},
         data() {
             return {
                 loading: false,
@@ -55,6 +57,39 @@
                     this.displayError = true;
                     this.loading = false;
                 }
+            },
+            async create() {
+                console.log('create');
+            },
+            async display() {
+                this.$router.push('/item/display/' + this.itemId);
+            },
+            async update() {
+                try {
+                    this.loading = true;
+                    let options = JSON.stringify(this.item);
+                    this.response = await this.axios.post('/item/update/' + this.itemId, options);
+                    // this.loadItem(this.itemId);
+                    this.loading = false;
+                } catch (error) {
+                    this.error = error;
+                    this.displayError = true;
+                    this.loading = false;
+                }
+            },
+            async deleteItem() {
+                try {
+                    this.loading = true;
+                    let options = JSON.stringify(this.item);
+                    this.response = await this.axios.post('/item/delete/' + this.item.id, options);
+                } catch (error) {
+                    this.error = error;
+                    this.displayError = true;
+                    this.loading = false;
+                }
+            },
+            async cancel() {
+                this.$router.push('/item/list');
             },
         }
     }

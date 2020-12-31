@@ -84,6 +84,7 @@ class ItemController extends ApiController
     public function update(int $id, Request $request, ItemRepository $itemRepository, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        return $this->respond($data);
         $request->request->replace(is_array($data) ? $data : array());
 
         // validate the title
