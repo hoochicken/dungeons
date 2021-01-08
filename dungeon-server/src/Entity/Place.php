@@ -115,7 +115,7 @@ class Place
     private $deletedUser;
 
     /**
-     * @ORM\ManyToMany(targetEntity=item::class, inversedBy="places")
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="places")
      */
     private $item;
 
