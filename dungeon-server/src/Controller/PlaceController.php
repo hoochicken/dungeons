@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Modules\Dater;
+use App\Repository\ItemRepository;
 use mysql_xdevapi\Exception;
 use phpDocumentor\Reflection\DocBlock\Tags\Example;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -75,14 +76,15 @@ class PlaceController extends ApiController
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function get(int $id, PlaceRepository $placeRepository, EntityManagerInterface $em): JsonResponse
+    public function get(int $id, PlaceRepository $placeRepository, ItemRepository $itemRepository, EntityManagerInterface $em): JsonResponse
     {
         try {
             $place = $placeRepository->find($id);
+
             if (!is_object($place)) {
                 throw new \ErrorException(sprintf('The place width the id \'%s\' could not be found.', $id));
             }
-            return $this->respond($placeRepository->transform($place));
+            return $this->respond($placeRepository->transform($place, $itemRepository));
         } catch (\Exception $e) {
             return $this->respondNotFound($e->getMessage());
         }

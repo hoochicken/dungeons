@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -98,14 +99,16 @@ class PlaceRepository extends ServiceEntityRepository
 
     /**
      * @param Place $place
+     * @param ItemRepository $itemRepository
      * @return array
      */
-    public function transform(Place $place)
+    public function transform(Place $place, ItemRepository $itemRepository)
     {
         $return = [];
         $return['id'] = $place->getId();
         $return['name'] = $place->getName();
         $return['description'] = $place->getDescription();
+        $return['item'] = $itemRepository->transformAll($place->getItem()->getValues());
         $return['pic'] = $place->getPic();
         $return['misc'] = $place->getMisc();
         $return['state'] = $place->getState();
