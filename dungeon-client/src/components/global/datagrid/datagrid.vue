@@ -1,8 +1,9 @@
 <template>
     <div>
-        {{ data }}
-        {{ listState }}
-        {{ actionRoutes }}
+        data: {{ data }}<br />
+        listState: {{ listState }}<br />
+        actionRoutes: {{ actionRoutes }}<br />
+        dataCount: {{ dataCount }}<br />
         <search :searchterm="searchterm" @resetSearch="resetSearch"></search>
         <md-table>
             <thead>
@@ -49,6 +50,9 @@
                     }
                 }
             },
+            getData: {
+                type: Function,
+            },
             actionRoutes: {
                 type: Object,
                 default: function () {
@@ -59,7 +63,7 @@
                         create: '',
                     }
                 }
-            }
+            },
         },
         data() {
             return {
@@ -81,26 +85,34 @@
             }
         },
         mounted() {
-            this.loadList();
+            // this.loadList({searchterm: '', listState: this.listState});
+        },
+        computed: {
+            dataCount () {
+                return typeof this.data === 'undefined' ? 0 : this.data.length;
+            }
+        },
+        watch: {
+            data() { this.loadList({searchterm: this.searchterm, listState: this.listState});}
+        },
+        created() {
+          this.loadList();
         },
         methods: {
             async loadList() {
                 try {
                     this.loading = true;
-                    let params = new URLSearchParams();
-                    params.append('searchterm', this.searchterm);
-                    params.append('listState', JSON.stringify(this.listState));
-                    const response = await this.axios.post('/item/list', params);
-                    this.data = response.data.items;
-                    this.listState = response.data.listState;
-                    this.loading = false;
+                    let param = {searchterm: this.searchterm, listState:this.listState};
+                    const data = await this.getData(param);
+                    this.data = data.data;
+                    this.listState = data.listState;
                 } catch(error) {
                     this.loading = false;
                 }
             },
             search() {
                 this.listState = this.listStateDefault;
-                this.loadList();
+                this.loadList({searchterm: this.searchterm, listState: this.listState});
             },
             resetSearch() {
                 this.searchterm = '';
@@ -112,7 +124,7 @@
             },
             async deleteById(id) {
                 if (!confirm('Really deleted entry with ' + this.idField + ' \'' + id + '\'')) return;
-                alert('total anihilation!');
+                alert('Total Anihilation!');
             }
         }
     }
