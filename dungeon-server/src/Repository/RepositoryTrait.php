@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 trait RepositoryTrait
@@ -58,9 +59,10 @@ trait RepositoryTrait
     public function findByName($value, int $currentPage = 0, int $maxResults = 0)
     {
         $firstResult = $maxResults * $currentPage;
+        /** @var QueryBuilder $qb */
         $qb = $this->createQueryBuilder('h');
 
-        if (!empty($value) && 3 <= strlen($value)) {
+        if (!empty($value) && 3 <= strlen($value) && 'undefined' !== $value) {
             $qb->andWhere('h.name LIKE :val')
                 ->setParameter('val', '%' . $value . '%');
         }
@@ -74,6 +76,6 @@ trait RepositoryTrait
 
         $query = $qb->getQuery();
         $items = $query->getResult();
-        return ['info' => $maxResults, 'items' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+        return ['info' => $value . '#' . $query->getDQL(), 'entries' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
     }
 }

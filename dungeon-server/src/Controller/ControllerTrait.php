@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Repository\CategoryRepository;
 use App\Repository\ItemRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,10 +27,10 @@ trait ControllerTrait
 
         // get items and pagination info
         $result = $repository->findByName($searchterm, $currentPage, $maxResult);
-        $items = $repository->transformAll($result['items']);
+        $entries = $repository->transformAll($result['entries']);
 
         // build return array
-        return $this->respond(['info' => $result['info'], 'items' => $items, 'listState' => $result['listState']]);
+        return $this->respond(['info' => $result['info'], 'entries' => $entries, 'listState' => $result['listState']]);
     }
 
     /**
