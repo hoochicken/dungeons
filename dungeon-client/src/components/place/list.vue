@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import Search from "../global/search";
+  import Search from "../global/datagrid/search";
   import VueLoading from "vue-loading-overlay/src/js/Component";
   export default {
     name: 'place-list',

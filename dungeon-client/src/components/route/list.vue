@@ -55,7 +55,7 @@
 
 <script>
     import VueLoading from "vue-loading-overlay/src/js/Component";
-    import Search from "../global/search";
+    import Search from "../global/datagrid/search";
     import Direction from "../global/direction";
     export default {
         name: "route-list",

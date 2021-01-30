@@ -3,7 +3,6 @@
         data: {{ data }}<br />
         listState: {{ listState }}<br />
         actionRoutes: {{ actionRoutes }}<br />
-       param: {{ param }}<br />
         dataCount: {{ dataCount }}<br />
         <search :searchterm="searchterm" @search="search" @resetSearch="resetSearch"></search>
         <md-table>
@@ -26,7 +25,7 @@
 </template>
 
 <script>
-    import Search from "../search";
+    import Search from "./search";
     export default {
         name: "datagrid",
         components: {Search},

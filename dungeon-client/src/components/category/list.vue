@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import Search from "../global/search";
+    import Search from "../global/datagrid/search";
 
     export default {
         name: 'category-list',
