@@ -22,7 +22,6 @@
                     delete: '/item/delete/:id',
                     create: '/item/create',
                 },
-                // tableColumns: {}
             }
         },
         mounted() {
@@ -37,23 +36,12 @@
         methods: {
             async loadList({searchterm, listState}) {
                 try {
-                    /*
-                    console.log('loadListSlave');
-                    console.log('searchterm');
-                    console.log(searchterm);
-                    console.log('listState');
-                    console.log(listState);
-                    */
                     let params = new URLSearchParams();
                     params.append('listState', JSON.stringify(listState));
                     params.append('searchterm', '');
                     const response = await this.axios.post('/item/list', params);
-                    console.log('response.data');
-                    console.log(searchterm);
-                    console.log(response);
                   return {data: response.data.entries, listState: response.data.listState};
                 } catch(error) {
-                    console.log(error);
                     this.loading = false;
                 }
             },
