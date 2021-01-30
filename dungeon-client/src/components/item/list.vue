@@ -26,7 +26,6 @@
             }
         },
         mounted() {
-            // this.loadList();
             this.header = { id: 'Id', name: 'Name', description: 'Description' };
             this.actionRoutes = {
                     display: '/item/display/:id',
@@ -34,18 +33,8 @@
                     delete: '/item/delete/:id',
                     create: '/item/create',
             };
-            // this.loadList();
-            // this.loadList({searchterm:this.searchTerm, listState:this.listState});
         },
         methods: {
-            async loadListX() {
-                return [
-                    {id: 2, title: 'asdtitle', column: 'asdad', column2: 'sadadasdd'},
-                    {id: 3, title: 'asd d a title', column: 'asdad', column2: 'sadadasdd'},
-                    {id: 5, title: 'asdtiasd a sdf tle', column: 'asdad', column2: 'sadadasdd'},
-                    {id: 13, title: 'as sf dtitle', column: 'asdad', column2: 'sadadasdd'},
-                ];
-            },
             async loadList({searchterm, listState}) {
                 try {
                     /*
