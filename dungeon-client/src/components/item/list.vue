@@ -38,7 +38,7 @@
                 try {
                     let params = new URLSearchParams();
                     params.append('listState', JSON.stringify(listState));
-                    params.append('searchterm', '');
+                    params.append('searchterm', searchterm);
                     const response = await this.axios.post('/item/list', params);
                   return {data: response.data.entries, listState: response.data.listState};
                 } catch(error) {

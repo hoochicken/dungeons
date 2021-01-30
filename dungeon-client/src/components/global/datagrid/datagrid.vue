@@ -3,8 +3,9 @@
         data: {{ data }}<br />
         listState: {{ listState }}<br />
         actionRoutes: {{ actionRoutes }}<br />
+       param: {{ param }}<br />
         dataCount: {{ dataCount }}<br />
-        <search :searchterm="searchterm" @resetSearch="resetSearch"></search>
+        <search :searchterm="searchterm" @search="search" @resetSearch="resetSearch"></search>
         <md-table>
             <thead>
             <md-table-row v-if="header !== undefined">
@@ -110,9 +111,10 @@
                     this.loading = false;
                 }
             },
-            search() {
+            search(searchterm) {
+                this.searchterm = searchterm;
                 this.listState = this.listStateDefault;
-                this.loadList({searchterm: this.searchterm, listState: this.listState});
+                this.loadList();
             },
             resetSearch() {
                 this.searchterm = '';
