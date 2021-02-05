@@ -14,7 +14,7 @@
                 <md-input v-model="item.description"></md-input>
             </md-field>
             <md-field>
-                <select-category v-model="item.category" :target="'item'"></select-category>
+                <select-category v-model="item.itemtype" :target="'item'"></select-category>
             </md-field>
             <md-field>
                 <label>Pic</label>
