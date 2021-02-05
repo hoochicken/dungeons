@@ -81,10 +81,9 @@ class ItemController extends ApiController
      * @param EntityManagerInterface $em
      * @return JsonResponse
      */
-    public function update(int $id, Request $request, ItemRepository $itemRepository, EntityManagerInterface $em): JsonResponse
+    public function update(int $id, Request $request, ItemRepository $itemRepository, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        return $this->respond($data);
         $request->request->replace(is_array($data) ? $data : array());
 
         // validate the title
@@ -95,17 +94,18 @@ class ItemController extends ApiController
         // persist the new item
         $item = $itemRepository->find($id);
         $item->setName($request->get('name'));
+        $item->setCategory($categoryRepository->find($request->get('category')));
         $item->setDescription($request->get('description'));
-        $item->setWeight($request->get´('weight'));
+        $item->setWeight($request->get('weight'));
         $item->setWorth($request->get('worth'));
         $item->setPic($request->get('pic'));
         $item->setAttributes($request->get('attributes'));
         $item->setState($request->get('state'));
-
         $item->setUpdated(Dater::get());
 
         $em->persist($item);
         $em->flush();
+
         return $this->respond($itemRepository->transform($item));
     }
 

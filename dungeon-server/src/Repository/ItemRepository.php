@@ -40,7 +40,7 @@ class ItemRepository extends ServiceEntityRepository
         $return['weight'] = $item->getWeight();
         $return['worth'] = $item->getWorth();
         $return['attributes'] = $item->getAttributes();
-        $return['itemtype'] = $item->getItemtype();
+        // $return['itemtype'] = $item->getItemtype();
         $return['pic'] = $item->getPic();
         $return['state'] = $item->getState();
         return $return;

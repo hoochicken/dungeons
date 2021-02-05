@@ -69,7 +69,6 @@
                     this.loading = true;
                     let options = JSON.stringify(this.item);
                     this.response = await this.axios.post('/item/update/' + this.itemId, options);
-                    // this.loadItem(this.itemId);
                     this.loading = false;
                 } catch (error) {
                     this.error = error;
