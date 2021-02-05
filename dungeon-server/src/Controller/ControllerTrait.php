@@ -24,9 +24,10 @@ trait ControllerTrait
         $listState = json_decode($request->request->get('listState'));
         $currentPage = $listState->currentPage ?? 0;
         $maxResult = $listState->maxResults ?? 2;
+        $sort = $listState->sort ?? 'id';
 
         // get items and pagination info
-        $result = $repository->findByName($searchterm, $currentPage, $maxResult);
+        $result = $repository->findByName($searchterm, $currentPage, $maxResult, $sort);
         $entries = $repository->transformAll($result['entries']);
 
         // build return array

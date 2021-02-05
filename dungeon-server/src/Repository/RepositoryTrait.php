@@ -56,7 +56,7 @@ trait RepositoryTrait
         return $return;
     }
 
-    public function findByName($value, int $currentPage = 0, int $maxResults = 0)
+    public function findByName($value, int $currentPage = 0, int $maxResults = 0, $sort = 'id')
     {
         $firstResult = $maxResults * $currentPage;
         /** @var QueryBuilder $qb */
@@ -72,7 +72,8 @@ trait RepositoryTrait
         if (0 < $maxResults) {
             $qb->setMaxResults($maxResults);
         }
-        $qb->orderBy('h.id', 'ASC');
+        $sort = !empty($sort) ? $sort : 'id';
+        $qb->orderBy('h.' . $sort, 'ASC');
 
         $query = $qb->getQuery();
         $items = $query->getResult();

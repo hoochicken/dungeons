@@ -4,11 +4,12 @@
         data: {{ data }}<br />
         actionRoutes: {{ actionRoutes }}<br />
         dataCount: {{ dataCount }}<br />
+        header: {{ header }}<br />
         <search :searchterm="searchterm" @search="search" @resetSearch="resetSearch"></search>
         <md-table>
             <thead>
             <md-table-row v-if="header !== undefined">
-                <md-table-head v-for="(item, index) in header" :key="index">{{ item }}</md-table-head>
+              <md-table-head v-for="(item, index) in header" :key="index"><span v-on:click="sort(index)">{{ item }}</span></md-table-head>
                 <th v-if="button !== undefined && button.display"></th>
             </md-table-row>
             </thead>
@@ -75,13 +76,14 @@
                     maxResults: 3,
                     currentPage: 0,
                     totalPage: 0,
-                    totalItems: 0
+                    sort: '',
                 },
                 listStateDefault: {
                     maxResults: 3,
                     currentPage: 0,
                     totalPage: 0,
-                    totalItems: 0
+                    totalItems: 0,
+                    sort: '',
                 }
             }
         },
@@ -104,6 +106,10 @@
                 } catch(error) {
                     this.loading = false;
                 }
+            },
+            sort(sort) {
+              this.listState.sort = sort;
+              this.loadList();
             },
             search(searchterm) {
                 this.searchterm = searchterm;
