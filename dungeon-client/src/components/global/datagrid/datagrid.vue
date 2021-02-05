@@ -1,7 +1,7 @@
 <template>
     <div>
-        data: {{ data }}<br />
         listState: {{ listState }}<br />
+        data: {{ data }}<br />
         actionRoutes: {{ actionRoutes }}<br />
         dataCount: {{ dataCount }}<br />
         <search :searchterm="searchterm" @search="search" @resetSearch="resetSearch"></search>
@@ -21,6 +21,7 @@
             </md-table-row>
             </tbody>
         </md-table>
+        <pagination :totalPage="listState.totalPage" :activeBGColor="'primary'" @btnClick="changePage"></pagination>
     </div>
 </template>
 
@@ -72,28 +73,22 @@
                 loading: false,
                 listState: {
                     maxResults: 3,
-                    currentPage:0,
+                    currentPage: 0,
                     totalPage: 0,
                     totalItems: 0
                 },
                 listStateDefault: {
                     maxResults: 3,
-                    currentPage:0,
+                    currentPage: 0,
                     totalPage: 0,
                     totalItems: 0
                 }
             }
         },
-        mounted() {
-            // this.loadList({searchterm: '', listState: this.listState});
-        },
         computed: {
             dataCount () {
                 return typeof this.data === 'undefined' ? 0 : this.data.length;
             }
-        },
-        watch: {
-            data() { this.loadList({searchterm: this.searchterm, listState: this.listState});}
         },
         created() {
           this.loadList();
@@ -126,6 +121,10 @@
             async deleteById(id) {
                 if (!confirm('Really deleted entry with ' + this.idField + ' \'' + id + '\'')) return;
                 alert('Total Anihilation!');
+            },
+            changePage(currentPage) {
+                this.listState.currentPage = currentPage - 1;
+                this.loadList();
             }
         }
     }
