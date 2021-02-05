@@ -55,6 +55,9 @@
             getData: {
                 type: Function,
             },
+            deleteEntry: {
+                type: Function,
+            },
             actionRoutes: {
                 type: Object,
                 default: function () {
@@ -93,7 +96,7 @@
             }
         },
         created() {
-          this.loadList();
+            this.loadList();
         },
         methods: {
             async loadList() {
@@ -110,7 +113,6 @@
             sort(sort) {
               if (sort === this.listState.sort) this.listState.sort = '-' + sort;
               else this.listState.sort = sort;
-
               this.loadList();
             },
             search(searchterm) {
@@ -129,6 +131,8 @@
             async deleteById(id) {
                 if (!confirm('Really deleted entry with ' + this.idField + ' \'' + id + '\'')) return;
                 alert('Total Anihilation!');
+                await this.deleteEntry(id);
+                this.loadList();
             },
             changePage(currentPage) {
                 this.listState.currentPage = currentPage - 1;

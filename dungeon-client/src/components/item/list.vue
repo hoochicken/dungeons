@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Item - List</h1>
-        <datagrid :header="header" :actionRoutes="actionRoutes" :getData="loadList"></datagrid>
+        <datagrid :header="header" :actionRoutes="actionRoutes" :getData="loadList" :deleteEntry="deleteItem"></datagrid>
     </div>
 </template>
 
@@ -40,11 +40,20 @@
                     params.append('listState', JSON.stringify(listState));
                     params.append('searchterm', searchterm);
                     const response = await this.axios.post('/item/list', params);
-                  return {data: response.data.entries, listState: response.data.listState};
+                    return {data: response.data.entries, listState: response.data.listState};
                 } catch(error) {
                     this.loading = false;
                 }
             },
+            async deleteItem(id) {
+                  try {
+                      let params = new URLSearchParams();
+                      params.append('id', id);
+                      await this.axios.post('item/delete/' + id);
+                  } catch(error) {
+                      console.log(error);
+                  }
+            }
         }
     }
 </script>
