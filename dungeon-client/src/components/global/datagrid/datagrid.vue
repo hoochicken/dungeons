@@ -108,7 +108,9 @@
                 }
             },
             sort(sort) {
-              this.listState.sort = sort;
+              if (sort === this.listState.sort) this.listState.sort = '-' + sort;
+              else this.listState.sort = sort;
+
               this.loadList();
             },
             search(searchterm) {

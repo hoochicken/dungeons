@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use JetBrains\PhpStorm\ArrayShape;
 
 trait RepositoryTrait
 {
@@ -14,9 +15,10 @@ trait RepositoryTrait
      * @param $maxResults
      * @param $firstResult
      * @param $currentPage
+     * @param $sort
      * @return array
      */
-    public function getListState($query, $maxResults, $firstResult, $currentPage)
+    public function getListState($query, $maxResults, $firstResult, $currentPage, $sort)
     {
         // load doctrine Paginator
         $paginator = new Paginator($query);
@@ -39,6 +41,7 @@ trait RepositoryTrait
             'totalPage' => $totalPage,
             'firstResult' => $firstResult,
             'totalItems' => $totalItems,
+            'sort' => $sort,
         ];
         return $listState;
     }
@@ -72,11 +75,24 @@ trait RepositoryTrait
         if (0 < $maxResults) {
             $qb->setMaxResults($maxResults);
         }
-        $sort = !empty($sort) ? $sort : 'id';
-        $qb->orderBy('h.' . $sort, 'ASC');
+        $sort = $this->getSort($sort);
+        $order = $sort['order'] ?? 'id';
+        $dir = $sort['dir'] ?? 'ASC';
+        $qb->orderBy('h.' . $order ?? 'id', $dir);
 
         $query = $qb->getQuery();
         $items = $query->getResult();
-        return ['info' => $value . '#' . $query->getDQL(), 'entries' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage)];
+        return ['info' => $value . '#' . json_encode($sort) . '#' . $query->getDQL(), 'entries' => $items, 'listState' => $this->getListState($query, $maxResults, $firstResult, $currentPage, $order)];
+    }
+
+    /**
+     * @param $sort
+     * @return array #[ArrayShape(['sort' => "mixed|string", 'dir' => "string"])]
+     */
+    private function getSort($sort): array
+    {
+        $direction = '-' === substr($sort, 0, 1) ? 'DESC' : 'ASC';
+        $order = !empty($sort) ? preg_replace('~([^0-9a-zA-Z]*)~','', $sort) : 'id';
+        return ['order' => $order, 'dir' => $direction];
     }
 }
