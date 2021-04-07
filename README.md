@@ -13,6 +13,16 @@ browser | https://addons.mozilla.org/de/firefox/addon/vue-js-devtools/?src=searc
 
 * get repository from <https://github.com/hoochicken/dungeons.git>
 
+```
+# install client
+cd adv-client
+npm install
+
+# install backend
+cd adv-server
+composer install
+```
+
 ## running the project
 
 ```
@@ -24,9 +34,11 @@ npm run serve
 cd adv-server
 php -S 127.0.0.1:8000 -t public
 
-# start dockers for mysql
+# start dockers for mysql and database;
+# root directory
 docker-compose up
 # phpmyadmin exposed to 8081, so: http://127.0.0.1:8081/
+# db exposed to 3306:3306, so: http://127.0.0.1:3306/, accessed by app und phpmyadmin
 
 # styleguidist
 cd adv-client
