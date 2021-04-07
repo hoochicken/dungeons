@@ -11,7 +11,7 @@ browser | https://addons.mozilla.org/de/firefox/addon/vue-js-devtools/?src=searc
 
 ## kick-starting the project
 
-* get repository from <https://github.com/hoochicken/dungeon.git>
+* get repository from <https://github.com/hoochicken/dungeons.git>
 
 ## running the project
 
